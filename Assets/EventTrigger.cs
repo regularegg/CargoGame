@@ -23,11 +23,10 @@ public class EventTrigger : MonoBehaviour {
 			SAM.TextDisplayUpdate ("hello", 1);
 		}
 
-		BM.ButtonClicked():
+	//	BM.ButtonClicked():
+	//}
+	//askWhichoption(){
+	//	"do you want A or B"
+	//}
 	}
-	askWhichoption(){
-		"do you want A or B"
-	}
-
-
 }

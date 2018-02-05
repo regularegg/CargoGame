@@ -6,7 +6,16 @@ using TMPro;
 
 public class ScreenBMAnager : MonoBehaviour {
 
-	// Use this for initialization
+
+	/*
+	 Screen B will contain:
+	 * graphs of ship stats (temperature, humidity, fuel, power usage, etc.)
+	 * distance to location
+	 * current ship stats in text form
+	 * to-do list of ship upkeep
+	 */
+
+
 	void Start () {
 		
 	}

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShipStatKeeper: MonoBehaviour {
-	public static int temperature, health, cargo, power;
+	public static float temperature = 10f, humidity, fuel, power, distanceToDestination;
+	public static float cryobedCount, crewCount, engineClass;
+	public static bool light1, light2, light3;
 
 	void Start () {
 		

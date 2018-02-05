@@ -1,0 +1,22 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ShipMvmt : MonoBehaviour {
+	public float speed = 10, distanceCovered, efficiency; 
+	//10km/sec > so there should be a delay function to calculate distance
+
+
+	void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+}
+
+
+
+//https://answers.unity.com/questions/415162/basics-of-making-a-gas-script-making-cars-get-gas.html

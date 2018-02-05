@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour {
 
-	public static int slider = 0;
+	public static float slider = ShipStatKeeper.temperature;
 	public static bool toggle, button;
 	public Button bt1, bt2, bt3;
 	public Button[] buttonList;
@@ -16,6 +16,11 @@ public class ButtonManager : MonoBehaviour {
 		slide.onValueChanged.AddListener(delegate {ValueChangeCheck(); });
 		slide.wholeNumbers = true;
 		slide.maxValue = 10;
+
+		tog.onValueChanged.AddListener (delegate {
+			LightToggle();
+		});
+
 
 		buttonList = new Button[]{bt1, bt2, bt3};
 
@@ -40,6 +45,13 @@ public class ButtonManager : MonoBehaviour {
 		int temp = int.Parse (butt.name);
 		Debug.Log (temp);
 	}
+
+
+	public bool ButtonChecker(int button){
+		
+
+		return false;
+	}
 	//make something check if the right button is pressed, no need to return anything
 
 
@@ -48,6 +60,7 @@ public class ButtonManager : MonoBehaviour {
 
 
 	public void ValueChangeCheck(){
+		ShipStatKeeper.temperature = slide.value;
 		Debug.Log (slide.value);
 	}
 
@@ -61,6 +74,10 @@ public class ButtonManager : MonoBehaviour {
 
 	public int Button3Click(){
 		return 2;
+	}
+
+	public void LightToggle(){
+		ShipStatKeeper.light1 = !ShipStatKeeper.light1;
 	}
 
 

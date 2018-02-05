@@ -6,12 +6,15 @@ using TMPro;
 
 public class ScreenCManager : MonoBehaviour {
 
-	// Use this for initialization
+	/*
+	 Screen C will contain: 
+	 * Crew stat cards: name, age, health, happiness, skills, current state
+	 */
+
 	void Start () {
 		
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		
 	}
