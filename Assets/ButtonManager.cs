@@ -82,3 +82,8 @@ public class ButtonManager : MonoBehaviour {
 
 
 }
+/* Notes:
+ * buttons should be added onto control board to represent interactive map (they should glow when hovered)
+ * IDEA: events taht require user to press buttons???!?!
+ * http://www.hopesandfears.com/hopes/culture/film/214001-the-ultimate-guide-to-control-panels-in-movies
+ */
