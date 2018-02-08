@@ -5,17 +5,26 @@ using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour {
 
-	public static float slider = ShipStatKeeper.temperature;
+	public static float sliderA = ShipStatKeeper.temperature;
 	public static bool toggle, button;
-	public Button bt1, bt2, bt3;
-	public Button[] buttonList;
-	public Slider slide;
+	public Button bt1, bt2, bt3, mpA,mpB,mpC,mpD,mpE;
+	public Button[] buttonList, mapButtonList;
+	public Slider slideA, slideB;
 	public Toggle tog;
 
+	public GameObject mapA, mapB, mapC, mapD, mapE;
+
 	void Start () {
-		slide.onValueChanged.AddListener(delegate {ValueChangeCheck(); });
-		slide.wholeNumbers = true;
-		slide.maxValue = 10;
+		slideA.onValueChanged.AddListener(delegate {ValueChangeCheckTemp(); });
+		slideA.wholeNumbers = true;
+		slideA.maxValue = 100;
+		slideA.value = 25;
+
+		slideB.onValueChanged.AddListener(delegate {ValueChangeCheckHum(); });
+		slideB.wholeNumbers = true;
+		slideB.maxValue = 100;
+		slideB.value = 25;
+		//make the actual temperature and set AC/humidifier temperature separate - takes time for real temperature to catch up to ship temp
 
 		tog.onValueChanged.AddListener (delegate {
 			LightToggle();
@@ -24,20 +33,17 @@ public class ButtonManager : MonoBehaviour {
 
 		buttonList = new Button[]{bt1, bt2, bt3};
 
-		/*bt1.onClick.AddListener (delegate {
-			Button1Click ();
-		});
-		bt2.onClick.AddListener (delegate {
-			Button2Click ();
-		});
-		bt3.onClick.AddListener (delegate {
-			Button3Click ();
-		});*/
-
 		for (int i = 0; i < buttonList.Length; i++){
 			Button temp = buttonList [i];
 			temp.name = ""+i;
 			buttonList[i].onClick.AddListener(() => {ButtonClicked(temp);});
+		}
+		mapButtonList = new Button[]{mpA,mpB,mpC,mpD,mpE};
+
+		for (int i = 0; i < mapButtonList.Length; i++){
+			Button temp = buttonList [i];
+			temp.name = ""+i;
+			mapButtonList[i].onClick.AddListener(() => {ButtonClicked(temp);});
 		}
 	}
 	
@@ -59,9 +65,12 @@ public class ButtonManager : MonoBehaviour {
 
 
 
-	public void ValueChangeCheck(){
-		ShipStatKeeper.temperature = slide.value;
-		Debug.Log (slide.value);
+	public void ValueChangeCheckTemp(){
+		ShipStatKeeper.temperature = slideA.value;
+	}
+
+	public void ValueChangeCheckHum(){
+		ShipStatKeeper.humidity = slideB.value;
 	}
 
 	public int Button1Click(){

@@ -20,7 +20,8 @@ public class ScreenAManager : MonoBehaviour {
 	}
 	
 	void Update () {
-		opA.text = ShipStatKeeper.temperature+ "";
+		opA.text = "Temperature: " + ShipStatKeeper.temperature;
+		opB.text = "Humidity: " + ShipStatKeeper.humidity;
 	}
 
 	public void TextDisplayUpdate(string inp, int pos){

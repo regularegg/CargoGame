@@ -33,6 +33,8 @@ public class ShipSystemDecay : MonoBehaviour {
 			hydroponicHealth -= 0.25f;
 		} else if (hydroponicHealth < 20) {
 			hydroponicHealth--;
+		} else if (ShipStatKeeper.temperature < 30 && ShipStatKeeper.temperature > 20 && hydroponicHealth < 100) {
+			hydroponicHealth += 0.5f;
 		}
 		//add humidity later
 	}
@@ -41,7 +43,7 @@ public class ShipSystemDecay : MonoBehaviour {
 		if (hydroponicHealth < 75) {
 			airfilterHealth -= 0.5f;
 		} else {
-			airfilterHealth -= 0.15f;//add randomness later
+			airfilterHealth -= 0.05f;//add randomness later
 		}
 	}
 

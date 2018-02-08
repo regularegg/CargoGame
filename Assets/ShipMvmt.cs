@@ -6,6 +6,7 @@ public class ShipMvmt : MonoBehaviour {
 	public float speed = 10, distanceCovered, efficiency = 100; //km per L 
 	//10km/sec > so there should be a delay function to calculate distance
 	//500km/L > rate of consumption
+	public GameObject shipSprite;
 
 
 	void Start () {
@@ -21,9 +22,14 @@ public class ShipMvmt : MonoBehaviour {
 	void FuelConsumption(){
 		if (ShipStatKeeper.fuel != 0) {
 			distanceCovered += speed;
-			if (efficiency%distanceCovered == 0) {
+			if (distanceCovered%efficiency == 0) {
 				ShipStatKeeper.fuel--;
+				shipSprite.transform.position += Vector3.right * 0.5f;
 			}
+		}
+		if (ShipStatKeeper.fuel == 0) {
+			Debug.Log ("EMPTY");
+
 		}
 		Debug.Log (ShipStatKeeper.fuel + " " + distanceCovered%efficiency);
 	}
