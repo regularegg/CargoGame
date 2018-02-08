@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShipStatKeeper: MonoBehaviour {
-	public static float temperature = 25, humidity = 25, fuel=6, power, distanceToDestination, food;
+	public static float temperature = 25, humidity = 25, fuel=8, power, distanceToDestination, food;
 	public static float tempToAdd, humToAdd;
 	public static float cryobedCount, crewCount, engineClass;
 	public static bool light1, light2, light3;
@@ -21,7 +21,7 @@ public class ShipStatKeeper: MonoBehaviour {
 		HumidityIncrease ();
 		TemperatureIncrease ();
 	}
-
+	//math does not check out
 	void HumidityIncrease(){
 		if (humToAdd != 0) {
 			humidity += 0.5f;
