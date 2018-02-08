@@ -13,45 +13,60 @@ public class ButtonManager : MonoBehaviour {
 	public Toggle tog;
 
 	public GameObject mapA, mapB, mapC, mapD, mapE;
+	public GameObject[] mapButt;
 
 	void Start () {
-		slideA.onValueChanged.AddListener(delegate {ValueChangeCheckTemp(); });
+		slideA.onValueChanged.AddListener (delegate {
+			ValueChangeCheckTemp ();
+		});
 		slideA.wholeNumbers = true;
 		slideA.maxValue = 100;
 		slideA.value = 25;
 
-		slideB.onValueChanged.AddListener(delegate {ValueChangeCheckHum(); });
+		slideB.onValueChanged.AddListener (delegate {
+			ValueChangeCheckHum ();
+		});
 		slideB.wholeNumbers = true;
 		slideB.maxValue = 100;
 		slideB.value = 25;
 		//make the actual temperature and set AC/humidifier temperature separate - takes time for real temperature to catch up to ship temp
 
 		tog.onValueChanged.AddListener (delegate {
-			LightToggle();
+			LightToggle ();
 		});
 
 
-		buttonList = new Button[]{bt1, bt2, bt3};
+		buttonList = new Button[]{ bt1, bt2, bt3 };
 
-		for (int i = 0; i < buttonList.Length; i++){
+		for (int i = 0; i < buttonList.Length; i++) {
 			Button temp = buttonList [i];
-			temp.name = ""+i;
-			buttonList[i].onClick.AddListener(() => {ButtonClicked(temp);});
+			temp.name = "" + i;
+			buttonList [i].onClick.AddListener (() => {
+				ButtonClicked (temp);
+			});
 		}
-		mapButtonList = new Button[]{mpA,mpB,mpC,mpD,mpE};
+		mapButtonList = new Button[]{ mpA, mpB, mpC, mpD, mpE };
 
-		for (int i = 0; i < mapButtonList.Length; i++){
-			Button temp = buttonList [i];
-			temp.name = ""+i;
-			mapButtonList[i].onClick.AddListener(() => {ButtonClicked(temp);});
+		for (int i = 0; i < mapButtonList.Length; i++) {
+			Button temp = mapButtonList [i];
+			temp.name = "" + i;
+			mapButtonList [i].onClick.AddListener (() => {
+				MapButtonClicked (temp);
+			});
 		}
+
+		mapButt = new GameObject[]{ mapA, mapB, mapC, mapD, mapE };
+
 	}
 	
 	public void ButtonClicked(Button butt){
 		int temp = int.Parse (butt.name);
-		Debug.Log (temp);
 	}
 
+	public void MapButtonClicked(Button butt){
+		int temp = int.Parse (butt.name);
+		mapButt [temp].GetComponent<SpriteRenderer> ().enabled = !mapButt [temp].GetComponent<SpriteRenderer> ().enabled;
+	}
 
 	public bool ButtonChecker(int button){
 		
