@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ButtonManager : MonoBehaviour {
 
-	public static float sliderA = ShipStatKeeper.temperature;
+	public static float tempSlideOutput, humSlideOutput;
 	public static bool toggle, button;
 	public Button bt1, bt2, bt3, mpA,mpB,mpC,mpD,mpE;
 	public Button[] buttonList, mapButtonList;
 	public Slider slideA, slideB;
 	public Toggle tog;
+
+	public TextMeshProUGUI temperature, humidity;
+	public GameObject light1, light2;
 
 	public GameObject mapA, mapB, mapC, mapD, mapE;
 	public GameObject[] mapButt;
@@ -60,7 +64,7 @@ public class ButtonManager : MonoBehaviour {
 	}
 	
 	public void ButtonClicked(Button butt){
-		int temp = int.Parse (butt.name);
+		//int temp = int.Parse (butt.name);
 	}
 
 	public void MapButtonClicked(Button butt){
@@ -81,11 +85,18 @@ public class ButtonManager : MonoBehaviour {
 
 
 	public void ValueChangeCheckTemp(){
-		ShipStatKeeper.temperature = slideA.value;
+		ShipStatKeeper.tempToAdd = slideA.value-ShipStatKeeper.humidity;
+		temperature.text = slideA.value+"";
+		Debug.Log (ShipStatKeeper.tempToAdd);
+
 	}
 
 	public void ValueChangeCheckHum(){
-		ShipStatKeeper.humidity = slideB.value;
+		ShipStatKeeper.humToAdd = slideB.value-ShipStatKeeper.temperature;
+		humidity.text = slideB.value+"";
+		Debug.Log (ShipStatKeeper.humToAdd);
+
+
 	}
 
 	public int Button1Click(){

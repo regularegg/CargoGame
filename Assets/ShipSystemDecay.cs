@@ -27,23 +27,23 @@ public class ShipSystemDecay : MonoBehaviour {
 	}
 
 	void HydroponicDecay(){
-		if (ShipStatKeeper.temperature > 30) {
+		if ((ShipStatKeeper.temperature > 30)&&(ShipStatKeeper.humidity<20&&ShipStatKeeper.humidity>60)) {
 			hydroponicHealth -= 0.5f;
-		} else if (ShipStatKeeper.temperature < 20) {
+		} else if (ShipStatKeeper.temperature < 20&&(ShipStatKeeper.humidity>20&&ShipStatKeeper.humidity<60)) {
 			hydroponicHealth -= 0.25f;
 		} else if (hydroponicHealth < 20) {
 			hydroponicHealth--;
-		} else if (ShipStatKeeper.temperature < 30 && ShipStatKeeper.temperature > 20 && hydroponicHealth < 100) {
+		} else if (ShipStatKeeper.temperature < 30 && ShipStatKeeper.temperature > 20 && hydroponicHealth < 100&&(ShipStatKeeper.humidity>20&&ShipStatKeeper.humidity<60)) {
 			hydroponicHealth += 0.5f;
 		}
 		//add humidity later
 	}
 
 	void AirFilterDecay(){
-		if (hydroponicHealth < 75) {
-			airfilterHealth -= 0.5f;
+		if ((hydroponicHealth < 75)&&(ShipStatKeeper.humidity>80)) {
+			airfilterHealth -= 0.05f;
 		} else {
-			airfilterHealth -= 0.05f;//add randomness later
+			airfilterHealth -= 0.025f;//add randomness later
 		}
 	}
 
