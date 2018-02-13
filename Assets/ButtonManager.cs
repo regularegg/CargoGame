@@ -22,7 +22,7 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 
 	WaitForSeconds wait;
 
-	private float currentHumidityTarget;
+	private float currentHumidityTarget, currentTemperatureTarget;
 
 	//public delegate void onChangeTemp();
 	//public static event onChangeTemp changetemp;
@@ -73,7 +73,9 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 		wait = new WaitForSeconds (0.25f);
 	}
 	void Update(){
-		ShipStatKeeper.humidity = (float)System.Math.Round (Mathf.Lerp (ShipStatKeeper.humidity, currentHumidityTarget, Time.deltaTime * 0.01f), 2);
+		ShipStatKeeper.humidity = Mathf.Lerp (ShipStatKeeper.humidity, currentHumidityTarget, Time.deltaTime * 0.01f);
+		ShipStatKeeper.temperature = Mathf.Lerp (ShipStatKeeper.temperature, currentTemperatureTarget, Time.deltaTime * 0.01f);
+
 		//UPDATE
 	}
 	
@@ -99,10 +101,8 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 
 
 	public void ValueChangeCheckTemp(){
-		ShipStatKeeper.tempToAdd = slideA.value;
-		temperature.text = slideA.value+"";
-		Debug.Log (ShipStatKeeper.tempToAdd);
-		TemperatureIncrease ();
+		
+		currentTemperatureTarget = slideA.value;
 	}
 
 	public void ValueChangeCheckHum(){

@@ -20,8 +20,8 @@ public class ScreenAManager : MonoBehaviour {
 	}
 	
 	void Update () {
-		opA.text = "Temperature: " + ShipStatKeeper.temperature;
-		opB.text = "Humidity: " + ShipStatKeeper.humidity;
+		opA.text = "Temperature: " + ShipStatKeeper.temperature.ToString("0.##");
+		opB.text = "Humidity: " + ShipStatKeeper.humidity.ToString("0.##");
 	}
 
 	public void TextDisplayUpdate(string inp, int pos){
