@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 
-public class ButtonManager : MonoBehaviour {
+public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 
 	public static float tempSlideOutput, humSlideOutput;
 	public static bool toggle, button;
@@ -18,6 +19,13 @@ public class ButtonManager : MonoBehaviour {
 
 	public GameObject mapA, mapB, mapC, mapD, mapE;
 	public GameObject[] mapButt;
+
+	WaitForSeconds wait;
+
+	private float currentHumidityTarget;
+
+	//public delegate void onChangeTemp();
+	//public static event onChangeTemp changetemp;
 
 	void Start () {
 		slideA.onValueChanged.AddListener (delegate {
@@ -61,6 +69,12 @@ public class ButtonManager : MonoBehaviour {
 
 		mapButt = new GameObject[]{ mapA, mapB, mapC, mapD, mapE };
 
+
+		wait = new WaitForSeconds (0.25f);
+	}
+	void Update(){
+		ShipStatKeeper.humidity = (float)System.Math.Round (Mathf.Lerp (ShipStatKeeper.humidity, currentHumidityTarget, Time.deltaTime * 0.01f), 2);
+		//UPDATE
 	}
 	
 	public void ButtonClicked(Button butt){
@@ -85,19 +99,51 @@ public class ButtonManager : MonoBehaviour {
 
 
 	public void ValueChangeCheckTemp(){
-		ShipStatKeeper.tempToAdd = slideA.value-ShipStatKeeper.humidity;
+		ShipStatKeeper.tempToAdd = slideA.value;
 		temperature.text = slideA.value+"";
 		Debug.Log (ShipStatKeeper.tempToAdd);
-
+		TemperatureIncrease ();
 	}
 
 	public void ValueChangeCheckHum(){
-		ShipStatKeeper.humToAdd = slideB.value-ShipStatKeeper.temperature;
+		ShipStatKeeper.humToAdd = slideB.value;
 		humidity.text = slideB.value+"";
-		Debug.Log (ShipStatKeeper.humToAdd);
+		currentHumidityTarget = slideB.value;
 
-
+		//Debug.Log (ShipStatKeeper.humToAdd); // i think ienum is going to be needed to fix this
+		/*if ((slideB.value - ShipStatKeeper.humidity) > 0) {
+			StartCoroutine (HumidityIncrease (slideB.value));
+		} else {
+			StartCoroutine (HumidityDecrease (slideB.value));
+		}*/
+	}/*
+	IEnumerator HumidityIncrease(float value){
+		if (slideB.value > ShipStatKeeper.humidity) {
+			ShipStatKeeper.humidity += Mathf.Sqrt (slideB.value);
+			Debug.Log ("increased");
+			//yield return wait;
+			yield return new WaitForSeconds(0.5f);
+		}
+		if (Mathf.Approximately(value, ShipStatKeeper.humidity)){
+			Mathf.Floor (ShipStatKeeper.humidity);
+			yield break;
+		}
 	}
+
+	IEnumerator HumidityDecrease(float value){
+		if (slideB.value < ShipStatKeeper.humidity) {
+			ShipStatKeeper.humidity -= Mathf.Sqrt (slideB.value);
+			Debug.Log ("decreased");
+			yield return wait;
+
+		}
+		if (Mathf.Approximately(value, ShipStatKeeper.humidity)){
+			Debug.Log ("good enough");
+			Mathf.Ceil (ShipStatKeeper.humidity);
+			yield break;
+		}
+	}
+*/
 
 	public int Button1Click(){
 		return 0;
@@ -116,6 +162,18 @@ public class ButtonManager : MonoBehaviour {
 	}
 
 
+	void TemperatureIncrease(){
+		if (ShipStatKeeper.tempToAdd != 0) {
+			ShipStatKeeper.temperature += ShipStatKeeper.tempToAdd/5;
+			ShipStatKeeper.tempToAdd -= ShipStatKeeper.tempToAdd/5;
+
+			Debug.Log ("added temp");
+		}
+	}
+
+	public void OnPointerUp(PointerEventData pointerData){
+		Debug.Log ("pointer up");
+	}
 }
 /* Notes:
  * buttons should be added onto control board to represent interactive map (they should glow when hovered)

@@ -31,7 +31,7 @@ public class ShipMvmt : MonoBehaviour {
 			Debug.Log ("EMPTY");
 
 		}
-		Debug.Log (ShipStatKeeper.fuel + " " + distanceCovered%efficiency);
+		//Debug.Log (ShipStatKeeper.fuel + " " + distanceCovered%efficiency);
 	}
 
 

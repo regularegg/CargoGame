@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ShipSystemDecay : MonoBehaviour {
 	public float cargoHealth = 100, hydroponicHealth = 100, airfilterHealth = 100, foodSupply = 100, oxygenLevel = 100, energyLevel = 100;
+	float temperatureHolder, humidityHolder;
+	public delegate void tempChange(float temp);
 
 	void Start () {
 		
@@ -14,8 +16,8 @@ public class ShipSystemDecay : MonoBehaviour {
 		HydroponicDecay ();
 		AirFilterDecay ();
 		oxygenDecay ();
-		HumidityIncrease ();
-		TemperatureIncrease ();
+		//HumidityIncrease ();
+		//TemperatureIncrease ();
 	}
 
 	void CargoDecay(int cargoType){
@@ -67,19 +69,6 @@ public class ShipSystemDecay : MonoBehaviour {
 		}
 	}
 
-	void HumidityIncrease(){
-		if (ShipStatKeeper.humToAdd != 0) {
-			ShipStatKeeper.humidity += ShipStatKeeper.humToAdd/5;
-			ShipStatKeeper.humToAdd -= ShipStatKeeper.humToAdd/5;
-			Debug.Log ("added hum");
-		}
-	}
-	void TemperatureIncrease(){
-		if (ShipStatKeeper.tempToAdd != 0) {
-			ShipStatKeeper.temperature += ShipStatKeeper.tempToAdd/5;
-			ShipStatKeeper.tempToAdd -= ShipStatKeeper.tempToAdd/5;
 
-			Debug.Log ("added temp");
-		}
-	}
+
 }
