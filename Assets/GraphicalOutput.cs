@@ -21,7 +21,7 @@ public class GraphicalOutput : MonoBehaviour {
 	}
 
 	void temperatureScale(){
-		temperature.transform.localScale = (ShipStatKeeper.temperature) * (Vector3.up/5)+(Vector3.right);
-		temperature.transform.localPosition = new Vector3(0, temperature.transform.localScale.y/10, 0);
+		temperature.transform.localScale = (ShipStatKeeper.temperature * Vector3.up/10)+(Vector3.right);
+		//temperature.transform.localPosition = new Vector3(0, temperature.transform.localScale.y+temp.transform.position.y/2, 0);
 	}
 }

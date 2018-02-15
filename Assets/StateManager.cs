@@ -4,13 +4,29 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour {
 
-	// Use this for initialization
+	public int state;
+
 	void Start () {
-		
+		state = 0;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	void shipSelect(){
+
+	}
+
+	void cargoSelect(){
+
+	}
+
+	void crewSelect(){
+
+	}
+
+	void startGame(){
+
 	}
 }
