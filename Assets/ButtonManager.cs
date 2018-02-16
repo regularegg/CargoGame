@@ -75,9 +75,8 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 		wait = new WaitForSeconds (0.25f);
 	}
 	void Update(){
-		ShipStatKeeper.humidity = Mathf.Lerp (ShipStatKeeper.humidity, currentHumidityTarget, Time.deltaTime * 0.01f);
+		SSK.Humidity = Mathf.Lerp (ShipStatKeeper.humidity, currentHumidityTarget, Time.deltaTime * 0.01f);
 		SSK.Temperature = Mathf.Lerp (ShipStatKeeper.temperature, currentTemperatureTarget, Time.deltaTime * 0.01f);
-		Debug.Log (ShipStatKeeper.humToAdd + " " + ShipStatKeeper.humidity);
 	}
 	
 	public void ButtonClicked(Button butt){

@@ -18,14 +18,26 @@ public class ShipStatKeeper: MonoBehaviour {
 			} else {
 				_temperature = value;
 				temperature = _temperature;
-				Debug.Log ("temp changed" + temperature);
 			}
 		}
 	}
-	
+	private float _humidity = humidity;
+	public float Humidity{
+		get{ return _humidity; }
+		set{ 
+			if (value == _humidity) {
+				return;
+			} else {
+				_humidity = value;
+				humidity = _humidity;
+			}
+			if (value > 30)
+				Debug.Log ("noice");
+		}
+	}
 	void Update () {
 		if (fuel < 10) {
-			Debug.Log("fuel is" + fuel);
+			//Debug.Log("fuel is" + fuel);
 		}
 		HumidityIncrease ();
 		TemperatureIncrease ();
@@ -35,15 +47,12 @@ public class ShipStatKeeper: MonoBehaviour {
 		if (humToAdd != 0) {
 			humidity += 0.5f;
 			humToAdd -= 0.5f;
-			//Debug.Log ("added hum");
 		}
 	}
 	void TemperatureIncrease(){
 		if (tempToAdd != 0) {
 			temperature += 0.5f;
 			tempToAdd -= 0.5f;
-
-			//Debug.Log ("added temp");
 		}
 	}
 }
