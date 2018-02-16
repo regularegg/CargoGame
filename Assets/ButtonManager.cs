@@ -22,12 +22,14 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 
 	WaitForSeconds wait;
 
+	ShipStatKeeper SSK;
+
+
 	private float currentHumidityTarget, currentTemperatureTarget;
 
-	//public delegate void onChangeTemp();
-	//public static event onChangeTemp changetemp;
-
 	void Start () {
+		SSK = FindObjectOfType<ShipStatKeeper> ();
+			
 		slideA.onValueChanged.AddListener (delegate {
 			ValueChangeCheckTemp ();
 		});
@@ -74,9 +76,8 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 	}
 	void Update(){
 		ShipStatKeeper.humidity = Mathf.Lerp (ShipStatKeeper.humidity, currentHumidityTarget, Time.deltaTime * 0.01f);
-		ShipStatKeeper.temperature = Mathf.Lerp (ShipStatKeeper.temperature, currentTemperatureTarget, Time.deltaTime * 0.01f);
-
-		//UPDATE
+		SSK.Temperature = Mathf.Lerp (ShipStatKeeper.temperature, currentTemperatureTarget, Time.deltaTime * 0.01f);
+		Debug.Log (ShipStatKeeper.humToAdd + " " + ShipStatKeeper.humidity);
 	}
 	
 	public void ButtonClicked(Button butt){
@@ -96,54 +97,16 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 	//make something check if the right button is pressed, no need to return anything
 
 
-
-
-
-
 	public void ValueChangeCheckTemp(){
-		
+		temperature.text = slideB.value+"";
 		currentTemperatureTarget = slideA.value;
 	}
 
 	public void ValueChangeCheckHum(){
-		ShipStatKeeper.humToAdd = slideB.value;
 		humidity.text = slideB.value+"";
 		currentHumidityTarget = slideB.value;
 
-		//Debug.Log (ShipStatKeeper.humToAdd); // i think ienum is going to be needed to fix this
-		/*if ((slideB.value - ShipStatKeeper.humidity) > 0) {
-			StartCoroutine (HumidityIncrease (slideB.value));
-		} else {
-			StartCoroutine (HumidityDecrease (slideB.value));
-		}*/
-	}/*
-	IEnumerator HumidityIncrease(float value){
-		if (slideB.value > ShipStatKeeper.humidity) {
-			ShipStatKeeper.humidity += Mathf.Sqrt (slideB.value);
-			Debug.Log ("increased");
-			//yield return wait;
-			yield return new WaitForSeconds(0.5f);
-		}
-		if (Mathf.Approximately(value, ShipStatKeeper.humidity)){
-			Mathf.Floor (ShipStatKeeper.humidity);
-			yield break;
-		}
 	}
-
-	IEnumerator HumidityDecrease(float value){
-		if (slideB.value < ShipStatKeeper.humidity) {
-			ShipStatKeeper.humidity -= Mathf.Sqrt (slideB.value);
-			Debug.Log ("decreased");
-			yield return wait;
-
-		}
-		if (Mathf.Approximately(value, ShipStatKeeper.humidity)){
-			Debug.Log ("good enough");
-			Mathf.Ceil (ShipStatKeeper.humidity);
-			yield break;
-		}
-	}
-*/
 
 	public int Button1Click(){
 		return 0;

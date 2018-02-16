@@ -9,11 +9,20 @@ public class ShipStatKeeper: MonoBehaviour {
 	public static bool light1, light2, light3;
 	public static int crewAwake = 1;
 
-	void Start () {
-		
+	private float _temperature = temperature;
+	public float Temperature{
+		get{ return _temperature; }
+		set{ 
+			if (value == _temperature) {
+				return;
+			} else {
+				_temperature = value;
+				temperature = _temperature;
+				Debug.Log ("temp changed" + temperature);
+			}
+		}
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if (fuel < 10) {
 			Debug.Log("fuel is" + fuel);
@@ -21,12 +30,12 @@ public class ShipStatKeeper: MonoBehaviour {
 		HumidityIncrease ();
 		TemperatureIncrease ();
 	}
-	//math does not check out
+
 	void HumidityIncrease(){
 		if (humToAdd != 0) {
 			humidity += 0.5f;
 			humToAdd -= 0.5f;
-			Debug.Log ("added hum");
+			//Debug.Log ("added hum");
 		}
 	}
 	void TemperatureIncrease(){
@@ -34,7 +43,7 @@ public class ShipStatKeeper: MonoBehaviour {
 			temperature += 0.5f;
 			tempToAdd -= 0.5f;
 
-			Debug.Log ("added temp");
+			//Debug.Log ("added temp");
 		}
 	}
 }
