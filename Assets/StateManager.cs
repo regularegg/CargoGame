@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour {
 
-	public int state;
+	public static int state;
 
 	void Start () {
 		state = 0;
