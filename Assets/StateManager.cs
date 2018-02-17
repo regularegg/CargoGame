@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StateManager : MonoBehaviour {
-	public GameObject SelectionScreen;
+	public GameObject 
+		SelectionScreen,
+		Map,
+		MapLabels,
+		ProgressBar;
 
 
-	public static int state;
-	public static int State{
+	public int state;
+	public int State{
 		get{ return state; }
 		set{ 
 			if (value == state) {
@@ -25,26 +29,45 @@ public class StateManager : MonoBehaviour {
 			}
 		}
 	}
+
+
 	void Start () {
-		state = 0;
+		state = 5;
 	}
 	
 	void Update () {
+		if (Input.GetKey (KeyCode.A)) {
+			State = 1;
+		}
+		if (Input.GetKey (KeyCode.S)) {
+			State = 0;
+		}
 	}
 
-	void shipSelect(){
 
+	void shipSelect(){
+		
 	}
 
 	void cargoSelect(){
 
 	}
 
-	static void crewSelect(){
-
+	void crewSelect(){
+		GameObject currentScreen = Instantiate (SelectionScreen);
+		if (state != 1)
+			Destroy (currentScreen);
 	}
 
-	static void startGame(){
+	void startGame(){
+		Destroy (GameObject.Find ("currentScreen"));
+		Destroy (GameObject.Find ("Center Map(Clone)"));
+		Destroy (GameObject.Find ("Ship Progression(Clone)"));
+		Destroy (GameObject.Find ("Map Label Holder(Clone)"));
 
+
+		GameObject currMap = Instantiate (Map);
+		GameObject currTrail = Instantiate (ProgressBar);
+		GameObject mapLabel = Instantiate (MapLabels);
 	}
 }
