@@ -55,6 +55,7 @@ public class StateManager : MonoBehaviour {
 
 	void crewSelect(){
 		GameObject currentScreen = Instantiate (SelectionScreen);
+
 		if (state != 1)
 			Destroy (currentScreen);
 	}

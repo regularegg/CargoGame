@@ -11,16 +11,17 @@ public class EventTrigger : MonoBehaviour {
 
 	public ButtonManager BM;
 
+	public int[] inventory;
+
 	// Use this for initialization
 	void Start () {
-		
+		inventory = new int[5];
+
 	}
 
 
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.Space)) {
-			SAM.TextDisplayUpdate ("hello", 1);
 		}
 
 	//	BM.ButtonClicked():
@@ -28,5 +29,6 @@ public class EventTrigger : MonoBehaviour {
 	//askWhichoption(){
 	//	"do you want A or B"
 	//}
-	}
+
+	// have multistage fixes for problems (ex. have person go to machine room, make thing, go to place b, do thing, fix)
 }

@@ -6,18 +6,25 @@ public class CrewPerson {
 	public float health, happiness, engineerSkill, plantSkill, mineSkill, cost, age;
 	public string name;
 	public bool awake, alive;
+	public int index, currRoom;
 
-	public CrewPerson(string id, float currAge, float engSkill, float plSkill, float mSkill){
+	public int currentActivity;
+
+	public CrewPerson(string id, float currAge, float engSkill, float plSkill, float mSkill, int nindex){
 		health = 100;
 		happiness = 80;
+		currRoom = 0;
 		awake = true;
 		alive = true;
+		currentActivity = 0;
+
 
 		engineerSkill = engSkill;
 		plantSkill = plSkill;
 		mineSkill = mSkill;
 		name = id;
 		age = currAge;
+		index = nindex;
 		cost = (engineerSkill + plantSkill + mineSkill) / 10;
 	}
 
