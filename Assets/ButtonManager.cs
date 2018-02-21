@@ -8,7 +8,7 @@ using TMPro;
 public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 
 	public static float tempSlideOutput, humSlideOutput;
-	public static bool toggle, button;
+	public static bool oggle, button;
 	public Button bt1, bt2, bt3, mpA,mpB,mpC,mpD,mpE;
 	public Button[] buttonList, mapButtonList;
 	public Slider slideA, slideB;
@@ -46,7 +46,7 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 		//make the actual temperature and set AC/humidifier temperature separate - takes time for real temperature to catch up to ship temp
 
 		tog.onValueChanged.AddListener (delegate {
-			LightToggle ();
+			GoToggle ();
 		});
 
 
@@ -119,8 +119,8 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 		return 2;
 	}
 
-	public void LightToggle(){
-		ShipStatKeeper.light1 = !ShipStatKeeper.light1;
+	public void GoToggle(){
+		ShipStatKeeper.shipMoving = !ShipStatKeeper.shipMoving;
 	}
 
 

@@ -46,7 +46,7 @@ public class ShipSystemDecay : MonoBehaviour {
 		if ((hydroponicHealth < 75)&&(ShipStatKeeper.humidity>80)) {
 			airfilterHealth -= 0.05f;
 		} else {
-			airfilterHealth -= 0.025f;//add randomness later
+			airfilterHealth -= 0.00025f;//add randomness later
 		}
 	}
 

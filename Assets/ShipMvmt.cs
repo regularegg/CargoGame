@@ -20,21 +20,28 @@ public class ShipMvmt : MonoBehaviour {
 	}
 
 	void FuelConsumption(){
-		if (ShipStatKeeper.fuel != 0) {
-			distanceCovered += speed;
-			if (distanceCovered%efficiency == 0) {
-				ShipStatKeeper.fuel--;
-				shipSprite.transform.position += Vector3.right * 0.5f;
+		if (ShipStatKeeper.shipMoving) {
+			if (ShipStatKeeper.fuel != 0) {
+				distanceCovered += speed;
+				if (distanceCovered % efficiency == 0) {
+					ShipStatKeeper.fuel--;
+					if (distanceCovered < 500) {
+						shipSprite.transform.position += Vector3.right * 0.5f;
+					} else {
+						shipSprite.GetComponent<SpriteRenderer> ().flipX = true;
+						shipSprite.transform.position -= Vector3.right * 0.5f;
+					}
+				}
 			}
-		}
-		if (ShipStatKeeper.fuel == 0) {
-			Debug.Log ("EMPTY");
+			if (ShipStatKeeper.fuel == 0) {
+				Debug.Log ("EMPTY");
 
-		}
+			}
 		//Debug.Log (ShipStatKeeper.fuel + " " + distanceCovered%efficiency);
 	}
 
 
+}
 }
 
 
