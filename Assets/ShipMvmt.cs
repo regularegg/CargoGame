@@ -14,10 +14,6 @@ public class ShipMvmt : MonoBehaviour {
 		InvokeRepeating ("FuelConsumption",5f, 1f);
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	}
 
 	void FuelConsumption(){
 		if (ShipStatKeeper.shipMoving) {
@@ -37,7 +33,6 @@ public class ShipMvmt : MonoBehaviour {
 				Debug.Log ("EMPTY");
 
 			}
-		//Debug.Log (ShipStatKeeper.fuel + " " + distanceCovered%efficiency);
 	}
 
 

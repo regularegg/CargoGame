@@ -3,7 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShipStatKeeper: MonoBehaviour {
-	public static float temperature = 25, humidity = 25, fuel=15, power = 100, distanceToDestination, food, gravity, oxygen;
+	public static float 
+	temperature = 25, 
+	humidity = 25, 
+	fuel=15, //going towards power
+	power = 100, //will take -0.01 fuel per mvmt for each system on
+	distanceToDestination, 
+	food = 100, 
+	gravity = 1, // only effects crew health
+	oxygen = 100, 
+	airfilter,
+	bots; // slow rate of decay when there are more bots, more bots can be made in fab room
+
 	public static float tempToAdd, humToAdd;
 	public static float cryobedCount, crewCount, engineClass;
 	public static bool shipMoving;
