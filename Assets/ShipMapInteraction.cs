@@ -5,7 +5,8 @@ using TMPro;
 using UnityEngine.UI;
 
 public class ShipMapInteraction : MonoBehaviour {
-	public TextMeshProUGUI detail;
+	public TextMeshProUGUI detail, selection, SB1, SB2, SB3;
+	public Button b1, b2, b3;
 	public bool selectionActive;
 	private int _selectedCrew;
 	public SpriteRenderer r0, r1, r2, r3, r4, r5, r6, r7, r8;
@@ -131,5 +132,32 @@ public class ShipMapInteraction : MonoBehaviour {
 			SC= -1;
 			selectionActive = false;
 		}
+	}
+
+	void roomMenu(){
+		int RM = SR;
+		selection.enabled = true;
+		SB1.enabled = true;
+		SB2.enabled = true;
+		SB3.enabled = true;
+		b1.onClick.AddListener (delegate {
+			optA ();
+		});
+		b2.onClick.AddListener (delegate {
+			optB ();
+		});
+		b3.onClick.AddListener (delegate {
+			optC ();
+		});
+	}
+
+	void optA(){
+
+	}
+	void optB(){
+
+	}
+	void optC(){
+
 	}
 }
