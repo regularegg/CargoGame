@@ -8,7 +8,8 @@ public class ShipMapInteraction : MonoBehaviour {
 	public TextMeshProUGUI detail;
 	public bool selectionActive;
 	private int _selectedCrew;
-	private CrewPerson CPTemp;
+	public SpriteRenderer r0, r1, r2, r3, r4, r5, r6, r7, r8;
+	SpriteRenderer[] sprites;
 	public int SC{
 		get{ return _selectedCrew; }
 		set{ 
@@ -17,7 +18,6 @@ public class ShipMapInteraction : MonoBehaviour {
 			//Use later to display crew member stats
 			if (value == 0) {
 				detail.text = "Engineering: " + CrewManager.crewList [0].engineerSkill + "\n" + "Plants: " + CrewManager.crewList [0].plantSkill + "\n" + "Mining: " + CrewManager.crewList [0].mineSkill + "\n";
-				CPTemp = CrewManager.crewList [0];
 			} else if (value == 1) {
 				detail.text = "Engineering: " + CrewManager.crewList [1].engineerSkill + "\n" + "Plants: " + CrewManager.crewList [1].plantSkill + "\n" + "Mining: " + CrewManager.crewList [1].mineSkill + "\n";
 
@@ -39,7 +39,17 @@ public class ShipMapInteraction : MonoBehaviour {
 			if (_selectedCrew > -1 && selectionActive) {
 				if (CrewManager.crewList [_selectedCrew].currRoom != value && !RoomManager.rooms [value].occupied) {
 					RoomManager.rooms[CrewManager.crewList [_selectedCrew].currRoom].occupied = false;
+					sprites [CrewManager.crewList [_selectedCrew].currRoom].enabled = false;
 					RoomManager.rooms [value].occupied = true;
+					if(_selectedCrew == 0)
+						sprites [value].color = new Color (0.5f,0,0);
+					else if(_selectedCrew == 1)
+						sprites [value].color = new Color (0, 1, 0);
+					
+					else
+						sprites [value].color = new Color (0, 0, 1);
+					
+					sprites [value].enabled = true;
 					_selectedRoom = value;
 					CrewManager.crewList [_selectedCrew].currRoom = value;
 					_selectedCrew = -1; 
@@ -51,7 +61,9 @@ public class ShipMapInteraction : MonoBehaviour {
 		}
 	}
 
-
+	void Start(){
+		sprites = new SpriteRenderer[]{ r0, r1, r2, r3, r4, r5, r6, r7, r8 };
+	}
 
 	void Update () {
 		if (Input.GetMouseButtonDown (0)) {
