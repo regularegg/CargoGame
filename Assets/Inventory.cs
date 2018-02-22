@@ -9,12 +9,16 @@ public class Inventory : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		inv = new int[6];
+		inv = new int[]{2,0,1,0,3,1};
 		invNames = new string[]{ "Hand Tools","Gardening Equipment", "Filters", "Drills", "Materials", "AC Coolant"};
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	void addInv(){
+
 	}
 }

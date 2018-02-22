@@ -6,11 +6,14 @@ using UnityEngine.UI;
 
 public class ShipMapInteraction : MonoBehaviour {
 	public TextMeshProUGUI detail, selection, SB1, SB2, SB3;
+	public GameObject holder;
 	public Button b1, b2, b3;
 	public bool selectionActive;
 	private int _selectedCrew;
 	public SpriteRenderer r0, r1, r2, r3, r4, r5, r6, r7, r8;
 	SpriteRenderer[] sprites;
+	string[] options1, options2, options3;
+
 	public int SC{
 		get{ return _selectedCrew; }
 		set{ 
@@ -54,6 +57,8 @@ public class ShipMapInteraction : MonoBehaviour {
 					_selectedRoom = value;
 					CrewManager.crewList [_selectedCrew].currRoom = value;
 					_selectedCrew = -1; 
+					roomMenu ();
+
 					//Debug.Log ("Current Room: " + CrewManager.crewList [0].currRoom);
 				}
 			} else {
@@ -95,36 +100,29 @@ public class ShipMapInteraction : MonoBehaviour {
 			if (hit.collider.gameObject.tag.Contains("Map")) {
 				if (hit.collider.gameObject.name.EndsWith("0")) {
 					SR = 0;
-					selectionActive = false;
 				}
 				else if (hit.collider.gameObject.name.EndsWith("1")) {
 					SR = 1;
-					selectionActive = false;
 				}
 				else if (hit.collider.gameObject.name.EndsWith("2")) {
 					SR = 2;
-					selectionActive = false;
 				}
 				else if (hit.collider.gameObject.name.EndsWith("3")) {
 					SR = 3;
-					selectionActive = false;
 				}
 				else if (hit.collider.gameObject.name.EndsWith("4")) {
 					SR = 4;
-					selectionActive = false;
 				}
 				else if (hit.collider.gameObject.name.EndsWith("5")) {
 					SR = 5;
-					selectionActive = false;
 				}
 				else if (hit.collider.gameObject.name.EndsWith("6")) {
 					SR = 6;
-					selectionActive = false;
 				}
 				else if (hit.collider.gameObject.name.EndsWith("7")) {
 					SR = 7;
-					selectionActive = false;
 				}
+				selectionActive = false;
 			}
 		}
 
@@ -135,11 +133,11 @@ public class ShipMapInteraction : MonoBehaviour {
 	}
 
 	void roomMenu(){
-		int RM = SR;
-		selection.enabled = true;
-		SB1.enabled = true;
-		SB2.enabled = true;
-		SB3.enabled = true;
+		Debug.Log ("ROOM MENU");
+		holder.SetActive (true);
+		b1.enabled = true;
+		b2.enabled = true;
+		b3.enabled = true;
 		b1.onClick.AddListener (delegate {
 			optA ();
 		});
@@ -149,15 +147,74 @@ public class ShipMapInteraction : MonoBehaviour {
 		b3.onClick.AddListener (delegate {
 			optC ();
 		});
+		if (SR == 0) {
+
+		}
+		else if (SR == 1) {
+			selection.enabled = true;
+			SB1.enabled = true;
+			SB1.text = "Check Cargo";
+		}
+		else if (SR == 2) {
+			selection.enabled = true;
+			SB1.enabled = true;
+			SB1.text = "Make hand tools";
+			SB2.enabled = true;
+			SB2.text = "make gardening equipment";
+			SB3.enabled = true;
+			SB3.text = "make drills";
+		}
+		else if (SR == 3) {
+			selection.enabled = true;
+			SB1.enabled = true;
+			SB1.text = "Upgrade Engines";
+			SB2.enabled = true;
+			SB2.text = "fix engines";
+		}
+		else if (SR == 4) {
+			selection.enabled = true;
+			SB1.enabled = true;
+			SB1.text = "Get Equipment";
+		}
+		else if (SR == 5) {
+			selection.enabled = true;
+			SB1.enabled = true;
+			SB1.text = "Harvest Food";
+			SB2.enabled = true;
+			SB2.text = "Tend Plants";
+		}
+		else if (SR == 6) {
+			selection.enabled = true;
+			SB1.enabled = true;
+			SB1.text = "Exit Airlock";
+		}
+		else if (SR == 7) {
+			selection.enabled = true;
+			SB1.enabled = true;
+			SB1.text = "Replace Filters";
+		}
+		else if (SR == 8) {
+			selection.enabled = true;
+			SB1.enabled = true;
+			SB1.text = "Enter Cryo";
+		}
 	}
 
 	void optA(){
-
+		Debug.Log ("Option 1");
+		holder.SetActive(false);
+		b1.onClick.RemoveAllListeners();
 	}
 	void optB(){
+		Debug.Log ("Option 2");
+		holder.SetActive (false);
+		b2.onClick.RemoveAllListeners();
 
 	}
 	void optC(){
+		Debug.Log ("Option 3");
+		holder.SetActive (false);
+		b3.onClick.RemoveAllListeners();
 
 	}
 }
