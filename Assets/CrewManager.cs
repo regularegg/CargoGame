@@ -18,7 +18,7 @@ public class CrewManager : MonoBehaviour {
 		nameList [3] = "Dingo";
 		nameList [4] = "Stumpy Stu";
 		nameList [5] = "Cart";
-		nameList [6] = "Fi";
+		nameList [6] = "Farts";
 		nameList [7] = "Hot Cheetos";
 
 
@@ -27,14 +27,10 @@ public class CrewManager : MonoBehaviour {
 			string name = nameList[Random.Range(0,nameList.Length)];
 			int age = Random.Range(18, 60), 
 			engineering = Random.Range(18, 60), 
-			plant = Random.Range(18, 60), 
+			fab = Random.Range(18, 60), 
 			mine = Random.Range(18, 60);
 
-			crewList [i] = new CrewPerson (name, age, engineering, plant, mine, i);
+			crewList [i] = new CrewPerson (name, age, engineering, fab, mine, i);
 		}
-	}
-	
-	void Update () {
-		
 	}
 }

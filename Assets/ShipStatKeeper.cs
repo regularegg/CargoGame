@@ -6,15 +6,16 @@ public class ShipStatKeeper: MonoBehaviour {
 	public static float 
 	temperature = 25, 
 	humidity = 25, 
-	fuel=15, //going towards power
+	fuel=10, //going towards power
 	power = 100, //will take -0.01 fuel per mvmt for each system on
 	distanceToDestination, 
 	food = 100, 
 	gravity = 1, // only effects crew health
 	oxygen = 100, 
-	airfilter,
-	bots; // slow rate of decay when there are more bots, more bots can be made in fab room
-
+	airfilter = 100,
+	hydroponics = 100,
+	bots = 3; // slow rate of decay when there are more bots, more bots can be made in fab room
+//	float foodDecay = 1, oxygenDecay = 0, airFilterDecay = 1, hydroponicsDecay = 0.5f, botsDecay = 1;
 	public static float tempToAdd, humToAdd;
 	public static float cryobedCount, crewCount, engineClass;
 	public static bool shipMoving;
@@ -42,8 +43,8 @@ public class ShipStatKeeper: MonoBehaviour {
 				_humidity = value;
 				humidity = _humidity;
 			}
-			if (value > 30)
-				Debug.Log ("noice");
+			if (value > 30) {
+			}
 		}
 	}
 	void Update () {
@@ -66,4 +67,27 @@ public class ShipStatKeeper: MonoBehaviour {
 			tempToAdd -= 0.5f;
 		}
 	}
+
+	static void filterDecay(){
+		if (hydroponics > 75) {
+			airfilter--;
+		} else {
+			airfilter -= 2;
+		}
+
+		if(Random.Range(0,1000)>950){
+			airfilter = 0;
+		}
+		if (airfilter < 10) {
+			oxygen--;
+		}
+	}
+	static void hydroDecay(){
+		if ((temperature < 40) && (temperature > 10)) {
+			hydroponics -= 0.05f;
+		} else {
+			hydroponics--;
+		}
+	}
+
 }

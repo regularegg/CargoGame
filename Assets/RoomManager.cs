@@ -14,8 +14,8 @@ public class RoomManager : MonoBehaviour {
 	void Update () {
 		room0 ();
 		room1 ();
-		room2 (rooms[2].occupied);
-		room3 (rooms[3].occupied);
+		room2 ();
+		room3 ();
 		room4 ();
 		room5 ();
 		room6 ();
@@ -28,80 +28,39 @@ public class RoomManager : MonoBehaviour {
 	}
 	//Cargo
 	void room1(){
-		bool Occupied;
-		int health = 100;
 
 	}
 	//Engineering
-	void room2(bool Occupied){
-		int health = 100;
-		if (!Occupied) {
-			if (Random.Range (0, 100) < 5) {
-				health--;
-			}
-		} else {
-			if ((Random.Range (0, 100) < 10)&&(health<100)) {
-				health++;
-			}
-		}
-
-		if (health < 50) {
-
-		}
-
+	void room2(){
+		string[] options = new string[]{"Upgrade Engines \n cost: 4 toolboxes", "fix engines \n cost: 1 toolbox"};
 	}
 	//Hydroponics
-	void room3(bool Occupied){
-		int health = 100;
-		if (!Occupied) {
-			if ((ShipStatKeeper.temperature > 40) ||(ShipStatKeeper.temperature < 10) || (ShipStatKeeper.humidity <10)) {
-				health--;
-			}
-		} else {
-			if ((Random.Range (0, 100) < 10)&&(health<100)) {
-				health++;
-			}
-		}
-		if (health < 30) {
-			ShipStatKeeper.food -= 0.5f;
-			ShipStatKeeper.oxygen -= 0.5f;
-		} else {
-			if (ShipStatKeeper.food < 100) {
-				ShipStatKeeper.food++;
-			}
-			if (ShipStatKeeper.oxygen < 100) {
-				ShipStatKeeper.oxygen++;
-			}
-		}
+	void room3(){
+		string[] options = new string[]{"Tend plants \n cost: 1 fertilizer"};
 	}
 	//Crew Quarters
 	void room4(){
-		bool Occupied;
-		int health = 100;
+		string[] options = new string[]{"Enter cryosleep"};
 
 	}
 	//Airlock
 	void room5(){
-		bool Occupied;
-		int health = 100;
+		string[] options = new string[]{"Exit Airlock \n warning: must be docked"};
+	
 
 	}
-	//Tool Fabrication
+	//upgrade Tool Fabrication
 	void room6(){
-		bool Occupied;
-		int health = 100;
+		string[] options = new string[]{"Make toolboxes", "Make fertilizer", "Make filters"};
 
 	}
 	//Tool Storage
 	void room7(){
-		bool Occupied;
-		int health = 100;
-
+		
 	}
-	//Tool Fab 2
+	//mine Tool Fab 2
 	void room8(){
-		bool Occupied;
-		int health = 100;
+		string[] options = new string[]{"Make drills", "Make containment units", "Make transporters"};
 
 	}
 

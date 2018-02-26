@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CrewPerson {
-	public float health, happiness, engineerSkill, plantSkill, mineSkill, cost, age;
+	public float health, happiness, engineerSkill, fabSkill, mineSkill, cost, age;
 	public string name;
 	public bool awake, alive;
 	public int index, currRoom;
 
 	public int currentActivity;
 
-	public CrewPerson(string id, float currAge, float engSkill, float plSkill, float mSkill, int nindex){
+	public CrewPerson(string id, float currAge, float engSkill, float fbSkill, float mSkill, int nindex){
 		health = 100;
 		happiness = 80;
 		currRoom = 0;
@@ -20,16 +20,12 @@ public class CrewPerson {
 
 
 		engineerSkill = engSkill;
-		plantSkill = plSkill;
+		fabSkill = fbSkill;
 		mineSkill = mSkill;
 		name = id;
 		age = currAge;
 		index = nindex;
-		cost = (engineerSkill + plantSkill + mineSkill) / 10;
-	}
-
-	void Start () {
-		
+		cost = (engineerSkill + fbSkill + mineSkill) / 10;
 	}
 	
 	void Update () {

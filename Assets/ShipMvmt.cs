@@ -7,12 +7,12 @@ public class ShipMvmt : MonoBehaviour {
 	//10km/sec > so there should be a delay function to calculate distance
 	//500km/L > rate of consumption
 	public GameObject shipSprite;
-
+	WaitForSeconds wait;
 
 	void Start () {
 		distanceCovered = 0;
 		InvokeRepeating ("FuelConsumption",5f, 1f);
-
+		StartCoroutine(shipMovement ());
 	}
 
 	void FuelConsumption(){
@@ -33,10 +33,18 @@ public class ShipMvmt : MonoBehaviour {
 				Debug.Log ("EMPTY");
 
 			}
+		}
 	}
 
+	IEnumerator shipMovement(){
+		Debug.Log ("EMPTY");
 
-}
+		if (ShipStatKeeper.shipMoving) {
+			Debug.Log ("EMPTY");
+
+		}
+		yield return new WaitForSeconds (1);
+	}
 }
 
 

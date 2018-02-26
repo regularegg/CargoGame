@@ -21,12 +21,12 @@ public class ShipMapInteraction : MonoBehaviour {
 			Debug.Log ("Initial Room: " + CrewManager.crewList [0].currRoom);
 			//Use later to display crew member stats
 			if (value == 0) {
-				detail.text = "Engineering: " + CrewManager.crewList [0].engineerSkill + "\n" + "Plants: " + CrewManager.crewList [0].plantSkill + "\n" + "Mining: " + CrewManager.crewList [0].mineSkill + "\n";
+				detail.text = "Engineering: " + CrewManager.crewList [0].engineerSkill + "\n" + "craft skill: " + CrewManager.crewList [0].fabSkill + "\n" + "Mining: " + CrewManager.crewList [0].mineSkill + "\n";
 			} else if (value == 1) {
-				detail.text = "Engineering: " + CrewManager.crewList [1].engineerSkill + "\n" + "Plants: " + CrewManager.crewList [1].plantSkill + "\n" + "Mining: " + CrewManager.crewList [1].mineSkill + "\n";
+				detail.text = "Engineering: " + CrewManager.crewList [1].engineerSkill + "\n" + "craft skill: " + CrewManager.crewList [1].fabSkill + "\n" + "Mining: " + CrewManager.crewList [1].mineSkill + "\n";
 
 			} else if (value == 2) {
-				detail.text = "Engineering: " + CrewManager.crewList [2].engineerSkill + "\n" + "Plants: " + CrewManager.crewList [2].plantSkill + "\n" + "Mining: " + CrewManager.crewList [2].mineSkill + "\n";
+				detail.text = "Engineering: " + CrewManager.crewList [2].engineerSkill + "\n" + "craft skill: " + CrewManager.crewList [2].fabSkill + "\n" + "Mining: " + CrewManager.crewList [2].mineSkill + "\n";
 
 			} else {
 				detail.text = "Engineering: " +"\n" + "Plants: " +"\n" + "Mining: " +"\n";
@@ -139,13 +139,13 @@ public class ShipMapInteraction : MonoBehaviour {
 		b2.enabled = true;
 		b3.enabled = true;
 		b1.onClick.AddListener (delegate {
-			optA ();
+			optA (SR);
 		});
 		b2.onClick.AddListener (delegate {
-			optB ();
+			optB (SR);
 		});
 		b3.onClick.AddListener (delegate {
-			optC ();
+			optC (SR);
 		});
 		if (SR == 0) {
 
@@ -158,11 +158,11 @@ public class ShipMapInteraction : MonoBehaviour {
 		else if (SR == 2) {
 			selection.enabled = true;
 			SB1.enabled = true;
-			SB1.text = "Make hand tools";
+			SB1.text = "make toolbox";
 			SB2.enabled = true;
-			SB2.text = "make gardening equipment";
+			SB2.text = "make fertilizer";
 			SB3.enabled = true;
-			SB3.text = "make drills";
+			SB3.text = "make airfilters";
 		}
 		else if (SR == 3) {
 			selection.enabled = true;
@@ -174,7 +174,11 @@ public class ShipMapInteraction : MonoBehaviour {
 		else if (SR == 4) {
 			selection.enabled = true;
 			SB1.enabled = true;
-			SB1.text = "Get Equipment";
+			SB1.text = "make drill";
+			SB2.enabled = true;
+			SB2.text = "make containment unit";
+			SB3.enabled = true;
+			SB3.text = "make transporters";
 		}
 		else if (SR == 5) {
 			selection.enabled = true;
@@ -196,24 +200,53 @@ public class ShipMapInteraction : MonoBehaviour {
 		else if (SR == 8) {
 			selection.enabled = true;
 			SB1.enabled = true;
-			SB1.text = "Enter Cryo";
+			SB1.text = "Enter Cryosleep";
 		}
 	}
 
-	void optA(){
+	void optA(int room){
 		Debug.Log ("Option 1");
 		holder.SetActive(false);
+		if (SR == 2) {
+			GetComponent<Inventory> ().fabPrep (SR, 0, 0);
+		} else if (SR == 4) {
+			GetComponent<Inventory> ().fabPrep (SR, 1, 0);
+
+		}
+
+		SB1.text = "";
+		SB2.text = "";
+		SB3.text = "";
 		b1.onClick.RemoveAllListeners();
 	}
-	void optB(){
+	void optB(int room){
 		Debug.Log ("Option 2");
 		holder.SetActive (false);
+		holder.SetActive(false);
+		if (SR == 2) {
+			GetComponent<Inventory> ().fabPrep (SR, 0, 1);
+		} else if (SR == 4) {
+			GetComponent<Inventory> ().fabPrep (SR, 1, 1);
+
+		}
+		SB1.text = "";
+		SB2.text = "";
+		SB3.text = "";
 		b2.onClick.RemoveAllListeners();
 
 	}
-	void optC(){
+	void optC(int room){
 		Debug.Log ("Option 3");
 		holder.SetActive (false);
+		holder.SetActive(false);
+		if (SR == 2) {
+			GetComponent<Inventory> ().fabPrep (SR, 0, 2);
+		} else if (SR == 4) {
+			GetComponent<Inventory> ().fabPrep (SR, 1, 2);
+		}
+		SB1.text = "";
+		SB2.text = "";
+		SB3.text = "";
 		b3.onClick.RemoveAllListeners();
 
 	}

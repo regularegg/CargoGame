@@ -9,11 +9,13 @@ public class GraphicalOutput : MonoBehaviour {
 	public GameObject crw0, crw1, crw2;
 	public float temperatureHold, humhold, fuelhold, powerhold;
 	public TextMeshProUGUI cstats0, cstats1, cstats2, detail, fueltxt, energy, filter, cargo, inventory;
+	float fuelInit;
 
 	string[] roomNames;
 
 
 	void Start () {
+		fuelInit = ShipStatKeeper.fuel;
 		roomNames = new string[] {
 			"Bridge",
 			"Cargo",
@@ -43,9 +45,9 @@ public class GraphicalOutput : MonoBehaviour {
 		}
 
 		CrewDataManager ();
-		fueltxt.text = "Fuel: " + ShipStatKeeper.fuel;
+		fueltxt.text = "Fuel: " + (100*ShipStatKeeper.fuel/fuelInit)+"%";
 		filter.text = "Filter: " + ShipStatKeeper.airfilter;
-		inventory.text = "hand tools: " + Inventory.inv [0] + "\nGardening Equipment: " + Inventory.inv [1] + "\nfilters: " + Inventory.inv [2] + "\nDrills: " + Inventory.inv [3] + "\nMaterials: " + Inventory.inv [4] + "\nCoolant" + Inventory.inv [5];
+		//inventory.text = "hand tools: " + Inventory.inv [0] + "\nGardening Equipment: " + Inventory.inv [1] + "\nfilters: " + Inventory.inv [2] + "\nDrills: " + Inventory.inv [3] + "\nMaterials: " + Inventory.inv [4] + "\nCoolant" + Inventory.inv [5];
 	}
 
 	void temperatureScale(){
