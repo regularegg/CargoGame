@@ -133,13 +133,14 @@ public class ShipMapInteraction : MonoBehaviour {
 	}
 
 	void roomMenu(){
-		Debug.Log ("ROOM MENU");
+		Debug.Log ("ROOM MENU" + b1.onClick.GetPersistentEventCount() );
 		holder.SetActive (true);
 		b1.enabled = true;
 		b2.enabled = true;
 		b3.enabled = true;
 		b1.onClick.AddListener (delegate {
 			optA (SR);
+			Debug.Log("optA");
 		});
 		b2.onClick.AddListener (delegate {
 			optB (SR);
@@ -208,6 +209,8 @@ public class ShipMapInteraction : MonoBehaviour {
 		Debug.Log ("Option 1");
 		holder.SetActive(false);
 		if (SR == 2) {
+			Debug.Log ("Option start fabprep");
+
 			GetComponent<Inventory> ().fabPrep (SR, 0, 0);
 		} else if (SR == 4) {
 			GetComponent<Inventory> ().fabPrep (SR, 1, 0);
@@ -220,7 +223,7 @@ public class ShipMapInteraction : MonoBehaviour {
 		b1.onClick.RemoveAllListeners();
 	}
 	void optB(int room){
-		Debug.Log ("Option 2");
+		Debug.Log ("Option 2 " + SR);
 		holder.SetActive (false);
 		holder.SetActive(false);
 		if (SR == 2) {

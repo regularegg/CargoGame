@@ -18,7 +18,7 @@ public class ShipStatKeeper: MonoBehaviour {
 //	float foodDecay = 1, oxygenDecay = 0, airFilterDecay = 1, hydroponicsDecay = 0.5f, botsDecay = 1;
 	public static float tempToAdd, humToAdd;
 	public static float cryobedCount, crewCount, engineClass;
-	public static bool shipMoving;
+	public static bool shipMoving, acOn, humidOn, _gravOn, botOn;
 	public static int crewAwake = 3;
 
 	private float _temperature = temperature;
@@ -45,6 +45,17 @@ public class ShipStatKeeper: MonoBehaviour {
 			}
 			if (value > 30) {
 			}
+		}
+	}
+	public static bool gravOn{
+		get{return _gravOn;}
+		set{
+			if (value) {
+				gravity = 1;
+			} else
+				gravity = 0;
+
+			_gravOn = value;
 		}
 	}
 	void Update () {

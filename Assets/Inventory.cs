@@ -12,10 +12,10 @@ public class Inventory : MonoBehaviour {
 	float[] upgradeFabTime = new float[]{ 10, 5, 7 };
 
 	public int rawMaterial = 20;
-	string[] mineItems;
-	string[] upgradeItems;
+	public static string[] mineItems;
+	public static string[] upgradeItems;
 
-	public WaitForSeconds wait = new WaitForSeconds (0.25f);
+	public WaitForSeconds wait = new WaitForSeconds (0.5f);
 
 
 	void Start () {
@@ -26,35 +26,49 @@ public class Inventory : MonoBehaviour {
 
 
 	public void fabPrep(int room, int fabType, int item){
+
 		for (int i = 0; i < CrewManager.crewList.Length; i++) {
+			Debug.Log ("fabPrep loop" + i);
+
 			if (CrewManager.crewList [i].currRoom == room) {
+				Debug.Log ("fabPrep 2");
 				if (fabType == 1) {
-					StartCoroutine (addMineInv (item,CrewManager.crewList[i].fabSkill));
+					StartCoroutine (addMineInv (item,CrewManager.crewList[i].fabSkill, CrewManager.crewList[i]));
+					break;
+
 				} else
-					StartCoroutine (addUpgradeInv (item,CrewManager.crewList[i].fabSkill));
+					StartCoroutine (addUpgradeInv (item,CrewManager.crewList[i].fabSkill, CrewManager.crewList[i]));
+				break;
+
 			} else
-				return;
+				Debug.Log("next person");
 		}
 	}
 
-	IEnumerator addMineInv(int itemIndex, float crewSkill){ // 1 progress every 0.25 sec
+	IEnumerator addMineInv(int itemIndex, float crewSkill, CrewPerson crew){ // 1 progress every 0.25 sec
+		Debug.Log("addMineInv");
+
 		float target = mineFabTime [itemIndex];
 		float productionProgress = 0;
 		while(productionProgress < target){
 			productionProgress += (crewSkill * 0.01f) + (ShipStatKeeper.gravity * 0.5f);
+			crew.currentActivity = 3 + itemIndex;
 			Debug.Log("Making" +mineInv[itemIndex]);
+
 
 			yield return wait;
 		}
-		if (productionProgress >= target) {
+
 			mineInv [itemIndex] += 1;
 			Debug.Log("Made inv thing" +mineInv[itemIndex]);
-
+			//productionProgress = 0;
 			yield break;
-		}
+	
 	}
 
-	IEnumerator addUpgradeInv(int itemIndex, float crewSkill){ // 1 progress every 0.25 sec
+	IEnumerator addUpgradeInv(int itemIndex, float crewSkill, CrewPerson crew){ // 1 progress every 0.25 sec
+		Debug.Log("addUpgradeInv");
+
 		float target = upgradeFabTime [itemIndex];
 		float productionProgress = 0;
 		while(productionProgress < target){
@@ -63,10 +77,10 @@ public class Inventory : MonoBehaviour {
 			Debug.Log("Making" +mineInv[itemIndex]);
 			yield return wait;
 		}
-		if (productionProgress >= target) {
 			upgradeInv [itemIndex] += 1;
 			Debug.Log("Made inv thing" +upgradeInv[itemIndex]);
+			//productionProgress = 0;
 			yield break;
-		}
+
 	}
 }

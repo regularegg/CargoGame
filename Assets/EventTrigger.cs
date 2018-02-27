@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EventTrigger : MonoBehaviour {
 
+	public int currStage = 0;
 	public GameObject screenA, screenB, screenC;
 	public ScreenAManager SAM;
 	public ScreenBMAnager SBM;
@@ -11,11 +12,9 @@ public class EventTrigger : MonoBehaviour {
 
 	public ButtonManager BM;
 
-	public int[] inventory;
 
 	// Use this for initialization
 	void Start () {
-		inventory = new int[5];
 
 	}
 
@@ -23,6 +22,8 @@ public class EventTrigger : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		}
+
+		
 
 	//	BM.ButtonClicked():
 	//}

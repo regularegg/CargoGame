@@ -7,15 +7,17 @@ using TMPro;
 
 public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 
+	public GameObject cam;
 	public static float tempSlideOutput, humSlideOutput;
 	public static bool oggle, button;
-	public Button bt1, bt2, bt3, mpA,mpB,mpC,mpD,mpE;
+	public Button humButt, acButt, botButt, gravButt, mpA,mpB,mpC,mpD,mpE;
 	public Button[] buttonList, mapButtonList;
 	public Slider slideA, slideB;
 	public Toggle tog;
 
 	public TextMeshProUGUI temperature, humidity;
-	public GameObject light1, light2;
+	public GameObject humL, acL, botL, gravL;
+	public Sprite offL, greenL, redL;
 
 	public GameObject mapA, mapB, mapC, mapD, mapE;
 	public GameObject[] mapButt;
@@ -50,7 +52,7 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 		});
 
 
-		buttonList = new Button[]{ bt1, bt2, bt3 };
+		buttonList = new Button[]{ humButt, acButt, botButt, gravButt, };
 
 		for (int i = 0; i < buttonList.Length; i++) {
 			Button temp = buttonList [i];
@@ -80,21 +82,28 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 	}
 	
 	public void ButtonClicked(Button butt){
-		//int temp = int.Parse (butt.name);
+		int temp = int.Parse (butt.name);
+		switch (temp) {
+		case 0:
+			Button0Click ();
+			break;
+		case 1:
+			Button1Click ();
+			break;
+		case 2:
+			Button2Click ();
+			break;
+		case 3:
+			Button3Click ();
+			break;
+		}
 	}
 
 	public void MapButtonClicked(Button butt){
 		int temp = int.Parse (butt.name);
 		mapButt [temp].GetComponent<SpriteRenderer> ().enabled = !mapButt [temp].GetComponent<SpriteRenderer> ().enabled;
 	}
-
-	public bool ButtonChecker(int button){
 		
-
-		return false;
-	}
-	//make something check if the right button is pressed, no need to return anything
-
 
 	public void ValueChangeCheckTemp(){
 		temperature.text = slideB.value+"";
@@ -107,22 +116,50 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 
 	}
 
-	public int Button1Click(){
-		return 0;
+	public void  Button0Click(){ //humidity button
+		ShipStatKeeper.humidOn = !ShipStatKeeper.humidOn;
+		SpriteRenderer SR = humL.GetComponent<SpriteRenderer> ();
+		if (ShipStatKeeper.humidOn) {
+			SR.sprite = greenL;
+		} else
+			SR.sprite = offL;
+		Debug.Log ("0");
+	}
+	public void  Button1Click(){//AC button
+		ShipStatKeeper.acOn = !ShipStatKeeper.acOn;
+		SpriteRenderer SR = acL.GetComponent<SpriteRenderer> ();
+		if (ShipStatKeeper.acOn) {
+			SR.sprite = greenL;
+		} else
+			SR.sprite = offL;
+		Debug.Log ("1");
 	}
 
-	public int Button2Click(){
-		return 1;
+	public void  Button2Click(){//Bot deploy button
+		ShipStatKeeper.botOn = !ShipStatKeeper.botOn;
+		SpriteRenderer SR = botL.GetComponent<SpriteRenderer> ();
+		if (ShipStatKeeper.botOn) {
+			SR.sprite = greenL;
+		} else
+			SR.sprite = offL;
+		Debug.Log ("2");
 	}
 
-	public int Button3Click(){
-		return 2;
+	public void  Button3Click(){//gravity button
+		ShipStatKeeper.gravOn = !ShipStatKeeper.gravOn;
+		SpriteRenderer SR = gravL.GetComponent<SpriteRenderer> ();
+		if (ShipStatKeeper.gravOn) {
+			SR.sprite = greenL;
+		} else
+			SR.sprite = offL;
+		Debug.Log ("3");
 	}
 
 	public void GoToggle(){
 		ShipStatKeeper.shipMoving = !ShipStatKeeper.shipMoving;
-	}
 
+	}
+		
 
 	void TemperatureIncrease(){
 		if (ShipStatKeeper.tempToAdd != 0) {
