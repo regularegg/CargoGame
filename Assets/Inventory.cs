@@ -15,6 +15,8 @@ public class Inventory : MonoBehaviour {
 	public static string[] mineItems;
 	public static string[] upgradeItems;
 
+	public GameObject[] crewSB = new GameObject[3];
+
 	public WaitForSeconds wait = new WaitForSeconds (0.5f);
 
 
@@ -33,11 +35,11 @@ public class Inventory : MonoBehaviour {
 			if (CrewManager.crewList [i].currRoom == room) {
 				Debug.Log ("fabPrep 2");
 				if (fabType == 1) {
-					StartCoroutine (addMineInv (item,CrewManager.crewList[i].fabSkill, CrewManager.crewList[i]));
+					StartCoroutine (addMineInv (item,CrewManager.crewList[i].fabSkill, CrewManager.crewList[i], i));
 					break;
 
 				} else
-					StartCoroutine (addUpgradeInv (item,CrewManager.crewList[i].fabSkill, CrewManager.crewList[i]));
+					StartCoroutine (addUpgradeInv (item,CrewManager.crewList[i].fabSkill, CrewManager.crewList[i], i));
 				break;
 
 			} else
@@ -45,7 +47,7 @@ public class Inventory : MonoBehaviour {
 		}
 	}
 
-	IEnumerator addMineInv(int itemIndex, float crewSkill, CrewPerson crew){ // 1 progress every 0.25 sec
+	IEnumerator addMineInv(int itemIndex, float crewSkill, CrewPerson crew, int index){ // 1 progress every 0.25 sec
 		Debug.Log("addMineInv");
 
 		float target = mineFabTime [itemIndex];
@@ -54,6 +56,7 @@ public class Inventory : MonoBehaviour {
 			productionProgress += (crewSkill * 0.01f) + (ShipStatKeeper.gravity * 0.5f);
 			crew.currentActivity = 3 + itemIndex;
 			Debug.Log("Making" +mineInv[itemIndex]);
+			crewSB[index].transform.localScale = (productionProgress * Vector3.left/60)+(Vector3.up);
 
 
 			yield return wait;
@@ -61,23 +64,32 @@ public class Inventory : MonoBehaviour {
 
 			mineInv [itemIndex] += 1;
 			Debug.Log("Made inv thing" +mineInv[itemIndex]);
+		crew.currentActivity = 0;
+
 			//productionProgress = 0;
 			yield break;
 	
 	}
 
-	IEnumerator addUpgradeInv(int itemIndex, float crewSkill, CrewPerson crew){ // 1 progress every 0.25 sec
+	IEnumerator addUpgradeInv(int itemIndex, float crewSkill, CrewPerson crew, int index){ // 1 progress every 0.25 sec
 		Debug.Log("addUpgradeInv");
 
 		float target = upgradeFabTime [itemIndex];
 		float productionProgress = 0;
 		while(productionProgress < target){
 			productionProgress += (crewSkill * 0.01f) + (ShipStatKeeper.gravity * 0.5f);
+			crew.currentActivity = 3 + itemIndex;
+
+			crewSB[index].transform.localScale = (productionProgress * Vector3.left/60)+(Vector3.up);
+
+
 
 			Debug.Log("Making" +mineInv[itemIndex]);
 			yield return wait;
 		}
 			upgradeInv [itemIndex] += 1;
+		crew.currentActivity = 0;
+
 			Debug.Log("Made inv thing" +upgradeInv[itemIndex]);
 			//productionProgress = 0;
 			yield break;

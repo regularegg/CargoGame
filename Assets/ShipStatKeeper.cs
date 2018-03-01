@@ -8,17 +8,19 @@ public class ShipStatKeeper: MonoBehaviour {
 	humidity = 25, 
 	fuel=10, //going towards power
 	power = 100, //will take -0.01 fuel per mvmt for each system on
-	distanceToDestination, 
+	distanceToDestination = 50,
+	distanceTravelled,
 	food = 100, 
 	gravity = 1, // only effects crew health
 	oxygen = 100, 
 	airfilter = 100,
 	hydroponics = 100,
+	cargo=0,
 	bots = 3; // slow rate of decay when there are more bots, more bots can be made in fab room
 //	float foodDecay = 1, oxygenDecay = 0, airFilterDecay = 1, hydroponicsDecay = 0.5f, botsDecay = 1;
 	public static float tempToAdd, humToAdd;
 	public static float cryobedCount, crewCount, engineClass;
-	public static bool shipMoving, acOn, humidOn, _gravOn, botOn;
+	public static bool shipMoving, acOn, humidOn, _gravOn, botOn, canMine;
 	public static int crewAwake = 3;
 
 	private float _temperature = temperature;

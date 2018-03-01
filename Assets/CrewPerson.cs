@@ -5,7 +5,7 @@ using UnityEngine;
 public class CrewPerson {
 	public float health, happiness, engineerSkill, fabSkill, mineSkill, cost, age;
 	public string name;
-	public bool awake, alive;
+	public bool awake, alive, outsideShip;
 	public int index, currRoom;
 
 	public int currentActivity;

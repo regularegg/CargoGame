@@ -19,12 +19,9 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 	public GameObject humL, acL, botL, gravL;
 	public Sprite offL, greenL, redL;
 
-	public GameObject mapA, mapB, mapC, mapD, mapE;
-	public GameObject[] mapButt;
+	ShipStatKeeper SSK;
 
 	WaitForSeconds wait;
-
-	ShipStatKeeper SSK;
 
 
 	private float currentHumidityTarget, currentTemperatureTarget;
@@ -61,19 +58,6 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 				ButtonClicked (temp);
 			});
 		}
-		mapButtonList = new Button[]{ mpA, mpB, mpC, mpD, mpE };
-
-		for (int i = 0; i < mapButtonList.Length; i++) {
-			Button temp = mapButtonList [i];
-			temp.name = "" + i;
-			mapButtonList [i].onClick.AddListener (() => {
-				MapButtonClicked (temp);
-			});
-		}
-
-		mapButt = new GameObject[]{ mapA, mapB, mapC, mapD, mapE };
-
-
 		wait = new WaitForSeconds (0.25f);
 	}
 	void Update(){
@@ -99,10 +83,6 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 		}
 	}
 
-	public void MapButtonClicked(Button butt){
-		int temp = int.Parse (butt.name);
-		mapButt [temp].GetComponent<SpriteRenderer> ().enabled = !mapButt [temp].GetComponent<SpriteRenderer> ().enabled;
-	}
 		
 
 	public void ValueChangeCheckTemp(){

@@ -17,7 +17,7 @@ public class RoomManager : MonoBehaviour {
 		room2 ();
 		room3 ();
 		room4 ();
-		room5 ();
+		room5 ();//airlock
 		room6 ();
 		room7 ();
 		room8 ();

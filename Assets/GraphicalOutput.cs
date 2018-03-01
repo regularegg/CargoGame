@@ -5,11 +5,12 @@ using UnityEngine.UI;
 using TMPro;
 
 public class GraphicalOutput : MonoBehaviour {
-	public GameObject temperature, humidity, fuel, power;
+	public GameObject temperature, humidity, fuel, power, trutemp, truhum;
 	public GameObject crw0, crw1, crw2;
 	public float temperatureHold, humhold, fuelhold, powerhold;
 	public TextMeshProUGUI cstats0, cstats1, cstats2, detail, fueltxt, energy, filter, cargo, inventory;
 	float fuelInit;
+
 
 	string[] roomNames;
 
@@ -53,9 +54,17 @@ public class GraphicalOutput : MonoBehaviour {
 
 	void temperatureScale(){
 		temperature.transform.localScale = (ShipStatKeeper.temperature * Vector3.up/10)+(Vector3.right);
+		if (ShipStatKeeper.temperature > 40) {
+			trutemp.GetComponent<SpriteRenderer> ().color = Color.red;
+		} else
+			trutemp.GetComponent<SpriteRenderer> ().color = Color.green;
 	}
 	void humidityScale(){
 		humidity.transform.localScale = (ShipStatKeeper.humidity * Vector3.up/10)+(Vector3.right);
+		if (ShipStatKeeper.humidity > 40) {
+			truhum.GetComponent<SpriteRenderer> ().color = Color.red;
+		} else
+			truhum.GetComponent<SpriteRenderer> ().color = Color.green;
 	}
 	void fuelScale(){
 		fuel.transform.localScale = (ShipStatKeeper.fuel * Vector3.up/10)+(Vector3.right);
@@ -74,7 +83,7 @@ public class GraphicalOutput : MonoBehaviour {
 	}
 	void InventoryDisplay(){
 		inventory.text = Inventory.upgradeItems[0] + Inventory.upgradeInv [0] + "\n" +
-			Inventory.upgradeItems[1] + Inventory.upgradeInv [1] + "\n" +
+			Inventory.upgradeItems[1] +": "+ Inventory.upgradeInv [1] + "\n" +
 			Inventory.upgradeItems[2] +Inventory.upgradeInv [2] +"\n" +
 			Inventory.mineItems[0] +Inventory.mineInv [0] + "\n" +
 			Inventory.mineItems[1] +Inventory.mineInv [1] + "\n" +
