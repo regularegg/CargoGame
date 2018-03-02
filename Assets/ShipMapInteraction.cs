@@ -18,7 +18,7 @@ public class ShipMapInteraction : MonoBehaviour {
 		get{ return _selectedCrew; }
 		set{ 
 			_selectedCrew = value;
-			Debug.Log ("Initial Room: " + CrewManager.crewList [0].currRoom);
+			/*Debug.Log ("Initial Room: " + CrewManager.crewList [0].currRoom);
 			//Use later to display crew member stats
 			if (value == 0) {
 				detail.text = "Engineering: " + CrewManager.crewList [0].engineerSkill + "\n" + "craft skill: " + CrewManager.crewList [0].fabSkill + "\n" + "Mining: " + CrewManager.crewList [0].mineSkill + "\n";
@@ -31,7 +31,7 @@ public class ShipMapInteraction : MonoBehaviour {
 			} else {
 				detail.text = "Engineering: " +"\n" + "Plants: " +"\n" + "Mining: " +"\n";
 
-			}
+			}*/
 		}
 	}
 

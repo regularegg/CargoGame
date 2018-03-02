@@ -14,7 +14,7 @@ public class ShipStatKeeper: MonoBehaviour {
 	gravity = 1, // only effects crew health
 	oxygen = 100, 
 	airfilter = 100,
-	hydroponics = 100,
+	garden = 100,
 	cargo=0,
 	bots = 3; // slow rate of decay when there are more bots, more bots can be made in fab room
 //	float foodDecay = 1, oxygenDecay = 0, airFilterDecay = 1, hydroponicsDecay = 0.5f, botsDecay = 1;
@@ -82,7 +82,7 @@ public class ShipStatKeeper: MonoBehaviour {
 	}
 
 	static void filterDecay(){
-		if (hydroponics > 75) {
+		if (garden > 75) {
 			airfilter--;
 		} else {
 			airfilter -= 2;
@@ -97,9 +97,9 @@ public class ShipStatKeeper: MonoBehaviour {
 	}
 	static void hydroDecay(){
 		if ((temperature < 40) && (temperature > 10)) {
-			hydroponics -= 0.05f;
+			garden -= 0.05f;
 		} else {
-			hydroponics--;
+			garden--;
 		}
 	}
 
