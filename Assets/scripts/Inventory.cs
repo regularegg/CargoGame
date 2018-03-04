@@ -37,7 +37,6 @@ public class Inventory : MonoBehaviour {
 				if (fabType == 1) {
 					StartCoroutine (addMineInv (item,CrewManager.crewList[i].fabSkill, CrewManager.crewList[i], i));
 					break;
-
 				} else
 					StartCoroutine (addUpgradeInv (item,CrewManager.crewList[i].fabSkill, CrewManager.crewList[i], i));
 				break;

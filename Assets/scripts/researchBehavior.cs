@@ -56,14 +56,10 @@ public class researchBehavior : MonoBehaviour {
 	}
 
 
-
 	void Start () {
 		roomLevels = new int[]{ Research, Engine, ToolFab, MineFab, Garden, Filter };
 	}
-	
-	void Update () {
-		
-	}
+
 }
 /* be able to research upgrades for ship
  * integers of ship level (w/ get n set)

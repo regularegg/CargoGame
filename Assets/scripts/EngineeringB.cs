@@ -20,12 +20,13 @@ public class EngineeringB : MonoBehaviour {
 		}
 	}
 
-	WaitForSeconds wait;
+	WaitForSeconds wait, upgradeWait;
 
 	// Use this for initialization
 	void Start () {
 		health = 100;
 		wait = new WaitForSeconds (4f);
+		upgradeWait = new WaitForSeconds (2f);
 		StartCoroutine ("Decay");
 	}
 
@@ -45,5 +46,44 @@ public class EngineeringB : MonoBehaviour {
 		}
 	}
 
+	public void fix(int toolbox, CrewPerson crew){
+		if (toolbox >= 1 && health<100) {
+			Inventory.upgradeInv [0] -= 2;
+			crew.active = true;
+			StartCoroutine (_fix(crew));
+		}
+	}
+	IEnumerator _fix(CrewPerson crew){
+		int count = -10;
+		while (count < 100){
+			count += 10;
+			yield return wait;
+		}
+		if (count >= 100) {
+			crew.active = false;
+			health += 50;
+			yield break;
+		}
+	}
 
+	public void upgrade(int toolbox, CrewPerson crew){
+		if (toolbox >= 5&&engineLevel<4) {
+			Inventory.upgradeInv [0] -= 4;
+			crew.active = true;
+			StartCoroutine (_upgrade(crew));
+		}
+	}
+		
+	IEnumerator _upgrade(CrewPerson crew){
+		int count = -10;
+		while (count < 100){
+			count += 10;
+			yield return upgradeWait;
+		}
+		if (count >= 100) {
+			crew.active = false;
+			engineLevel++;
+			yield break;
+		}
+	}
 }

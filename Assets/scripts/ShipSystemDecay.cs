@@ -14,7 +14,6 @@ public class ShipSystemDecay : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		HydroponicDecay ();
-		AirFilterDecay ();
 		oxygenDecay ();
 		//HumidityIncrease ();
 		//TemperatureIncrease ();
@@ -42,13 +41,7 @@ public class ShipSystemDecay : MonoBehaviour {
 		//add humidity later
 	}
 
-	void AirFilterDecay(){
-		if ((hydroponicHealth < 75)&&(ShipStatKeeper.humidity>80)) {
-			airfilterHealth -= 0.05f;
-		} else {
-			airfilterHealth -= 0.00025f;//add randomness later
-		}
-	}
+
 
 	void foodDecay(){
 		if (ShipStatKeeper.crewAwake != 0) {

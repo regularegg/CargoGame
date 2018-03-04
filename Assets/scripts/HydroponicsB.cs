@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HydroponicsB : MonoBehaviour {
 	public static int ID = 4;
+	public static string[] requirements = new string[]{ "1 Fertilizer" };
 
 	float _health = 100;
 	public float Health{
