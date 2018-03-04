@@ -5,7 +5,7 @@ using UnityEngine;
 public class CrewPerson {
 	public float health, happiness, engineerSkill, fabSkill, mineSkill, cost, age;
 	public string name;
-	public bool awake, alive, outsideShip;
+	public bool awake, alive, outsideShip, active;
 	public int index, currRoom;
 
 	public int currentActivity;
@@ -13,10 +13,11 @@ public class CrewPerson {
 	public CrewPerson(string id, float currAge, float engSkill, float fbSkill, float mSkill, int nindex){
 		health = 100;
 		happiness = 80;
-		currRoom = 0;
+		currRoom = 8;
 		awake = true;
 		alive = true;
 		currentActivity = 0;
+		active = false;
 
 
 		engineerSkill = engSkill;
@@ -27,11 +28,12 @@ public class CrewPerson {
 		index = nindex;
 		cost = (engineerSkill + fbSkill + mineSkill) / 10;
 	}
-	
+
 	void Update () {
 		if (health == 0) {
 			alive = false;
 		}
+
 	}
 
 	void needsDecay(){

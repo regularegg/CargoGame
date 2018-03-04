@@ -6,9 +6,20 @@ using UnityEngine.UI;
 
 public class ShipMapInteraction : MonoBehaviour {
 	public TextMeshProUGUI detail, selection, SB1, SB2, SB3;
-	public GameObject holder;
+	public GameObject holder, bg1, bg2, bg3;
 	public Button b1, b2, b3;
-	public bool selectionActive;
+	public bool _selectionActive;
+	bool selectionActive{
+		get{return _selectionActive;}
+		set{
+			_selectionActive = value;
+			if(value == false){
+				bg1.GetComponent<SpriteRenderer>().enabled = false;
+				bg2.GetComponent<SpriteRenderer>().enabled = false;
+				bg3.GetComponent<SpriteRenderer>().enabled = false;
+			}
+		}
+	}
 	private int _selectedCrew;
 	public SpriteRenderer r0, r1, r2, r3, r4, r5, r6, r7, r8;
 	SpriteRenderer[] sprites;
@@ -18,20 +29,15 @@ public class ShipMapInteraction : MonoBehaviour {
 		get{ return _selectedCrew; }
 		set{ 
 			_selectedCrew = value;
-			/*Debug.Log ("Initial Room: " + CrewManager.crewList [0].currRoom);
+			Debug.Log ("Initial Room: " + CrewManager.crewList [0].currRoom);
 			//Use later to display crew member stats
 			if (value == 0) {
-				detail.text = "Engineering: " + CrewManager.crewList [0].engineerSkill + "\n" + "craft skill: " + CrewManager.crewList [0].fabSkill + "\n" + "Mining: " + CrewManager.crewList [0].mineSkill + "\n";
+				bg1.GetComponent<SpriteRenderer>().enabled = !bg1.GetComponent<SpriteRenderer>().enabled;
 			} else if (value == 1) {
-				detail.text = "Engineering: " + CrewManager.crewList [1].engineerSkill + "\n" + "craft skill: " + CrewManager.crewList [1].fabSkill + "\n" + "Mining: " + CrewManager.crewList [1].mineSkill + "\n";
-
+				bg2.GetComponent<SpriteRenderer>().enabled = !bg2.GetComponent<SpriteRenderer>().enabled;
 			} else if (value == 2) {
-				detail.text = "Engineering: " + CrewManager.crewList [2].engineerSkill + "\n" + "craft skill: " + CrewManager.crewList [2].fabSkill + "\n" + "Mining: " + CrewManager.crewList [2].mineSkill + "\n";
-
-			} else {
-				detail.text = "Engineering: " +"\n" + "Plants: " +"\n" + "Mining: " +"\n";
-
-			}*/
+				bg3.GetComponent<SpriteRenderer>().enabled = !bg3.GetComponent<SpriteRenderer>().enabled;
+			}
 		}
 	}
 
@@ -41,15 +47,15 @@ public class ShipMapInteraction : MonoBehaviour {
 		set{ 
 			_selectedRoom = value;
 			if (_selectedCrew > -1 && selectionActive) {
-				if (CrewManager.crewList [_selectedCrew].currRoom != value && !RoomManager.rooms [value].occupied) {
+				if (CrewManager.crewList [_selectedCrew].currRoom != value && !RoomManager.rooms [value].occupied &&!CrewManager.crewList[_selectedCrew].active) {
 					RoomManager.rooms[CrewManager.crewList [_selectedCrew].currRoom].occupied = false;
 					sprites [CrewManager.crewList [_selectedCrew].currRoom].enabled = false;
 					RoomManager.rooms [value].occupied = true;
+
 					if(_selectedCrew == 0)
 						sprites [value].color = new Color (0.5f,0,0);
 					else if(_selectedCrew == 1)
 						sprites [value].color = new Color (0, 1, 0);
-					
 					else
 						sprites [value].color = new Color (0, 0, 1);
 					
@@ -61,8 +67,6 @@ public class ShipMapInteraction : MonoBehaviour {
 
 					//Debug.Log ("Current Room: " + CrewManager.crewList [0].currRoom);
 				}
-			} else {
-
 			}
 		}
 	}
@@ -74,6 +78,9 @@ public class ShipMapInteraction : MonoBehaviour {
 	void Update () {
 		if (Input.GetMouseButtonDown (0)) {
 			CastRay ();
+			if (selectionActive){
+				
+			}
 		}
 	}
 
@@ -98,6 +105,8 @@ public class ShipMapInteraction : MonoBehaviour {
 			}
 
 			if (hit.collider.gameObject.tag.Contains("Map")) {
+				
+
 				if (hit.collider.gameObject.name.EndsWith("0")) {
 					SR = 0;
 				}
@@ -121,6 +130,9 @@ public class ShipMapInteraction : MonoBehaviour {
 				}
 				else if (hit.collider.gameObject.name.EndsWith("7")) {
 					SR = 7;
+				}
+				else if (hit.collider.gameObject.name.EndsWith("8")) {
+					SR = 8;
 				}
 				selectionActive = false;
 			}
@@ -215,6 +227,9 @@ public class ShipMapInteraction : MonoBehaviour {
 		} else if (SR == 4) {
 			GetComponent<Inventory> ().fabPrep (SR, 1, 0);
 
+		} else if (SR == 5) {
+			GetComponent<HydroponicsB> ().harvest();
+
 		}
 
 		SB1.text = "";
@@ -230,6 +245,8 @@ public class ShipMapInteraction : MonoBehaviour {
 			GetComponent<Inventory> ().fabPrep (SR, 0, 1);
 		} else if (SR == 4) {
 			GetComponent<Inventory> ().fabPrep (SR, 1, 1);
+		}else if (SR == 5) {
+			//GetComponent<HydroponicsB> ().fabPrep (SR, 0, 1);
 
 		}
 		SB1.text = "";
@@ -246,6 +263,8 @@ public class ShipMapInteraction : MonoBehaviour {
 			GetComponent<Inventory> ().fabPrep (SR, 0, 2);
 		} else if (SR == 4) {
 			GetComponent<Inventory> ().fabPrep (SR, 1, 2);
+		}else if (SR == 5) {
+
 		}
 		SB1.text = "";
 		SB2.text = "";

@@ -86,12 +86,12 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 		
 
 	public void ValueChangeCheckTemp(){
-		temperature.text = slideB.value+"";
+	//	temperature.text = slideB.value+"";
 		currentTemperatureTarget = slideA.value;
 	}
 
 	public void ValueChangeCheckHum(){
-		humidity.text = slideB.value+"";
+	//	humidity.text = slideB.value+"";
 		currentHumidityTarget = slideB.value;
 
 	}

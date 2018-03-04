@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HydroponicsB : MonoBehaviour {
+public class airFilterBehavior : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

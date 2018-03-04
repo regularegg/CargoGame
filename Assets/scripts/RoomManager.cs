@@ -10,8 +10,9 @@ public class RoomManager : MonoBehaviour {
 			rooms [i] = new RoomBehavior (i);
 		}
 	}
-	
+	//research = 0, tool fab = 1, engine = 2, mining fab = 3, garden = 4, airlock = 5, filter = 6, cryo = 7
 	void Update () {
+		/*
 		room0 ();
 		room1 ();
 		room2 ();
@@ -20,25 +21,25 @@ public class RoomManager : MonoBehaviour {
 		room5 ();//airlock
 		room6 ();
 		room7 ();
-		room8 ();
+		room8 ();*/
 	}
 	//Bridge
 	void room0(){
 		
 	}
-	//Cargo
+	//Cargo ID = 0
 	void room1(){
 
 	}
-	//Engineering
+	//Engineering ID = 1
 	void room2(){
 		string[] options = new string[]{"Upgrade Engines \n cost: 4 toolboxes", "fix engines \n cost: 1 toolbox"};
 	}
-	//Hydroponics
+	//Hydroponics ID = 2
 	void room3(){
 		string[] options = new string[]{"Tend plants \n cost: 1 fertilizer"};
 	}
-	//Crew Quarters
+	//Crew cryo ID 
 	void room4(){
 		string[] options = new string[]{"Enter cryosleep"};
 

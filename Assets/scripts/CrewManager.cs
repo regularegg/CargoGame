@@ -31,6 +31,20 @@ public class CrewManager : MonoBehaviour {
 			mine = Random.Range(18, 60);
 
 			crewList [i] = new CrewPerson (name, age, engineering, fab, mine, i);
+			StartCoroutine (aging (crewList [i]));
+		}
+	}
+
+
+	IEnumerator aging(CrewPerson crew){
+		if (crew.age < 100 && crew.alive && crew.awake) {
+			crew.age++;
+			yield return new WaitForSeconds (60);
+		} else if (!crew.awake) {
+			yield return null;
+		}
+		else if (crew.age > 100 || !crew.alive || crew.health < 1) {
+			yield break;
 		}
 	}
 }

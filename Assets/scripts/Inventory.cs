@@ -57,17 +57,16 @@ public class Inventory : MonoBehaviour {
 			crew.currentActivity = 3 + itemIndex;
 			Debug.Log("Making" +mineInv[itemIndex]);
 			crewSB[index].transform.localScale = (productionProgress * Vector3.left/60)+(Vector3.up);
-
+			crew.active = true;
 
 			yield return wait;
 		}
 
-			mineInv [itemIndex] += 1;
-			Debug.Log("Made inv thing" +mineInv[itemIndex]);
+		mineInv [itemIndex] += 1;
+		Debug.Log("Made inv thing" +mineInv[itemIndex]);
 		crew.currentActivity = 0;
-
-			//productionProgress = 0;
-			yield break;
+		crew.active = false;
+		yield break;
 	
 	}
 
@@ -79,10 +78,8 @@ public class Inventory : MonoBehaviour {
 		while(productionProgress < target){
 			productionProgress += (crewSkill * 0.01f) + (ShipStatKeeper.gravity * 0.5f);
 			crew.currentActivity = 3 + itemIndex;
-
+			crew.active = true;
 			crewSB[index].transform.localScale = (productionProgress * Vector3.left/60)+(Vector3.up);
-
-
 
 			Debug.Log("Making" +mineInv[itemIndex]);
 			yield return wait;
@@ -91,7 +88,7 @@ public class Inventory : MonoBehaviour {
 		crew.currentActivity = 0;
 
 			Debug.Log("Made inv thing" +upgradeInv[itemIndex]);
-			//productionProgress = 0;
+			crew.active = false;
 			yield break;
 
 	}
