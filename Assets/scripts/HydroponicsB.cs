@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HydroponicsB : MonoBehaviour {
+	public static int ID = 4;
+
 	float _health = 100;
 	public float Health{
 		get{ return _health; }
