@@ -7,7 +7,7 @@ using TMPro;
 public class GraphicalOutput : MonoBehaviour {
 	public GameObject temperature, humidity, fuel, power, trutemp, truhum;
 	public GameObject crw0, crw1, crw2;
-	public float temperatureHold, humhold, fuelhold, powerhold;
+	public float temperatureHold, humhold, oxygenhold, powerhold;
 	public TextMeshProUGUI cstats0, cstats1, cstats2, detail, fueltxt, energy, filter, cargo, inventory;
 	float fuelInit;
 
@@ -41,9 +41,9 @@ public class GraphicalOutput : MonoBehaviour {
 			humidityScale ();
 			humhold = ShipStatKeeper.temperature;
 		}
-		if (fuelhold != ShipStatKeeper.fuel) {
-			fuelScale ();
-			fuelhold = ShipStatKeeper.fuel;
+		if (oxygenhold != ShipStatKeeper.oxygen) {
+			oxygenScale ();
+			oxygenhold = ShipStatKeeper.fuel;
 		}
 
 		CrewDataManager ();
@@ -66,13 +66,14 @@ public class GraphicalOutput : MonoBehaviour {
 		} else
 			truhum.GetComponent<SpriteRenderer> ().color = Color.green;
 	}
-	void fuelScale(){
-		fuel.transform.localScale = (ShipStatKeeper.fuel * Vector3.up/10)+(Vector3.right);
+	void oxygenScale(){
+		fuel.transform.localScale = (ShipStatKeeper.oxygen * Vector3.up/10)+(Vector3.right);
+		if (ShipStatKeeper.oxygen > 50) {
+			truhum.GetComponent<SpriteRenderer> ().color = Color.green;
+		} else
+			truhum.GetComponent<SpriteRenderer> ().color = Color.red;
 	}
 
-	void CrewClick(){
-
-	}
 	void CrewDataManager(){
 		cstats0.text = CrewManager.crewList [0].name + "\n" + CrewManager.crewList [0].age+"\n" + CrewManager.crewList [0].health + "\n" + roomNames[CrewManager.crewList [0].currRoom];
 

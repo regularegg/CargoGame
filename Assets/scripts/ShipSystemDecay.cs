@@ -6,15 +6,15 @@ public class ShipSystemDecay : MonoBehaviour {
 	public float cargoHealth = 100, hydroponicHealth = 100, airfilterHealth = 100, foodSupply = 100, oxygenLevel = 100, energyLevel = 100;
 	float temperatureHolder, humidityHolder;
 	public delegate void tempChange(float temp);
-
+	WaitForSeconds wait = new WaitForSeconds(1f);
 	void Start () {
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		HydroponicDecay ();
 		oxygenDecay ();
+		foodDecay ();
 		//HumidityIncrease ();
 		//TemperatureIncrease ();
 	}
@@ -28,39 +28,30 @@ public class ShipSystemDecay : MonoBehaviour {
 		}
 	}
 
-	void HydroponicDecay(){
-		if ((ShipStatKeeper.temperature > 30)&&(ShipStatKeeper.humidity<20&&ShipStatKeeper.humidity>60)) {
-			hydroponicHealth -= 0.5f;
-		} else if (ShipStatKeeper.temperature < 20&&(ShipStatKeeper.humidity>20&&ShipStatKeeper.humidity<60)) {
-			hydroponicHealth -= 0.25f;
-		} else if (hydroponicHealth < 20) {
-			hydroponicHealth--;
-		} else if (ShipStatKeeper.temperature < 30 && ShipStatKeeper.temperature > 20 && hydroponicHealth < 100&&(ShipStatKeeper.humidity>20&&ShipStatKeeper.humidity<60)) {
-			hydroponicHealth += 0.5f;
-		}
-		//add humidity later
+	IEnumerable decay(){
+		foodDecay ();
+		oxygenDecay ();
+		yield return wait;
 	}
 
 
 
 	void foodDecay(){
 		if (ShipStatKeeper.crewAwake != 0) {
-			ShipStatKeeper.food -= 0.5f * ShipStatKeeper.crewAwake;
-		}
-		if (hydroponicHealth < 50) {
-			ShipStatKeeper.food--;
+			ShipStatKeeper.food -= 1 * ShipStatKeeper.crewAwake;
 		}
 	}
 
 	void oxygenDecay(){
-		if (airfilterHealth < 80 || hydroponicHealth < 40) {
-			oxygenLevel -= 0.25f * ShipStatKeeper.crewAwake;
-		} else if (airfilterHealth < 80 && hydroponicHealth < 40) {
-			oxygenLevel -= 0.5f * ShipStatKeeper.crewAwake;
-		} else if ((airfilterHealth > 80 && hydroponicHealth > 40) && oxygenLevel != 100) {
-			oxygenLevel += 0.75f;
+			if (ShipStatKeeper.airfilter < 80 || ShipStatKeeper.garden < 40) {
+				ShipStatKeeper.oxygen -= 0.25f * ShipStatKeeper.crewAwake;
+			} else if (ShipStatKeeper.airfilter  < 80 && ShipStatKeeper.garden < 40) {
+				ShipStatKeeper.oxygen -= 0.5f * ShipStatKeeper.crewAwake;
+			} else if ((ShipStatKeeper.airfilter  > 80 && ShipStatKeeper.garden > 40) && ShipStatKeeper.oxygen != 100) {
+				ShipStatKeeper.oxygen += 0.75f;
+			}
 		}
-	}
+
 
 
 

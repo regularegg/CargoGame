@@ -20,18 +20,18 @@ public class airFilterBehavior : MonoBehaviour {
 		health = ShipStatKeeper.airfilter;
 		wait = new WaitForSeconds (1f);
 		oxygenWait = new WaitForSeconds (2f);
-		StartCoroutine ("AirFilterDecay");
+		InvokeRepeating ("AirFilterDecay", 1, 1f);
+		InvokeRepeating ("OxygenDecay", 1, 2f);
 	}
 
-	IEnumerator AirFilterDecay(){
+	void AirFilterDecay(){
 		if ((ShipStatKeeper.garden < 75)&&(ShipStatKeeper.humidity>50)) {
 			health -= 1f;
 		} else {
 			health -= 0.25f;//add randomness later
 		}
-		yield return wait;
 	}
-	IEnumerator OxygenDecay(){
+	void OxygenDecay(){
 		for (int i = 0; i < CrewManager.crewList.Length; i++) {
 			if (CrewManager.crewList [i].awake)
 				crewAwake++;
@@ -46,7 +46,6 @@ public class airFilterBehavior : MonoBehaviour {
 			ShipStatKeeper.oxygen -= 1f*crewAwake;
 		}
 
-		yield return oxygenWait;
 	}
 
 	public void fix(int filters, CrewPerson crew){

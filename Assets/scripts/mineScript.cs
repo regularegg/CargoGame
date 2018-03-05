@@ -39,8 +39,8 @@ public class mineScript : MonoBehaviour {
 	}
 
 	IEnumerator mining(){
-		float mineable = baseIceOutput + sumSkillMult;
-		float rate = mineable * 0.5f*crewOutside;
+		float mineable = baseIceOutput + sumSkillMult+(Inventory.mineBonus[1]*Inventory.mineInv[1]/2);
+		float rate = mineable * 0.5f*crewOutside+(Inventory.mineBonus[0]*Inventory.mineInv[0])+(Inventory.mineBonus[2]*Inventory.mineInv[2]);
 		float iceMined = 0;
 
 		while (mineable > 0) {
@@ -67,9 +67,10 @@ public class mineScript : MonoBehaviour {
 			}
 		} else {
 			for (int i = 0; i < CrewManager.crewList.Length; i++) {
-				if (CrewManager.crewList [i].currRoom==5) {
+				if (CrewManager.crewList [i].currRoom==6) {
 					CrewManager.crewList [i].health = 0;
 				}
+				Debug.Log ("o no ded");
 			}
 		}
 		airlock.onClick.RemoveAllListeners();

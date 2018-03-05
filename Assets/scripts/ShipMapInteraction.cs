@@ -222,14 +222,13 @@ public class ShipMapInteraction : MonoBehaviour {
 		holder.SetActive(false);
 		if (SR == 2) {
 			Debug.Log ("Option start fabprep");
-
 			GetComponent<Inventory> ().fabPrep (SR, 0, 0);
+			b2.onClick.RemoveAllListeners();
 		} else if (SR == 4) {
 			GetComponent<Inventory> ().fabPrep (SR, 1, 0);
-
+			b2.onClick.RemoveAllListeners();
 		} else if (SR == 5) {
 			GetComponent<HydroponicsB> ().harvest();
-
 		}
 
 		SB1.text = "";
@@ -240,14 +239,14 @@ public class ShipMapInteraction : MonoBehaviour {
 	void optB(int room){
 		Debug.Log ("Option 2 " + SR);
 		holder.SetActive (false);
-		holder.SetActive(false);
 		if (SR == 2) {
 			GetComponent<Inventory> ().fabPrep (SR, 0, 1);
+			b2.onClick.RemoveAllListeners();
 		} else if (SR == 4) {
 			GetComponent<Inventory> ().fabPrep (SR, 1, 1);
+			b2.onClick.RemoveAllListeners();
 		}else if (SR == 5) {
 			//GetComponent<HydroponicsB> ().fabPrep (SR, 0, 1);
-
 		}
 		SB1.text = "";
 		SB2.text = "";
@@ -257,7 +256,6 @@ public class ShipMapInteraction : MonoBehaviour {
 	}
 	void optC(int room){
 		Debug.Log ("Option 3");
-		holder.SetActive (false);
 		holder.SetActive(false);
 		if (SR == 2) {
 			GetComponent<Inventory> ().fabPrep (SR, 0, 2);

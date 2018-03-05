@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class HydroponicsB : MonoBehaviour {
 	public static int ID = 4;
 	public static string[] requirements = new string[]{ "1 Fertilizer" };
+	public TextMeshProUGUI output;
 
 	float _health = 100;
 	public float Health{
@@ -34,28 +36,86 @@ public class HydroponicsB : MonoBehaviour {
 	}
 	WaitForSeconds decayRate, foodRate;
 	int foodOutput;
-	public static int foodStore;
+	public static int foodStore = 0;
 
 
 	void Start () {
+		Health = ShipStatKeeper.garden;
 		decayRate = new WaitForSeconds (5f);
 		foodRate = new WaitForSeconds (3f);
-		StartCoroutine ("gardenDecay");
-		StartCoroutine ("foodGrowth");
+
+		InvokeRepeating ("gardenDecay", 1,5f);
+		InvokeRepeating ("foodGrowth", 1, 5f);
 	}
 
-	IEnumerator gardenDecay(){
-		Health--;
-		yield return decayRate;
+	void startCR(){
+		//StartCoroutine ("gardenDecay");
+		//StartCoroutine ("foodGrowth");
 	}
-	IEnumerator foodGrowth(){
-		if (foodOutput > 0) {
-			foodStore += foodOutput;
-			yield return foodRate;
-		} else {
-			yield return null;
+	void gardenDecay(){
+		Debug.Log("garden decay 2"); 	
+
+		if ((ShipStatKeeper.temperature > 30) && (ShipStatKeeper.humidity < 20 && ShipStatKeeper.humidity > 60)) {
+			Health -= 0.5f;
+
+			ShipStatKeeper.humidity++;
+		} else if (ShipStatKeeper.temperature < 20 && (ShipStatKeeper.humidity > 20 && ShipStatKeeper.humidity < 60)) {
+			Health -= 0.25f;
+		} else if (Health < 20) {
+			Health--;
+		} else if (ShipStatKeeper.temperature < 30 && ShipStatKeeper.temperature > 20 && Health < 100 && (ShipStatKeeper.humidity > 20 && ShipStatKeeper.humidity < 60)) {
+			Health += 0.25f;
 		}
 	}
+
+	void foodGrowth(){
+		Debug.Log ("goog");
+		output.text = "FOOD: " + foodStore;
+		if (foodOutput > 0) {
+			foodStore += foodOutput;
+			// TEMPORARY PLS CHANGE TO OUTPUT THE FOOD IN INV INSTEAD
+			//Debug.Log ("food enum"); 	
+		}
+	}
+
+	IEnumerator _gardenDecay(){
+		while (ShipStatKeeper.fuel > 0) {
+			Debug.Log("garden decay 1"); 	
+
+			if ((ShipStatKeeper.temperature > 30) && (ShipStatKeeper.humidity < 20 && ShipStatKeeper.humidity > 60)) {
+				Health -= 0.5f;
+				Debug.Log("garden decay 2"); 	
+
+				ShipStatKeeper.humidity++;
+			} else if (ShipStatKeeper.temperature < 20 && (ShipStatKeeper.humidity > 20 && ShipStatKeeper.humidity < 60)) {
+				Health -= 0.25f;
+			} else if (Health < 20) {
+				Health--;
+			} else if (ShipStatKeeper.temperature < 30 && ShipStatKeeper.temperature > 20 && Health < 100 && (ShipStatKeeper.humidity > 20 && ShipStatKeeper.humidity < 60)) {
+				Health += 0.25f;
+			}
+			yield return decayRate;
+		}
+	}
+
+	IEnumerator _foodGrowth(){
+		Debug.Log("food enum122s"); 	
+		while (ShipStatKeeper.fuel > 0) {
+			Debug.Log("food enum555"); 	
+
+			if (foodOutput > 0) {
+				Debug.Log("food 77"); 	
+
+				foodStore += foodOutput;
+				output.text = "FOOD0 :"+ foodStore;// TEMPORARY PLS CHANGE TO OUTPUT THE FOOD IN INV INSTEAD
+				Debug.Log("food enum"); 	
+				yield return foodRate;
+			} else {
+				yield return null;
+			}
+		yield return decayRate;
+	}
+}
 	public void harvest(){
 		ShipStatKeeper.food += foodStore;
 		foodStore = 0;

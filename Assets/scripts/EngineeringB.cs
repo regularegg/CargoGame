@@ -3,7 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EngineeringB : MonoBehaviour {
-	public int health;
+	int _health;
+	public int health{
+		get{ return _health; }
+		set{
+			_health = value;
+			ShipStatKeeper.engine = value;
+		}
+	}
+	public int heatOutput = 1;
 	public static int ID = 2;
 	int _engineLevel = 0;
 	public int engineLevel{
@@ -27,22 +35,24 @@ public class EngineeringB : MonoBehaviour {
 		health = 100;
 		wait = new WaitForSeconds (4f);
 		upgradeWait = new WaitForSeconds (2f);
-		StartCoroutine ("Decay");
+		InvokeRepeating ("Decay", 1f, 4f);
 	}
 
-	IEnumerator Decay(){
+	void Decay(){
 		if (health > 10) {
 			if (Random.Range (0, 100) < 10) {
 				health--;
+				if (!ShipStatKeeper.acOn)
+					ShipStatKeeper.temperature += heatOutput / 2;
 			}
-			yield return wait;
 		} else if (health <= 10 && health > 0) {
-			if (Random.Range (0, 100) < 45) {
+			if (Random.Range (0, 100) < 50) {
 				health--;
+				if (!ShipStatKeeper.acOn)
+					ShipStatKeeper.temperature += heatOutput;
 			}
-			yield return wait;
-		} else {
-			yield return null;
+		} else if (health == 0) {
+
 		}
 	}
 

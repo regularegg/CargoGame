@@ -6,7 +6,7 @@ public class ShipStatKeeper: MonoBehaviour {
 	public static float 
 	temperature = 25, 
 	humidity = 25, 
-	fuel=10, //going towards power
+	fuel=20, //going towards power
 	power = 100, //will take -0.01 fuel per mvmt for each system on
 	distanceToDestination = 50,
 	distanceTravelled,
@@ -21,7 +21,7 @@ public class ShipStatKeeper: MonoBehaviour {
 //	float foodDecay = 1, oxygenDecay = 0, airFilterDecay = 1, hydroponicsDecay = 0.5f, botsDecay = 1;
 	public static float tempToAdd, humToAdd;
 	public static float cryobedCount, crewCount, engineClass;
-	public static bool shipMoving, acOn, humidOn, _gravOn, botOn, canMine;
+	public static bool shipMoving, acOn, humidOn, _gravOn, docked, canMine;
 	public static int crewAwake = 3;
 
 	private float _temperature = temperature;

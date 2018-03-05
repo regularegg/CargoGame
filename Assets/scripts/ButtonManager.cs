@@ -10,7 +10,7 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 	public GameObject cam;
 	public static float tempSlideOutput, humSlideOutput;
 	public static bool oggle, button;
-	public Button humButt, acButt, botButt, gravButt, mpA,mpB,mpC,mpD,mpE;
+	public Button humButt, acButt, dockButt, gravButt, airlockButt, returnButt;
 	public Button[] buttonList, mapButtonList;
 	public Slider slideA, slideB;
 	public Toggle tog;
@@ -49,7 +49,7 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 		});
 
 
-		buttonList = new Button[]{ humButt, acButt, botButt, gravButt, };
+		buttonList = new Button[]{ humButt, acButt, dockButt, gravButt, airlockButt, returnButt};
 
 		for (int i = 0; i < buttonList.Length; i++) {
 			Button temp = buttonList [i];
@@ -80,6 +80,13 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 		case 3:
 			Button3Click ();
 			break;
+		case 4:
+			Button4Click ();
+			break;
+		case 5:
+			Button5Click ();
+			break;
+		
 		}
 	}
 
@@ -97,42 +104,64 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 	}
 
 	public void  Button0Click(){ //humidity button
-		ShipStatKeeper.humidOn = !ShipStatKeeper.humidOn;
+		if (ShipStatKeeper.engine != 0) {
+			ShipStatKeeper.humidOn = !ShipStatKeeper.humidOn;
+
+			Debug.Log ("0");
+		} else {
+			ShipStatKeeper.humidOn = false;
+		}
 		SpriteRenderer SR = humL.GetComponent<SpriteRenderer> ();
+
 		if (ShipStatKeeper.humidOn) {
 			SR.sprite = greenL;
 		} else
 			SR.sprite = offL;
-		Debug.Log ("0");
 	}
 	public void  Button1Click(){//AC button
-		ShipStatKeeper.acOn = !ShipStatKeeper.acOn;
+		if (ShipStatKeeper.engine != 0) {
+			ShipStatKeeper.acOn = !ShipStatKeeper.acOn;
+			Debug.Log ("1");
+		} else
+			ShipStatKeeper.acOn = false;
 		SpriteRenderer SR = acL.GetComponent<SpriteRenderer> ();
 		if (ShipStatKeeper.acOn) {
 			SR.sprite = greenL;
 		} else
 			SR.sprite = offL;
-		Debug.Log ("1");
 	}
 
 	public void  Button2Click(){//Bot deploy button
-		ShipStatKeeper.botOn = !ShipStatKeeper.botOn;
+		if (ShipStatKeeper.engine != 0) {
+			ShipStatKeeper.docked = true;
+			Debug.Log ("2");
+		} 
 		SpriteRenderer SR = botL.GetComponent<SpriteRenderer> ();
-		if (ShipStatKeeper.botOn) {
+		if (ShipStatKeeper.docked) {
 			SR.sprite = greenL;
 		} else
 			SR.sprite = offL;
-		Debug.Log ("2");
 	}
 
 	public void  Button3Click(){//gravity button
-		ShipStatKeeper.gravOn = !ShipStatKeeper.gravOn;
+		if (ShipStatKeeper.engine != 0) {
+			ShipStatKeeper.gravOn = !ShipStatKeeper.gravOn;
+
+			Debug.Log ("3");
+		} else {
+			ShipStatKeeper.gravOn = false;
+		}
 		SpriteRenderer SR = gravL.GetComponent<SpriteRenderer> ();
 		if (ShipStatKeeper.gravOn) {
 			SR.sprite = greenL;
 		} else
 			SR.sprite = offL;
-		Debug.Log ("3");
+	}
+	public void Button4Click(){
+		
+	}
+	public void Button5Click(){
+
 	}
 
 	public void GoToggle(){
