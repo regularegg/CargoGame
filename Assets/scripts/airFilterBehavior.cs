@@ -6,11 +6,11 @@ public class airFilterBehavior : MonoBehaviour {
 	int crewAwake;
 	public static string[] requirements = new string[]{ "cost: 1 filter", "cost: 4 filter" };
 
-	float _health;
+	float _health = 100;
 	public float health{
 		get{ return _health; }
 		set{
-			health = value;
+			_health = value;
 		}
 	}
 	public static int ID = 6;
