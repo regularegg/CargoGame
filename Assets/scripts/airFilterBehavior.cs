@@ -57,6 +57,7 @@ public class airFilterBehavior : MonoBehaviour {
 	}
 
 	IEnumerator filterReplace(CrewPerson crew){
+		crew.active = true;
 		int count = -10;
 		while (count < 100){
 			count += 10;

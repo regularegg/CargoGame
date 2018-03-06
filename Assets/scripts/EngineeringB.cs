@@ -61,6 +61,7 @@ public class EngineeringB : MonoBehaviour {
 		if (toolbox >= 1 && health<100) {
 			Inventory.upgradeInv [0] -= 2;
 			crew.active = true;
+			crew.active = true;
 			StartCoroutine (_fix(crew));
 		}
 	}
@@ -79,6 +80,7 @@ public class EngineeringB : MonoBehaviour {
 
 	public void upgrade(int toolbox, CrewPerson crew){
 		if (toolbox >= 5&&engineLevel<4&& ShipStatKeeper.engineCanUpgrade) {
+			crew.active = true;
 			Inventory.upgradeInv [0] -= 4;
 			crew.active = true;
 			StartCoroutine (_upgrade(crew));
@@ -96,7 +98,6 @@ public class EngineeringB : MonoBehaviour {
 		}
 		if (count >= 100) {
 			Debug.Log ("Finsihed upgrade");
-
 			crew.active = false;
 			engineLevel++;
 			yield break;
