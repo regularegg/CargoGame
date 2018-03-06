@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class shipmapPathfinding : MonoBehaviour {
 
-	// Use this for initialization
+	WaitForSeconds wait = new WaitForSeconds(1f);
 	void Start () {
 		
 	}

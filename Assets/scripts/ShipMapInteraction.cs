@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-
+//remove listeners when player doesnt select an option
 public class ShipMapInteraction : MonoBehaviour {
 	public TextMeshProUGUI detail, selection, SB1, SB2, SB3;
 	public GameObject holder, bg1, bg2, bg3, crewCommVisual;
 	public Button b1, b2, b3;
+	int SCHold;
 	public bool _selectionActive;
 	bool selectionActive{
 		get{return _selectionActive;}
@@ -112,48 +113,51 @@ public class ShipMapInteraction : MonoBehaviour {
 			if (hit.collider.gameObject.tag.Contains("Crew")) {
 				if (hit.collider.gameObject.name.EndsWith("0")) {
 					SC = 0;
+					SCHold = SC;
 					selectionActive = true;
-				}
+					b1.onClick.RemoveAllListeners();
+					b2.onClick.RemoveAllListeners();
+					b3.onClick.RemoveAllListeners();				}
 				else if (hit.collider.gameObject.name.EndsWith("1")) {
 					SC = 1;
+					SCHold = SC;
 					selectionActive = true;
-				}
+					b1.onClick.RemoveAllListeners();
+					b2.onClick.RemoveAllListeners();
+					b3.onClick.RemoveAllListeners();				}
 				else if (hit.collider.gameObject.name.EndsWith("2")) {
 					SC = 2;
+					SCHold = SC;
 					selectionActive = true;
+					b1.onClick.RemoveAllListeners();
+					b2.onClick.RemoveAllListeners();
+					b3.onClick.RemoveAllListeners();
 				}
 			}
 
 			if (hit.collider.gameObject.tag.Contains("Map")) {
 				
 
-				if (hit.collider.gameObject.name.EndsWith("0")) {
+				if (hit.collider.gameObject.name.EndsWith ("0")) {
 					SR = 0;
-				}
-				else if (hit.collider.gameObject.name.EndsWith("1")) {
+				} else if (hit.collider.gameObject.name.EndsWith ("1")) {
 					SR = 1;
-				}
-				else if (hit.collider.gameObject.name.EndsWith("2")) {
+				} else if (hit.collider.gameObject.name.EndsWith ("2")) {
 					SR = 2;
-				}
-				else if (hit.collider.gameObject.name.EndsWith("3")) {
+				} else if (hit.collider.gameObject.name.EndsWith ("3")) {
 					SR = 3;
-				}
-				else if (hit.collider.gameObject.name.EndsWith("4")) {
+				} else if (hit.collider.gameObject.name.EndsWith ("4")) {
 					SR = 4;
-				}
-				else if (hit.collider.gameObject.name.EndsWith("5")) {
+				} else if (hit.collider.gameObject.name.EndsWith ("5")) {
 					SR = 5;
-				}
-				else if (hit.collider.gameObject.name.EndsWith("6")) {
+				} else if (hit.collider.gameObject.name.EndsWith ("6")) {
 					SR = 6;
-				}
-				else if (hit.collider.gameObject.name.EndsWith("7")) {
+				} else if (hit.collider.gameObject.name.EndsWith ("7")) {
 					SR = 7;
-				}
-				else if (hit.collider.gameObject.name.EndsWith("8")) {
+				} else if (hit.collider.gameObject.name.EndsWith ("8")) {
 					SR = 8;
-				}
+				} else
+					SR = -1;
 				selectionActive = false;
 			}
 		}
@@ -165,7 +169,7 @@ public class ShipMapInteraction : MonoBehaviour {
 	}
 
 	void roomMenu(){
-		Debug.Log ("ROOM MENU" + b1.onClick.GetPersistentEventCount() );
+		Debug.Log ("ROOM MEN LISTENR COUNT: " + b1.onClick.GetPersistentEventCount() );
 		holder.SetActive (true);
 		b1.enabled = true;
 		b2.enabled = true;
@@ -253,20 +257,24 @@ public class ShipMapInteraction : MonoBehaviour {
 			Debug.Log ("Option start fabprep");
 			GetComponent<Inventory> ().fabPrep (SR, 0, 0);
 		} else if (SR == 1) {
-			GetComponent<researchBehavior> ().upgradeCheck (2, SC);
+			GetComponent<researchBehavior> ().upgradeCheck (2, SCHold);
 		}else if (SR == 4) {
 			GetComponent<Inventory> ().fabPrep (SR, 1, 0);
 		} else if (SR == 3) {
-			GetComponent<EngineeringB> ().upgrade (Inventory.upgradeInv [0], CrewManager.crewList [SC]);
+			GetComponent<EngineeringB> ().upgrade (Inventory.upgradeInv [0], CrewManager.crewList [SCHold]);
 		}else if (SR == 7) {
-			StartCoroutine(GetComponent<airFilterBehavior>().filterUpgrade(CrewManager.crewList[SC]));
+			StartCoroutine(GetComponent<airFilterBehavior>().filterUpgrade(CrewManager.crewList[SCHold]));
 		}else if (SR == 5) {
 			GetComponent<HydroponicsB> ().tend ();
+		}else if (SR == -1) {
+			b1.onClick.RemoveAllListeners();
 		}
 
 		SB1.text = "";
 		SB2.text = "";
 		SB3.text = "";
+		SCHold = -1;
+
 		crewCommVisual.GetComponent<SpriteRenderer> ().enabled = false;
 		b1.onClick.RemoveAllListeners();
 	}
@@ -277,19 +285,26 @@ public class ShipMapInteraction : MonoBehaviour {
 			GetComponent<Inventory> ().fabPrep (SR, 0, 1);
 		} else if (SR == 1) {
 			GetComponent<researchBehavior> ().upgradeCheck (1, SC);
-		}else if (SR == 4) {
+
+		} else if (SR == 4) {
 			GetComponent<Inventory> ().fabPrep (SR, 1, 1);
-		}else if (SR == 3) {
-						GetComponent<EngineeringB>().fix(Inventory.upgradeInv [0], CrewManager.crewList [SC]);
-		}else if (SR == 7) {
-						GetComponent<airFilterBehavior> ().fix (Inventory.upgradeInv[2], CrewManager.crewList [SC]);
-		}else if (SR == 8) {
+
+		} else if (SR == 3) {
+			GetComponent<EngineeringB> ().fix (Inventory.upgradeInv [0], CrewManager.crewList [SCHold]);
+
+		} else if (SR == 7) {
+			GetComponent<airFilterBehavior> ().fix (Inventory.upgradeInv [2], CrewManager.crewList [SCHold]);
+
+		} else if (SR == 8) {
 			GetComponent<HydroponicsB> ().harvest ();
+		} else if (SR == -1) {
+			b2.onClick.RemoveAllListeners();
 		}
 		selection.text = "";
 		SB1.text = "";
 		SB2.text = "";
 		SB3.text = "";
+		SCHold = -1;
 		crewCommVisual.GetComponent<SpriteRenderer> ().enabled = false;
 		b2.onClick.RemoveAllListeners();
 
@@ -299,19 +314,25 @@ public class ShipMapInteraction : MonoBehaviour {
 		holder.SetActive(false);
 		if (SR == 2) {
 			GetComponent<Inventory> ().fabPrep (SR, 0, 2);
+
 		}else if (SR == 1) {
-			GetComponent<researchBehavior> ().upgradeCheck (6, SC);
+			GetComponent<researchBehavior> ().upgradeCheck (6, SCHold);
+
 		} else if (SR == 4) {
 			GetComponent<Inventory> ().fabPrep (SR, 1, 2);
-		}else if (SR == 5) {
 
+		}else if (SR == 5) {
+			
+		}else if (SR == -1) {
+			b3.onClick.RemoveAllListeners();
 		}
 		selection.text = "";
 		SB1.text = "";
 		SB2.text = "";
-		SB3.text = "";					
+		SB3.text = "";	
+		SCHold = -1;
+
 		crewCommVisual.GetComponent<SpriteRenderer> ().enabled = false;
-		b3.onClick.RemoveAllListeners();
 
 	}
 }

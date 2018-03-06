@@ -19,6 +19,7 @@ public class EngineeringB : MonoBehaviour {
 		set{
 			if (value == 1) {
 				ShipMvmt.efficiency += 10;
+				researchBehavior.roomLevels [2]++;
 			} else if (value == 2) {
 				ShipMvmt.speed += 3;
 			} else if (value == 3) {
@@ -81,16 +82,21 @@ public class EngineeringB : MonoBehaviour {
 			Inventory.upgradeInv [0] -= 4;
 			crew.active = true;
 			StartCoroutine (_upgrade(crew));
+			Debug.Log ("Started upgrade");
 		}
 	}
 		
 	IEnumerator _upgrade(CrewPerson crew){
 		int count = -10;
 		while (count < 100){
+			Debug.Log ("Upgrading");
+
 			count += 10;
 			yield return upgradeWait;
 		}
 		if (count >= 100) {
+			Debug.Log ("Finsihed upgrade");
+
 			crew.active = false;
 			engineLevel++;
 			yield break;
