@@ -34,11 +34,14 @@ public class ShipMvmt : MonoBehaviour {
 					Debug.Log ("Sprite Moving");
 				} else if(distanceCovered >= (speed*(initfuel/2-1))&&!asteroid){
 					Debug.Log("AT ASTEROID");
+					GetComponent<EventManager> ().state = 1;
 					ShipStatKeeper.shipMoving = false;
 					asteroid = true;
 				}else if (asteroid){
 					ship.GetComponent<SpriteRenderer> ().flipX = true;
 					ship.transform.position -= Vector3.right * 0.5f;
+				}else if(distanceCovered >= (speed * initfuel)){
+					Debug.Log ("VICTORY!!!");
 				}
 			}
 			if (ShipStatKeeper.fuel == 0) {

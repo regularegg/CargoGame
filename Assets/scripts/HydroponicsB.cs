@@ -7,6 +7,7 @@ public class HydroponicsB : MonoBehaviour {
 	public static int ID = 4;
 	public static string[] requirements = new string[]{ "1 Fertilizer" };
 	public TextMeshProUGUI output;
+	public GameObject level;
 
 	float _health = 100;
 	public float Health{
@@ -47,10 +48,17 @@ public class HydroponicsB : MonoBehaviour {
 		InvokeRepeating ("gardenDecay", 1,5f);
 		InvokeRepeating ("foodGrowth", 1, 5f);
 	}
+	void Update(){
+		scale ();
+	}
 
-	void startCR(){
-		//StartCoroutine ("gardenDecay");
-		//StartCoroutine ("foodGrowth");
+	public void tend(){
+		if (Inventory.upgradeInv[0] > 0&&ShipStatKeeper.garden<100){
+
+			Inventory.upgradeInv [0]--;
+			ShipStatKeeper.garden += 25;
+
+		}
 	}
 	void gardenDecay(){
 		Debug.Log("garden decay 2"); 	
@@ -69,12 +77,8 @@ public class HydroponicsB : MonoBehaviour {
 	}
 
 	void foodGrowth(){
-		Debug.Log ("goog");
-		output.text = "FOOD: " + foodStore;
 		if (foodOutput > 0) {
 			foodStore += foodOutput;
-			// TEMPORARY PLS CHANGE TO OUTPUT THE FOOD IN INV INSTEAD
-			//Debug.Log ("food enum"); 	
 		}
 	}
 
@@ -120,6 +124,9 @@ public class HydroponicsB : MonoBehaviour {
 		ShipStatKeeper.food += foodStore;
 		foodStore = 0;
 		Debug.Log (ShipStatKeeper.food);
+	}
+	void scale(){
+		level.transform.localScale = (foodStore * Vector3.up/10)+(Vector3.right);
 	}
 }
 

@@ -7,8 +7,8 @@ public class ShipSystemDecay : MonoBehaviour {
 	float temperatureHolder, humidityHolder;
 	public delegate void tempChange(float temp);
 	WaitForSeconds wait = new WaitForSeconds(1f);
+	int count = 0;
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
@@ -37,8 +37,13 @@ public class ShipSystemDecay : MonoBehaviour {
 
 
 	void foodDecay(){
-		if (ShipStatKeeper.crewAwake != 0) {
-			ShipStatKeeper.food -= 1 * ShipStatKeeper.crewAwake;
+		for (int i = 0; i < CrewManager.crewList.Length; i++) {
+			if (CrewManager.crewList [i].awake) {
+				count++;
+			}
+		}
+		if (count > 1000&&ShipStatKeeper.food>0) {
+			ShipStatKeeper.food--;
 		}
 	}
 

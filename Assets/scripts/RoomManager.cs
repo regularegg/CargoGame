@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour {
 	public static RoomBehavior[] rooms;
+
 	void Start () {
 		rooms = new RoomBehavior[9];
 		for (int i = 0; i < rooms.Length; i++) {

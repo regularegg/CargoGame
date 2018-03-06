@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ShipMapInteraction : MonoBehaviour {
 	public TextMeshProUGUI detail, selection, SB1, SB2, SB3;
-	public GameObject holder, bg1, bg2, bg3;
+	public GameObject holder, bg1, bg2, bg3, crewCommVisual;
 	public Button b1, b2, b3;
 	public bool _selectionActive;
 	bool selectionActive{
@@ -30,13 +30,33 @@ public class ShipMapInteraction : MonoBehaviour {
 		set{ 
 			_selectedCrew = value;
 			Debug.Log ("Initial Room: " + CrewManager.crewList [0].currRoom);
+
+
+
 			//Use later to display crew member stats
 			if (value == 0) {
+				selection.enabled = true;
+				selection.text = "Where do you want me to go boss";
 				bg1.GetComponent<SpriteRenderer>().enabled = !bg1.GetComponent<SpriteRenderer>().enabled;
+				crewCommVisual.GetComponent<SpriteRenderer> ().enabled = true;
+				crewCommVisual.GetComponent<SpriteRenderer> ().sprite = CrewManager.crewList [0].sprite;
+				crewCommVisual.GetComponent<SpriteRenderer> ().color = Color.red;
 			} else if (value == 1) {
+				selection.enabled = true;
+				selection.text = "Where do you want me to go boss";
 				bg2.GetComponent<SpriteRenderer>().enabled = !bg2.GetComponent<SpriteRenderer>().enabled;
+				crewCommVisual.GetComponent<SpriteRenderer>().enabled = true;
+				crewCommVisual.GetComponent<SpriteRenderer>().sprite =  CrewManager.crewList [1].sprite;
+				crewCommVisual.GetComponent<SpriteRenderer> ().color = Color.green;
+
 			} else if (value == 2) {
+				selection.enabled = true;
+				selection.text = "Where do you want me to go boss";
 				bg3.GetComponent<SpriteRenderer>().enabled = !bg3.GetComponent<SpriteRenderer>().enabled;
+				crewCommVisual.GetComponent<SpriteRenderer> ().enabled = true;
+				crewCommVisual.GetComponent<SpriteRenderer>().sprite =  CrewManager.crewList [2].sprite;
+				crewCommVisual.GetComponent<SpriteRenderer> ().color = Color.blue;
+
 			}
 		}
 	}
@@ -150,6 +170,8 @@ public class ShipMapInteraction : MonoBehaviour {
 		b1.enabled = true;
 		b2.enabled = true;
 		b3.enabled = true;
+		selection.text = "What do you want me to do?";
+
 		b1.onClick.AddListener (delegate {
 			optA (SR);
 			Debug.Log("optA");
@@ -166,7 +188,11 @@ public class ShipMapInteraction : MonoBehaviour {
 		else if (SR == 1) {
 			selection.enabled = true;
 			SB1.enabled = true;
-			SB1.text = "Check Cargo";
+			SB1.text = "Research Engine";
+			SB2.enabled = true;
+			SB2.text = "Research Tool Fab";
+			SB3.enabled = true;
+			SB3.text = "Research Air Filter";
 		}
 		else if (SR == 2) {
 			selection.enabled = true;
@@ -208,7 +234,9 @@ public class ShipMapInteraction : MonoBehaviour {
 		else if (SR == 7) {
 			selection.enabled = true;
 			SB1.enabled = true;
-			SB1.text = "Replace Filters";
+			SB1.text = "Upgrade Air Filtration Pumps";
+			SB2.enabled = true;
+			SB2.text = "Replace Filters";
 		}
 		else if (SR == 8) {
 			selection.enabled = true;
@@ -216,24 +244,30 @@ public class ShipMapInteraction : MonoBehaviour {
 			SB1.text = "Enter Cryosleep";
 		}
 	}
-
+	//keeps duplicating actions?!?!?
 	void optA(int room){
 		Debug.Log ("Option 1");
 		holder.SetActive(false);
+
 		if (SR == 2) {
 			Debug.Log ("Option start fabprep");
 			GetComponent<Inventory> ().fabPrep (SR, 0, 0);
-			b2.onClick.RemoveAllListeners();
-		} else if (SR == 4) {
+		} else if (SR == 1) {
+			GetComponent<researchBehavior> ().upgradeCheck (2, SC);
+		}else if (SR == 4) {
 			GetComponent<Inventory> ().fabPrep (SR, 1, 0);
-			b2.onClick.RemoveAllListeners();
-		} else if (SR == 5) {
-			GetComponent<HydroponicsB> ().harvest();
+		} else if (SR == 3) {
+			GetComponent<EngineeringB> ().upgrade (Inventory.upgradeInv [0], CrewManager.crewList [SC]);
+		}else if (SR == 7) {
+			StartCoroutine(GetComponent<airFilterBehavior>().filterUpgrade(CrewManager.crewList[SC]));
+		}else if (SR == 5) {
+			GetComponent<HydroponicsB> ().tend ();
 		}
 
 		SB1.text = "";
 		SB2.text = "";
 		SB3.text = "";
+		crewCommVisual.GetComponent<SpriteRenderer> ().enabled = false;
 		b1.onClick.RemoveAllListeners();
 	}
 	void optB(int room){
@@ -241,16 +275,22 @@ public class ShipMapInteraction : MonoBehaviour {
 		holder.SetActive (false);
 		if (SR == 2) {
 			GetComponent<Inventory> ().fabPrep (SR, 0, 1);
-			b2.onClick.RemoveAllListeners();
-		} else if (SR == 4) {
+		} else if (SR == 1) {
+			GetComponent<researchBehavior> ().upgradeCheck (1, SC);
+		}else if (SR == 4) {
 			GetComponent<Inventory> ().fabPrep (SR, 1, 1);
-			b2.onClick.RemoveAllListeners();
-		}else if (SR == 5) {
-			//GetComponent<HydroponicsB> ().fabPrep (SR, 0, 1);
+		}else if (SR == 3) {
+						GetComponent<EngineeringB>().fix(Inventory.upgradeInv [0], CrewManager.crewList [SC]);
+		}else if (SR == 7) {
+						GetComponent<airFilterBehavior> ().fix (Inventory.upgradeInv[2], CrewManager.crewList [SC]);
+		}else if (SR == 8) {
+			GetComponent<HydroponicsB> ().harvest ();
 		}
+		selection.text = "";
 		SB1.text = "";
 		SB2.text = "";
 		SB3.text = "";
+		crewCommVisual.GetComponent<SpriteRenderer> ().enabled = false;
 		b2.onClick.RemoveAllListeners();
 
 	}
@@ -259,14 +299,18 @@ public class ShipMapInteraction : MonoBehaviour {
 		holder.SetActive(false);
 		if (SR == 2) {
 			GetComponent<Inventory> ().fabPrep (SR, 0, 2);
+		}else if (SR == 1) {
+			GetComponent<researchBehavior> ().upgradeCheck (6, SC);
 		} else if (SR == 4) {
 			GetComponent<Inventory> ().fabPrep (SR, 1, 2);
 		}else if (SR == 5) {
 
 		}
+		selection.text = "";
 		SB1.text = "";
 		SB2.text = "";
-		SB3.text = "";
+		SB3.text = "";					
+		crewCommVisual.GetComponent<SpriteRenderer> ().enabled = false;
 		b3.onClick.RemoveAllListeners();
 
 	}

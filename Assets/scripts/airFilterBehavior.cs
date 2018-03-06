@@ -68,4 +68,20 @@ public class airFilterBehavior : MonoBehaviour {
 			yield break;
 		}
 	}
+	public IEnumerator filterUpgrade(CrewPerson crew){
+		if (ShipStatKeeper.filterCanUpgrade&&Inventory.upgradeInv[2]>3) {
+			int count = -10;
+			Inventory.upgradeInv [2] -= 3;
+			while (count < 100) {
+				count += 10;
+				yield return oxygenWait;
+			}
+			if (count >= 100) {
+				crew.active = false;
+				researchBehavior.roomLevels [7]++;
+				ShipStatKeeper.filterCanUpgrade = false;
+				yield break;
+			}
+		}
+	}
 }

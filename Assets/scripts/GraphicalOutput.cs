@@ -47,7 +47,7 @@ public class GraphicalOutput : MonoBehaviour {
 		}
 
 		CrewDataManager ();
-		fueltxt.text = "Fuel: " + (100*ShipStatKeeper.fuel/fuelInit)+"%";
+		fueltxt.text = "Fuel: " + (100*ShipStatKeeper.fuel/fuelInit)+"% " + ShipStatKeeper.fuel;
 		filter.text = "Filter: " + ShipStatKeeper.airfilter;
 		//inventory.text = "hand tools: " + Inventory.inv [0] + "\nGardening Equipment: " + Inventory.inv [1] + "\nfilters: " + Inventory.inv [2] + "\nDrills: " + Inventory.inv [3] + "\nMaterials: " + Inventory.inv [4] + "\nCoolant" + Inventory.inv [5];
 	}

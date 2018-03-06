@@ -30,7 +30,6 @@ public class Inventory : MonoBehaviour {
 
 
 	public void fabPrep(int room, int fabType, int item){
-
 		for (int i = 0; i < CrewManager.crewList.Length; i++) {
 			Debug.Log ("fabPrep loop" + i);
 

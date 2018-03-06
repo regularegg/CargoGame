@@ -9,6 +9,8 @@ public class mineScript : MonoBehaviour {
 	public static int _distanceToDest;
 	int crewOutside = 0;
 	float sumSkillMult = 0;
+	public int type;
+	public float[] value = new float[]{1, 1.25f, 1.5f, 2};
 
 	public Button airlock;
 	public Button callbackCrew;

@@ -30,10 +30,6 @@ public class CrewManager : MonoBehaviour {
 		nameList [6] = "Farts";
 		nameList [7] = "Hot Cheetos";
 
-		crewDisplay1.GetComponent<SpriteRenderer> ().sprite = crewpics [Random.Range (0, 6)];
-		crewDisplay2.GetComponent<SpriteRenderer> ().sprite = crewpics [Random.Range (0, 6)];
-		crewDisplay3.GetComponent<SpriteRenderer> ().sprite = crewpics [Random.Range (0, 6)];
-
 		//for (int i = 0; i < options.Length; i++) {   << for when you can actually choose your crew
 		for (int i = 0; i < crewList.Length; i++) {
 			string name = nameList[Random.Range(0,nameList.Length)];
@@ -41,10 +37,14 @@ public class CrewManager : MonoBehaviour {
 			engineering = Random.Range(18, 60), 
 			fab = Random.Range(18, 60), 
 			mine = Random.Range(18, 60);
-
-			crewList [i] = new CrewPerson (name, age, engineering, fab, mine, i);
+			crewList [i] = new CrewPerson (name, age, engineering, fab, mine, i, crewpics[Random.Range(0,6)]);
 			StartCoroutine (aging (crewList [i]));
 		}
+
+
+		crewDisplay1.GetComponent<SpriteRenderer> ().sprite = crewList [0].sprite;
+		crewDisplay2.GetComponent<SpriteRenderer> ().sprite = crewList [1].sprite;
+		crewDisplay3.GetComponent<SpriteRenderer> ().sprite = crewList [2].sprite;
 	}
 
 
@@ -52,7 +52,7 @@ public class CrewManager : MonoBehaviour {
 		if (crew.age < 100 && crew.alive && crew.awake) {
 			crew.age++;
 
-			yield return new WaitForSeconds (60);
+			yield return new WaitForSeconds (30);
 		} else if (!crew.awake) {
 			yield return null;
 		}

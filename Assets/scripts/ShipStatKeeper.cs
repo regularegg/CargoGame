@@ -21,7 +21,9 @@ public class ShipStatKeeper: MonoBehaviour {
 //	float foodDecay = 1, oxygenDecay = 0, airFilterDecay = 1, hydroponicsDecay = 0.5f, botsDecay = 1;
 	public static float tempToAdd, humToAdd;
 	public static float cryobedCount, crewCount, engineClass;
-	public static bool shipMoving, acOn, humidOn, _gravOn, docked, canMine;
+	public static bool shipMoving, acOn, humidOn, _gravOn, docked, canMine, 
+	engineCanUpgrade,
+	filterCanUpgrade;
 	public static int crewAwake = 3;
 
 	private float _temperature = temperature;

@@ -10,7 +10,7 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 	public GameObject cam;
 	public static float tempSlideOutput, humSlideOutput;
 	public static bool oggle, button;
-	public Button humButt, acButt, dockButt, gravButt, airlockButt, returnButt;
+	public Button humButt, acButt, dockButt, gravButt, airlockButt, returnButt, startEngineButt;
 	public Button[] buttonList, mapButtonList;
 	public Slider slideA, slideB;
 	public Toggle tog;
@@ -44,9 +44,6 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 		slideB.value = 25;
 		//make the actual temperature and set AC/humidifier temperature separate - takes time for real temperature to catch up to ship temp
 
-		tog.onValueChanged.AddListener (delegate {
-			GoToggle ();
-		});
 
 
 		buttonList = new Button[]{ humButt, acButt, dockButt, gravButt, airlockButt, returnButt};
@@ -86,7 +83,9 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 		case 5:
 			Button5Click ();
 			break;
-		
+		case 6:
+			Button6Click ();
+			break;
 		}
 	}
 
@@ -157,18 +156,16 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 		} else
 			SR.sprite = offL;
 	}
-	public void Button4Click(){
-		
+	public void Button4Click(){//airlock
+		//nvm no need...
 	}
-	public void Button5Click(){
+	public void Button5Click(){//return
 
 	}
-
-	public void GoToggle(){
+	public void Button6Click(){//go 
 		ShipStatKeeper.shipMoving = !ShipStatKeeper.shipMoving;
 
 	}
-		
 
 	void TemperatureIncrease(){
 		if (ShipStatKeeper.tempToAdd != 0) {
