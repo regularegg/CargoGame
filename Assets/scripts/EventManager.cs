@@ -60,8 +60,8 @@ public class EventManager : MonoBehaviour {
 				ShipStatKeeper.airfilter = 10;
 			}
 			if (value == 10000) {
-				alert.text = CrewManager.crewList[1].name+" ";
-				ShipStatKeeper.airfilter = 10;
+				alert.text = CrewManager.crewList[1].name+" done messed up. The garden is all goofed!";
+				ShipStatKeeper.garden = 10;
 			}
 		}
 	}

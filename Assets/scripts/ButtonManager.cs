@@ -93,12 +93,16 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 
 	public void ValueChangeCheckTemp(){
 	//	temperature.text = slideB.value+"";
-		currentTemperatureTarget = slideA.value;
+		if (ShipStatKeeper.acOn) {
+			currentTemperatureTarget = slideA.value;
+		}
 	}
 
 	public void ValueChangeCheckHum(){
 	//	humidity.text = slideB.value+"";
-		currentHumidityTarget = slideB.value;
+		if (ShipStatKeeper.humidOn) {
+			currentHumidityTarget = slideB.value;
+		}
 
 	}
 
