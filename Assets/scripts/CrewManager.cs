@@ -16,11 +16,10 @@ public class CrewManager : MonoBehaviour {
 		}
 	}
 
-	void Start () {
-		 
+	void Awake () {
 		crewList = new CrewPerson[3];
 		//options = new CrewPerson[5];
-		nameList = new string[8];
+		nameList = new string[9];
 		nameList [0] = "Womp";
 		nameList [1] = "Smells";
 		nameList [2] = "Mel";
@@ -29,6 +28,7 @@ public class CrewManager : MonoBehaviour {
 		nameList [5] = "Cart";
 		nameList [6] = "Farts";
 		nameList [7] = "Hot Cheetos";
+		nameList [8] = "Messy Jesse";
 
 		//for (int i = 0; i < options.Length; i++) {   << for when you can actually choose your crew
 		for (int i = 0; i < crewList.Length; i++) {
@@ -37,7 +37,7 @@ public class CrewManager : MonoBehaviour {
 			engineering = Random.Range(18, 60), 
 			fab = Random.Range(18, 60), 
 			mine = Random.Range(18, 60);
-			crewList [i] = new CrewPerson (name, age, engineering, fab, mine, i, crewpics[Random.Range(0,6)]);
+			crewList [i] = new CrewPerson (name, age, engineering, fab, mine, i, crewpics[Random.Range(0,crewpics.Length)]);
 			StartCoroutine (aging (crewList [i]));
 		}
 

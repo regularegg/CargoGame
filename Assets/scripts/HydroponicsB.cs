@@ -54,7 +54,6 @@ public class HydroponicsB : MonoBehaviour {
 
 	public void tend(){
 		if (Inventory.upgradeInv[0] > 0&&ShipStatKeeper.garden<100){
-
 			Inventory.upgradeInv [0]--;
 			ShipStatKeeper.garden += 25;
 

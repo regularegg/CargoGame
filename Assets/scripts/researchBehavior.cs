@@ -31,14 +31,16 @@ public class researchBehavior : MonoBehaviour {
 	int ToolFab{
 		get{ return _toolFab; }
 		set{
-
+			_toolFab = value;
+			//ShipStatKeeper.engi = true;
 		}
 	}
 	int _mineFab;
 	int MineFab{
 		get{ return _mineFab; }
 		set{
-
+			_mineFab = value;
+			//ShipStatKeeper.filterCanUpgrade = true;
 		}
 	}
 	int _garden;
@@ -67,15 +69,14 @@ public class researchBehavior : MonoBehaviour {
 		for (int i = 0; i < CrewManager.crewList.Length; i++) {
 			Debug.Log ("fabPrep loop" + i);
 
-			if (CrewManager.crewList [i].currRoom == room) {
+			if (CrewManager.crewList [i].currRoom == 1) {
 				StartCoroutine (research (room,CrewManager.crewList[i]));
 				break;
 			} else
 				Debug.Log("next person");
-			
 		}
-		if (RoomManager.rooms [room].level < 3) {
-
+		if (RoomManager.rooms [room].level >= 3) {
+			Debug.Log("Room level maxed");
 		}
 	}
 	IEnumerator research(int room, CrewPerson crew){
@@ -89,10 +90,12 @@ public class researchBehavior : MonoBehaviour {
 		int target = 0;
 		while (target < 10 + RoomManager.rooms [room].level) {
 			target++;
+			Debug.Log ("researching");
+
 			yield return wait;
 		}
 		if (target >= 10 + RoomManager.rooms [room].level) {
-			Debug.Log ("done w level");
+			Debug.Log ("done w level research");
 			if (room == 1)
 				ToolFab++;
 			else if (room == 2)

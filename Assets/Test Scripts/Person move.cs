@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class maintenanceBot : MonoBehaviour {
+public class Personmove : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

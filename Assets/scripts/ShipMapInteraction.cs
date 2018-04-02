@@ -30,34 +30,44 @@ public class ShipMapInteraction : MonoBehaviour {
 		get{ return _selectedCrew; }
 		set{ 
 			_selectedCrew = value;
-			Debug.Log ("Initial Room: " + CrewManager.crewList [0].currRoom);
+			if (value > -1) {
+				if (CrewManager.crewList [value].alive) {
 
+					//Use later to display crew member stats
+					if (value == 0) {
+						selection.enabled = true;
+						selection.text = "Where do you want me to go boss";
+						Debug.Log (selection.text + selection.enabled);
 
+						bg1.GetComponent<SpriteRenderer> ().enabled = !bg1.GetComponent<SpriteRenderer> ().enabled;
+						crewCommVisual.GetComponent<SpriteRenderer> ().enabled = true;
+						crewCommVisual.GetComponent<SpriteRenderer> ().sprite = CrewManager.crewList [0].sprite;
+						crewCommVisual.GetComponent<SpriteRenderer> ().color = Color.red;
+					} else if (value == 1) {
+						selection.enabled = true;
+						selection.text = "Where do you want me to go boss";
+						Debug.Log (selection.text + selection.enabled);
 
-			//Use later to display crew member stats
-			if (value == 0) {
-				selection.enabled = true;
-				selection.text = "Where do you want me to go boss";
-				bg1.GetComponent<SpriteRenderer>().enabled = !bg1.GetComponent<SpriteRenderer>().enabled;
-				crewCommVisual.GetComponent<SpriteRenderer> ().enabled = true;
-				crewCommVisual.GetComponent<SpriteRenderer> ().sprite = CrewManager.crewList [0].sprite;
-				crewCommVisual.GetComponent<SpriteRenderer> ().color = Color.red;
-			} else if (value == 1) {
-				selection.enabled = true;
-				selection.text = "Where do you want me to go boss";
-				bg2.GetComponent<SpriteRenderer>().enabled = !bg2.GetComponent<SpriteRenderer>().enabled;
-				crewCommVisual.GetComponent<SpriteRenderer>().enabled = true;
-				crewCommVisual.GetComponent<SpriteRenderer>().sprite =  CrewManager.crewList [1].sprite;
-				crewCommVisual.GetComponent<SpriteRenderer> ().color = Color.green;
+						bg2.GetComponent<SpriteRenderer> ().enabled = !bg2.GetComponent<SpriteRenderer> ().enabled;
+						crewCommVisual.GetComponent<SpriteRenderer> ().enabled = true;
+						crewCommVisual.GetComponent<SpriteRenderer> ().sprite = CrewManager.crewList [1].sprite;
+						crewCommVisual.GetComponent<SpriteRenderer> ().color = Color.green;
 
-			} else if (value == 2) {
-				selection.enabled = true;
-				selection.text = "Where do you want me to go boss";
-				bg3.GetComponent<SpriteRenderer>().enabled = !bg3.GetComponent<SpriteRenderer>().enabled;
-				crewCommVisual.GetComponent<SpriteRenderer> ().enabled = true;
-				crewCommVisual.GetComponent<SpriteRenderer>().sprite =  CrewManager.crewList [2].sprite;
-				crewCommVisual.GetComponent<SpriteRenderer> ().color = Color.blue;
+					} else if (value == 2) {
+						selection.enabled = true;
+						selection.text = "Where do you want me to go boss";
+						Debug.Log (selection.text + selection.enabled);
+						bg3.GetComponent<SpriteRenderer> ().enabled = !bg3.GetComponent<SpriteRenderer> ().enabled;
+						crewCommVisual.GetComponent<SpriteRenderer> ().enabled = true;
+						crewCommVisual.GetComponent<SpriteRenderer> ().sprite = CrewManager.crewList [2].sprite;
+						crewCommVisual.GetComponent<SpriteRenderer> ().color = Color.blue;
 
+					}
+				} else {
+					selection.text = "Crew dead";
+					SC = -1;
+					selectionActive = false;
+				}
 			}
 		}
 	}
@@ -165,6 +175,11 @@ public class ShipMapInteraction : MonoBehaviour {
 		if (hit.collider == null) {
 			SC= -1;
 			selectionActive = false;
+			selection.text = "";
+			SB1.text = "";
+			SB2.text = "";
+			SB3.text = "";
+			crewCommVisual.GetComponent<SpriteRenderer> ().enabled = false;
 		}
 	}
 
@@ -178,7 +193,6 @@ public class ShipMapInteraction : MonoBehaviour {
 
 		b1.onClick.AddListener (delegate {
 			optA (SR);
-			Debug.Log("optA");
 		});
 		b2.onClick.AddListener (delegate {
 			optB (SR);
@@ -251,7 +265,6 @@ public class ShipMapInteraction : MonoBehaviour {
 	//keeps duplicating actions?!?!?
 	void optA(int room){
 		Debug.Log ("Option 1");
-		holder.SetActive(false);
 
 		if (SR == 2) {
 			Debug.Log ("Option start fabprep");
@@ -265,14 +278,12 @@ public class ShipMapInteraction : MonoBehaviour {
 		}else if (SR == 7) {
 			StartCoroutine(GetComponent<airFilterBehavior>().filterUpgrade(CrewManager.crewList[SCHold]));
 		}else if (SR == 5) {
-			GetComponent<HydroponicsB> ().tend ();
+			GetComponent<HydroponicsB> ().harvest ();
 		}else if (SR == -1) {
 			b1.onClick.RemoveAllListeners();
 		}
-
-		SB1.text = "";
-		SB2.text = "";
-		SB3.text = "";
+		selection.text = "";
+	
 		SCHold = -1;
 
 		crewCommVisual.GetComponent<SpriteRenderer> ().enabled = false;
@@ -280,7 +291,6 @@ public class ShipMapInteraction : MonoBehaviour {
 	}
 	void optB(int room){
 		Debug.Log ("Option 2 " + SR);
-		holder.SetActive (false);
 		if (SR == 2) {
 			GetComponent<Inventory> ().fabPrep (SR, 0, 1);
 		} else if (SR == 1) {
@@ -296,7 +306,8 @@ public class ShipMapInteraction : MonoBehaviour {
 			GetComponent<airFilterBehavior> ().fix (Inventory.upgradeInv [2], CrewManager.crewList [SCHold]);
 
 		} else if (SR == 8) {
-			GetComponent<HydroponicsB> ().harvest ();
+			GetComponent<HydroponicsB> ().tend ();
+
 		} else if (SR == -1) {
 			b2.onClick.RemoveAllListeners();
 		}
@@ -311,7 +322,7 @@ public class ShipMapInteraction : MonoBehaviour {
 	}
 	void optC(int room){
 		Debug.Log ("Option 3");
-		holder.SetActive(false);
+		//holder.SetActive(false);
 		if (SR == 2) {
 			GetComponent<Inventory> ().fabPrep (SR, 0, 2);
 

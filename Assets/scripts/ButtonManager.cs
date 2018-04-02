@@ -16,7 +16,7 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 	public Toggle tog;
 
 	public TextMeshProUGUI temperature, humidity;
-	public GameObject humL, acL, botL, gravL;
+	public GameObject humL, acL, botL, gravL, goL1, goL2;
 	public Sprite offL, greenL, redL;
 
 	ShipStatKeeper SSK;
@@ -46,7 +46,7 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 
 
 
-		buttonList = new Button[]{ humButt, acButt, dockButt, gravButt, airlockButt, returnButt};
+		buttonList = new Button[]{ humButt, acButt, dockButt, gravButt, airlockButt, returnButt,startEngineButt};
 
 		for (int i = 0; i < buttonList.Length; i++) {
 			Button temp = buttonList [i];
@@ -86,8 +86,12 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 		case 6:
 			Button6Click ();
 			break;
+		case 7:
+			Button7Click ();
+			break;
 		}
 	}
+
 
 		
 
@@ -166,8 +170,19 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 	public void Button5Click(){//return
 
 	}
-	public void Button6Click(){//go 
+	public void Button6Click(){//return
+		Debug.Log(ShipStatKeeper.shipMoving + " ship going");
 		ShipStatKeeper.shipMoving = !ShipStatKeeper.shipMoving;
+		if (ShipStatKeeper.shipMoving) {
+			goL1.GetComponent<SpriteRenderer> ().sprite = greenL;
+			goL2.GetComponent<SpriteRenderer> ().sprite = greenL;
+		} else {
+			goL1.GetComponent<SpriteRenderer> ().sprite = offL;
+			goL2.GetComponent<SpriteRenderer> ().sprite = offL;
+		}
+	}
+	public void Button7Click(){//go 
+		
 
 	}
 

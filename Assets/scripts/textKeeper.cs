@@ -33,6 +33,11 @@ public class textKeeper : MonoBehaviour {
 		"Your job is to keep an eye on their progress and return them using the return crew button when they are done.",
 		"Be careful, if you press that button too early, they will return to ship and abort their mining mission."
 	};
+	public static string[] eventAlerts = new string[]{
+		"Temperature inhabitable!",
+		"Filters getting clogged",
+		"Fuel use not sustainable!"
+	};
 		
 	void Start () {
 		

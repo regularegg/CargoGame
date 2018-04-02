@@ -45,7 +45,7 @@ public class airFilterBehavior : MonoBehaviour {
 		} else if (health < 1) {
 			ShipStatKeeper.oxygen -= 1f*crewAwake;
 		}
-
+		crewAwake = 0;
 	}
 
 	public void fix(int filters, CrewPerson crew){

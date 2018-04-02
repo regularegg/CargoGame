@@ -83,7 +83,7 @@ public class GraphicalOutput : MonoBehaviour {
 
 	}
 	void InventoryDisplay(){
-		inventory.text = Inventory.upgradeItems[0] + Inventory.upgradeInv [0] + "\n" +
+		inventory.text = Inventory.upgradeItems[0] +": "+ Inventory.upgradeInv [0] + "\n" +
 			Inventory.upgradeItems[1] +": "+ Inventory.upgradeInv [1] + "\n" +
 			Inventory.upgradeItems[2] +": "+Inventory.upgradeInv [2] +"\n" +
 			Inventory.mineItems[0] +": "+Inventory.mineInv [0] + "\n" +

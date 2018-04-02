@@ -8,6 +8,7 @@ public class Inventory : MonoBehaviour {
 	public static int[] mineInv = new int[]{0,0,0};
 	float[] mineFabTime = new float[]{10,15,15};
 	public static float[] mineBonus = new float[]{ 0.5f, 1, 1 };
+
 	public static int[] upgradeInv = new int[]{0,0,0};
 	float[] upgradeFabTime = new float[]{ 10, 5, 7 };
 
@@ -17,7 +18,6 @@ public class Inventory : MonoBehaviour {
 	public static string[] mineItems;
 	public static string[] upgradeItems;
 
-	public GameObject[] crewSB = new GameObject[3];
 
 	public WaitForSeconds wait = new WaitForSeconds (0.5f);
 
@@ -67,7 +67,6 @@ public class Inventory : MonoBehaviour {
 			Debug.Log("Making" +mineInv[itemIndex]);
 			int temp = (int)(100*productionProgress/target);
 			action [index].text = mineItems [itemIndex] + ": " + temp + "%";
-			//crewSB[index].transform.localScale = (productionProgress * Vector3.left/60)+(Vector3.up);
 			crew.active = true;
 			yield return wait;
 		}
@@ -100,7 +99,6 @@ public class Inventory : MonoBehaviour {
 			}
 			crew.currentActivity = 3 + itemIndex;
 			crew.active = true;
-			//crewSB[index].transform.localScale = (productionProgress * Vector3.left/60)+(Vector3.up);
 			int temp = (int)(100*productionProgress/target);
 			action [index].text = upgradeItems [itemIndex] + ": " + temp + "%";
 
@@ -109,7 +107,7 @@ public class Inventory : MonoBehaviour {
 		}
 		upgradeInv [itemIndex] += 1;
 		crew.currentActivity = 0;
-
+		action [index].text = upgradeItems [itemIndex] + ": " + 100 + "%";
 		Debug.Log("Made inv thing" +upgradeInv[itemIndex]);
 		crew.active = false;
 		action [index].text = "";

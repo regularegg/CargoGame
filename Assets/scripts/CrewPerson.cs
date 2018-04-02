@@ -3,7 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CrewPerson {
-	public float health, happiness, engineerSkill, fabSkill, mineSkill, cost, age;
+	public float _health, happiness, engineerSkill, fabSkill, mineSkill, cost, age;
+	public float health{
+		get{ return _health; }
+		set{
+			_health = value;
+			if (value == 0) {
+				alive = false;
+			}
+		}
+	}
 	public string name;
 	public bool awake, alive, outsideShip, active;
 	public int index, currRoom, energy;
@@ -28,13 +37,6 @@ public class CrewPerson {
 		age = currAge;
 		index = nindex;
 		cost = (engineerSkill + fbSkill + mineSkill) / 10;
-	}
-
-	void Update () {
-		if (health == 0) {
-			alive = false;
-		}
-
 	}
 
 	void needsDecay(){

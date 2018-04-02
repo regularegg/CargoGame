@@ -13,25 +13,24 @@ public class MouseManager : MonoBehaviour {
 		get{ return SC; }
 		set{ 
 			//SC = value;
-			Debug.Log ("Initial Room: " + CrewManager.crewList [0].currRoom);
 			//Use later to display crew member stats
+			if (value > -1) {
+				crewText.GetComponent<TextMeshProUGUI>().text = "Engineering: " + CrewManager.crewList [value].engineerSkill + "\n" + "craft skill: " + CrewManager.crewList [value].fabSkill + "\n" + "Mining: " + CrewManager.crewList [value].mineSkill + "\n";
+
+			}/*
 			if (value == 0) {
 				crewText.GetComponent<TextMeshProUGUI>().text = "Engineering: " + CrewManager.crewList [0].engineerSkill + "\n" + "craft skill: " + CrewManager.crewList [0].fabSkill + "\n" + "Mining: " + CrewManager.crewList [0].mineSkill + "\n";
 			} else if (value == 1) {
 				crewText.GetComponent<TextMeshProUGUI>().text = "Engineering: " + CrewManager.crewList [1].engineerSkill + "\n" + "craft skill: " + CrewManager.crewList [1].fabSkill + "\n" + "Mining: " + CrewManager.crewList [1].mineSkill + "\n";
-
 			} else if (value == 2) {
 				crewText.GetComponent<TextMeshProUGUI>().text = "Engineering: " + CrewManager.crewList [2].engineerSkill + "\n" + "craft skill: " + CrewManager.crewList [2].fabSkill + "\n" + "Mining: " + CrewManager.crewList [2].mineSkill + "\n";
-
-			} else {
+			}*/ else {
 				crewText.GetComponent<TextMeshProUGUI>().text = "Engineering: " +"\n" + "Plants: " +"\n" + "Mining: " +"\n";
-
 			}
 		}
 	}
 
 	void Start () {
-		//InvokeRepeating ("castRay", 0f, 1f);
 		transHolder = new Vector3(1.25f,-.75f,-10);
 	}
 	

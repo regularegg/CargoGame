@@ -20,6 +20,7 @@ public class EventManager : MonoBehaviour {
 				pic.GetComponent<SpriteRenderer> ().enabled = true;
 				speech.enabled = true;
 				GetComponent<ShipMapInteraction> ().enabled = false;
+				FindObjectOfType<ButtonManager> ().enabled = false;
 				StartCoroutine (textDisplay (textKeeper.introduction));
 
 			} else if (value == 1) {
@@ -27,6 +28,8 @@ public class EventManager : MonoBehaviour {
 				pic.GetComponent<SpriteRenderer> ().enabled = true;
 				speech.enabled = true;
 				GetComponent<ShipMapInteraction> ().enabled = false;
+				FindObjectOfType<ButtonManager> ().enabled = false;
+
 				StartCoroutine (textDisplay (textKeeper.asteroid));
 			}
 		}
@@ -106,6 +109,8 @@ public class EventManager : MonoBehaviour {
 					GetComponent<ShipMapInteraction> ().enabled = true;
 					pic.GetComponent<SpriteRenderer> ().enabled = false;
 					speech.enabled = false;
+					FindObjectOfType<ButtonManager> ().enabled = true;
+
 				}
 				yield return wait;
 			} 

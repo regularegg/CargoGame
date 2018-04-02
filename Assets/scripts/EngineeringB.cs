@@ -17,9 +17,11 @@ public class EngineeringB : MonoBehaviour {
 	public int engineLevel{
 		get{ return _engineLevel; }
 		set{
+			_engineLevel = value;
 			if (value == 1) {
 				ShipMvmt.efficiency += 10;
 				researchBehavior.roomLevels [2]++;
+				RoomManager.rooms [2].level++;
 			} else if (value == 2) {
 				ShipMvmt.speed += 3;
 			} else if (value == 3) {
@@ -79,12 +81,16 @@ public class EngineeringB : MonoBehaviour {
 	}
 
 	public void upgrade(int toolbox, CrewPerson crew){
-		if (toolbox >= 5&&engineLevel<4&& ShipStatKeeper.engineCanUpgrade) {
+		Debug.Log ("Upgrade check");
+
+		if (toolbox>=5 && ShipStatKeeper.engineCanUpgrade) {
 			crew.active = true;
 			Inventory.upgradeInv [0] -= 4;
 			crew.active = true;
-			StartCoroutine (_upgrade(crew));
+			StartCoroutine (_upgrade (crew));
 			Debug.Log ("Started upgrade");
+		} else {
+			Debug.Log (" NOT enough toolboxes");
 		}
 	}
 		
