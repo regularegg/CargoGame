@@ -18,6 +18,9 @@ public class Inventory : MonoBehaviour {
 	public static string[] mineItems;
 	public static string[] upgradeItems;
 
+	public Animator anim;
+	public Animation walking, working;
+
 
 	public WaitForSeconds wait = new WaitForSeconds (0.5f);
 
@@ -49,6 +52,7 @@ public class Inventory : MonoBehaviour {
 
 	IEnumerator addMineInv(int itemIndex, float crewSkill, CrewPerson crew, int index){ // 1 progress every 0.25 sec
 		Debug.Log("addMineInv");
+
 
 		float target = mineFabTime [itemIndex];
 		float productionProgress = 0;
@@ -83,6 +87,8 @@ public class Inventory : MonoBehaviour {
 
 	IEnumerator addUpgradeInv(int itemIndex, float crewSkill, CrewPerson crew, int index){ // 1 progress every 0.25 sec
 		Debug.Log("addUpgradeInv");
+		anim.enabled = true;
+		anim.Play ("working");
 
 		float target = upgradeFabTime [itemIndex];
 		float productionProgress = 0;
@@ -111,6 +117,8 @@ public class Inventory : MonoBehaviour {
 		Debug.Log("Made inv thing" +upgradeInv[itemIndex]);
 		crew.active = false;
 		action [index].text = "";
+
+		anim.Play ("wait");
 			yield break;
 
 	}

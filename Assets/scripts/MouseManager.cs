@@ -14,17 +14,15 @@ public class MouseManager : MonoBehaviour {
 		set{ 
 			//SC = value;
 			//Use later to display crew member stats
-			if (value > -1) {
-				crewText.GetComponent<TextMeshProUGUI>().text = "Engineering: " + CrewManager.crewList [value].engineerSkill + "\n" + "craft skill: " + CrewManager.crewList [value].fabSkill + "\n" + "Mining: " + CrewManager.crewList [value].mineSkill + "\n";
+			if (value == 0 || value == 1 || value == 2) {
+				crewText.GetComponent<TextMeshProUGUI> ().text = "Engineering: " + CrewManager.crewList [value].engineerSkill + "\n" + "craft skill: " + CrewManager.crewList [value].fabSkill + "\n" + "Mining: " + CrewManager.crewList [value].mineSkill + "\n";
 
-			}/*
-			if (value == 0) {
-				crewText.GetComponent<TextMeshProUGUI>().text = "Engineering: " + CrewManager.crewList [0].engineerSkill + "\n" + "craft skill: " + CrewManager.crewList [0].fabSkill + "\n" + "Mining: " + CrewManager.crewList [0].mineSkill + "\n";
-			} else if (value == 1) {
-				crewText.GetComponent<TextMeshProUGUI>().text = "Engineering: " + CrewManager.crewList [1].engineerSkill + "\n" + "craft skill: " + CrewManager.crewList [1].fabSkill + "\n" + "Mining: " + CrewManager.crewList [1].mineSkill + "\n";
-			} else if (value == 2) {
-				crewText.GetComponent<TextMeshProUGUI>().text = "Engineering: " + CrewManager.crewList [2].engineerSkill + "\n" + "craft skill: " + CrewManager.crewList [2].fabSkill + "\n" + "Mining: " + CrewManager.crewList [2].mineSkill + "\n";
-			}*/ else {
+			} else if (value == 3 || value == 4 || value == 5) {
+				int a = GetComponent<ShipMapInteraction> ().SR;
+
+			}
+
+			else {
 				crewText.GetComponent<TextMeshProUGUI>().text = "Engineering: " +"\n" + "Plants: " +"\n" + "Mining: " +"\n";
 			}
 		}

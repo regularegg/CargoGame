@@ -23,7 +23,12 @@ public class ShipMapInteraction : MonoBehaviour {
 	}
 	private int _selectedCrew;
 	public SpriteRenderer r0, r1, r2, r3, r4, r5, r6, r7;
+	public Animator a0, a1, a2, a3, a4, a5, a6, a7; //temp
 	SpriteRenderer[] sprites;
+	Animator[] animators;
+
+	Animation turn, working, walking;
+
 	string[] options1, options2, options3;
 
 	public int SC{

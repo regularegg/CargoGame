@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 789d9057941ee4befa40181881d11cc1
-timeCreated: 1522774544
+timeCreated: 1522778970
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -16,6 +16,7 @@ TextureImporter:
     21300018: walking_9
     21300020: walking_10
     21300022: walking_11
+    21300024: walking_12
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -248,6 +249,19 @@ TextureImporter:
         y: 11
         width: 10
         height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: walking_12
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 62
+        width: 10
+        height: 36
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -5,24 +5,19 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class ButtonManager : MonoBehaviour,IPointerUpHandler {
+public class ButtonManager : MonoBehaviour {
 
-	public GameObject cam;
 	public static float tempSlideOutput, humSlideOutput;
-	public static bool oggle, button;
-	public Button humButt, acButt, dockButt, gravButt, airlockButt, returnButt, startEngineButt;
+
+	public Button humButt, acButt, dockButt, gravButt, airlockButt, returnButt;
 	public Button[] buttonList, mapButtonList;
-	public Slider slideA, slideB;
-	public Toggle tog;
+	public Slider slideA, slideB, slideC;
 
 	public TextMeshProUGUI temperature, humidity;
-	public GameObject humL, acL, botL, gravL, goL1, goL2;
+	public GameObject humL, acL, dockL, gravL, goL1;
 	public Sprite offL, greenL, redL;
 
 	ShipStatKeeper SSK;
-
-	WaitForSeconds wait;
-
 
 	private float currentHumidityTarget, currentTemperatureTarget;
 
@@ -44,9 +39,15 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 		slideB.value = 25;
 		//make the actual temperature and set AC/humidifier temperature separate - takes time for real temperature to catch up to ship temp
 
+		slideC.onValueChanged.AddListener (delegate {
+			StartShip ();
+		});
+		slideC.wholeNumbers = true;
+		slideC.maxValue = 1;
+		slideC.value = 0;
 
 
-		buttonList = new Button[]{ humButt, acButt, dockButt, gravButt, airlockButt, returnButt,startEngineButt};
+		buttonList = new Button[]{ humButt, acButt, dockButt, gravButt, airlockButt, returnButt};
 
 		for (int i = 0; i < buttonList.Length; i++) {
 			Button temp = buttonList [i];
@@ -55,7 +56,26 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 				ButtonClicked (temp);
 			});
 		}
-		wait = new WaitForSeconds (0.25f);
+	}
+
+	void StartShip(){
+		if (slideC.value == 0) {
+			ShipStatKeeper.shipMoving = true;
+			goL1.GetComponent<SpriteRenderer> ().sprite = greenL;
+		}
+
+		if (slideC.value == 1) {
+			ShipStatKeeper.shipMoving = false;
+			goL1.GetComponent<SpriteRenderer> ().sprite = offL;
+		}
+
+		Debug.Log(ShipStatKeeper.shipMoving + " ship going");
+		ShipStatKeeper.shipMoving = !ShipStatKeeper.shipMoving;
+		if (ShipStatKeeper.shipMoving) {
+			goL1.GetComponent<SpriteRenderer> ().sprite = greenL;
+		} else {
+			goL1.GetComponent<SpriteRenderer> ().sprite = offL;
+		}
 	}
 	void Update(){
 		SSK.Humidity = Mathf.Lerp (ShipStatKeeper.humidity, currentHumidityTarget, Time.deltaTime * 0.01f);
@@ -66,10 +86,10 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 		int temp = int.Parse (butt.name);
 		switch (temp) {
 		case 0:
-			Button0Click ();
+			Button0Click ();// humidity
 			break;
 		case 1:
-			Button1Click ();
+			Button1Click ();// temperature
 			break;
 		case 2:
 			Button2Click ();
@@ -79,15 +99,6 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 			break;
 		case 4:
 			Button4Click ();
-			break;
-		case 5:
-			Button5Click ();
-			break;
-		case 6:
-			Button6Click ();
-			break;
-		case 7:
-			Button7Click ();
 			break;
 		}
 	}
@@ -138,12 +149,12 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 			SR.sprite = offL;
 	}
 
-	public void  Button2Click(){//Bot deploy button
+	public void  Button2Click(){//Dock
 		if (ShipStatKeeper.engine != 0) {
 			ShipStatKeeper.docked = true;
 			Debug.Log ("2");
 		} 
-		SpriteRenderer SR = botL.GetComponent<SpriteRenderer> ();
+		SpriteRenderer SR = dockL.GetComponent<SpriteRenderer> ();
 		if (ShipStatKeeper.docked) {
 			SR.sprite = greenL;
 		} else
@@ -167,24 +178,7 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 	public void Button4Click(){//airlock
 		//nvm no need...
 	}
-	public void Button5Click(){//return
 
-	}
-	public void Button6Click(){//return
-		Debug.Log(ShipStatKeeper.shipMoving + " ship going");
-		ShipStatKeeper.shipMoving = !ShipStatKeeper.shipMoving;
-		if (ShipStatKeeper.shipMoving) {
-			goL1.GetComponent<SpriteRenderer> ().sprite = greenL;
-			goL2.GetComponent<SpriteRenderer> ().sprite = greenL;
-		} else {
-			goL1.GetComponent<SpriteRenderer> ().sprite = offL;
-			goL2.GetComponent<SpriteRenderer> ().sprite = offL;
-		}
-	}
-	public void Button7Click(){//go 
-		
-
-	}
 
 	void TemperatureIncrease(){
 		if (ShipStatKeeper.tempToAdd != 0) {
@@ -194,13 +188,4 @@ public class ButtonManager : MonoBehaviour,IPointerUpHandler {
 			Debug.Log ("added temp");
 		}
 	}
-
-	public void OnPointerUp(PointerEventData pointerData){
-		Debug.Log ("pointer up");
-	}
 }
-/* Notes:
- * buttons should be added onto control board to represent interactive map (they should glow when hovered)
- * IDEA: events taht require user to press buttons???!?!
- * http://www.hopesandfears.com/hopes/culture/film/214001-the-ultimate-guide-to-control-panels-in-movies
- */

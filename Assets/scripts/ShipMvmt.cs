@@ -16,7 +16,6 @@ public class ShipMvmt : MonoBehaviour {
 	void Start () {
 		distanceCovered = 0;
 		InvokeRepeating ("FuelConsumption", 5f, 5f);
-		//StartCoroutine("shipMovement");
 		distToDestination = ShipStatKeeper.distanceToDestination;
 		wait = new WaitForSeconds (5);
 	}

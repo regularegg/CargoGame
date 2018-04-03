@@ -8,7 +8,8 @@ public class EventManager : MonoBehaviour {
 	public bool[] introChecklist = new bool[textKeeper.introduction.Length];
 	public string[] introText;
 	public GameObject pic, alert1, alert2;
-	public Sprite fish;
+	public SpriteRenderer light;
+	public Sprite fish,offLight, onLight;
 	public TextMeshProUGUI speech, alert;
 
 	GameObject holder;
@@ -43,10 +44,13 @@ public class EventManager : MonoBehaviour {
 		set{
 			_introCount = value;
 			if (value == 1) {
+				light.sprite = onLight;
 				/*holder = GameObject.Find ("Communication Screen");
 				holder.GetComponent<slidepanel> ().handle.transform.position = holder.GetComponent<slidepanel> ().openPos;
 				holder.GetComponent<slidepanel> ().active = true;*/
-			} else if (value == 7) {
+			} else if (value == 2) {
+				light.sprite = offLight;
+			}else if (value == 7) {
 				alert1.GetComponent<SpriteRenderer> ().enabled = true;
 				holder = GameObject.Find ("Info Panel");
 				holder.GetComponent<slidepanel> ().handle.transform.position = holder.GetComponent<slidepanel> ().openPos;
