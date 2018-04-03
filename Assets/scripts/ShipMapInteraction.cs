@@ -38,14 +38,12 @@ public class ShipMapInteraction : MonoBehaviour {
 
 						selection.enabled = true;
 						selection.text = "Where do you want me to go boss";
-						Debug.Log (selection.text + selection.enabled);
 
 						bg1.GetComponent<SpriteRenderer> ().enabled = !bg1.GetComponent<SpriteRenderer> ().enabled;
 						crewCommVisual.GetComponent<SpriteRenderer> ().enabled = true;
 						crewCommVisual.GetComponent<SpriteRenderer> ().sprite = CrewManager.crewList [0].sprite;
 						crewCommVisual.GetComponent<SpriteRenderer> ().color = Color.red;
 					} else if (value == 1) {
-						Debug.Log ("selection screen active");
 
 						selection.enabled = true;
 						selection.text = "Where do you want me to go boss";
@@ -57,7 +55,6 @@ public class ShipMapInteraction : MonoBehaviour {
 						crewCommVisual.GetComponent<SpriteRenderer> ().color = Color.green;
 
 					} else if (value == 2) {
-						Debug.Log ("selection screen active");
 
 						selection.enabled = true;
 						selection.text = "Where do you want me to go boss";
@@ -86,9 +83,9 @@ public class ShipMapInteraction : MonoBehaviour {
 			_selectedRoom = value;
 			if (_selectedCrew > -1 && selectionActive) {
 				if (CrewManager.crewList [_selectedCrew].currRoom != value && !RoomManager.rooms [value].occupied &&!CrewManager.crewList[_selectedCrew].active) {
-					//RoomManager.rooms[CrewManager.crewList [_selectedCrew].currRoom].occupied = false;
-					Debug.Log("TEST" + CrewManager.crewList [0].currRoom);
-					RoomManager.rooms[CrewManager.crewList [0].currRoom].occupied = false;
+					RoomManager.rooms[CrewManager.crewList [_selectedCrew].currRoom].occupied = false;
+					//Debug.Log("TEST" + CrewManager.crewList [0].currRoom);
+					//RoomManager.rooms[CrewManager.crewList [0].currRoom].occupied = false;
 
 					sprites [CrewManager.crewList [_selectedCrew].currRoom].enabled = false;
 					RoomManager.rooms [value].occupied = true;
@@ -202,6 +199,7 @@ public class ShipMapInteraction : MonoBehaviour {
 		selection.text = "What do you want me to do?";
 
 		b1.onClick.AddListener (delegate {
+			Debug.Log("listener added");
 			optA (SR);
 		});
 		b2.onClick.AddListener (delegate {
