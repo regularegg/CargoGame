@@ -43,9 +43,9 @@ public class EventManager : MonoBehaviour {
 		set{
 			_introCount = value;
 			if (value == 1) {
-				holder = GameObject.Find ("Communication Screen");
+				/*holder = GameObject.Find ("Communication Screen");
 				holder.GetComponent<slidepanel> ().handle.transform.position = holder.GetComponent<slidepanel> ().openPos;
-				holder.GetComponent<slidepanel> ().active = true;
+				holder.GetComponent<slidepanel> ().active = true;*/
 			} else if (value == 7) {
 				alert1.GetComponent<SpriteRenderer> ().enabled = true;
 				holder = GameObject.Find ("Info Panel");
