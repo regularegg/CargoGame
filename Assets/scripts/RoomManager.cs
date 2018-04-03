@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour {
 	public static RoomBehavior[] rooms;
+	public RoomBehavior[] roomDsp;
 
 	void Start () {
-		rooms = new RoomBehavior[9];
+		rooms = new RoomBehavior[8];
 		for (int i = 0; i < rooms.Length; i++) {
 			rooms [i] = new RoomBehavior (i);
 		}
+
+		roomDsp = rooms;
 	}
 	//research = 0, tool fab = 1, engine = 2, mining fab = 3, garden = 4, airlock = 5, filter = 6, cryo = 7
 	void Update () {

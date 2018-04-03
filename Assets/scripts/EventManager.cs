@@ -10,6 +10,9 @@ public class EventManager : MonoBehaviour {
 	public GameObject pic, alert1, alert2;
 	public Sprite fish;
 	public TextMeshProUGUI speech, alert;
+
+	GameObject holder;
+
 	WaitForSeconds wait;
 	int _state;
 	public int state{
@@ -23,13 +26,13 @@ public class EventManager : MonoBehaviour {
 				FindObjectOfType<ButtonManager> ().enabled = false;
 				StartCoroutine (textDisplay (textKeeper.introduction));
 
+
 			} else if (value == 1) {
 				pic.GetComponent<SpriteRenderer> ().sprite = fish;
 				pic.GetComponent<SpriteRenderer> ().enabled = true;
 				speech.enabled = true;
 				GetComponent<ShipMapInteraction> ().enabled = false;
 				FindObjectOfType<ButtonManager> ().enabled = false;
-
 				StartCoroutine (textDisplay (textKeeper.asteroid));
 			}
 		}
@@ -39,17 +42,28 @@ public class EventManager : MonoBehaviour {
 		get{ return _introCount; }
 		set{
 			_introCount = value;
-			if (value == 7){
+			if (value == 1) {
+				holder = GameObject.Find ("Communication Screen");
+				holder.GetComponent<slidepanel> ().handle.transform.position = holder.GetComponent<slidepanel> ().openPos;
+				holder.GetComponent<slidepanel> ().active = true;
+			} else if (value == 7) {
 				alert1.GetComponent<SpriteRenderer> ().enabled = true;
-			}
-			else if (value == 8){
+				holder = GameObject.Find ("Info Panel");
+				holder.GetComponent<slidepanel> ().handle.transform.position = holder.GetComponent<slidepanel> ().openPos;
+				holder.GetComponent<slidepanel> ().active = true;
+			} else if (value == 8) {
 				alert1.GetComponent<SpriteRenderer> ().enabled = false;
-			}
-			else if (value == 10) {
+				holder = GameObject.Find ("Info Panel");
+				holder.GetComponent<slidepanel> ().handle.transform.position = holder.GetComponent<slidepanel> ().startPos;
+				holder.GetComponent<slidepanel> ().active = false;
+			} else if (value == 10) {
 				alert2.GetComponent<SpriteRenderer> ().enabled = true;
-			}
-			else if (value == 11) {
+			} else if (value == 11) {
 				alert2.GetComponent<SpriteRenderer> ().enabled = false;
+			} else if (value == textKeeper.introduction.Length) {
+				holder = GameObject.Find ("Communication Screen");
+				holder.GetComponent<slidepanel> ().handle.transform.position = holder.GetComponent<slidepanel>().startPos;
+ 				holder.GetComponent<slidepanel> ().active = false;
 			}
 		}
 	}
@@ -69,7 +83,7 @@ public class EventManager : MonoBehaviour {
 		}
 	}
 	int asteroidCount;
-	void Start () {
+	void Awake () {
 		state = 0;
 		wait = new WaitForSeconds (0.5f);
 	}

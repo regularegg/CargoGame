@@ -22,7 +22,7 @@ public class CrewPerson {
 	public CrewPerson(string id, float currAge, float engSkill, float fbSkill, float mSkill, int nindex, Sprite sp){
 		health = 100;
 		happiness = 80;
-		currRoom = 8;
+		currRoom = 0;
 		awake = true;
 		alive = true;
 		currentActivity = 0;

@@ -34,15 +34,15 @@ public class GraphicalOutput : MonoBehaviour {
 	void Update () {
 		InventoryDisplay ();
 		if (temperatureHold != ShipStatKeeper.temperature) {
-			temperatureScale ();
+			//temperatureScale ();
 			temperatureHold = ShipStatKeeper.temperature;
 		}
 		if (humhold != ShipStatKeeper.humidity) {
-			humidityScale ();
+			//humidityScale ();
 			humhold = ShipStatKeeper.temperature;
 		}
 		if (oxygenhold != ShipStatKeeper.oxygen) {
-			oxygenScale ();
+			//oxygenScale ();
 			oxygenhold = ShipStatKeeper.fuel;
 		}
 
@@ -52,7 +52,7 @@ public class GraphicalOutput : MonoBehaviour {
 		//inventory.text = "hand tools: " + Inventory.inv [0] + "\nGardening Equipment: " + Inventory.inv [1] + "\nfilters: " + Inventory.inv [2] + "\nDrills: " + Inventory.inv [3] + "\nMaterials: " + Inventory.inv [4] + "\nCoolant" + Inventory.inv [5];
 	}
 
-	void temperatureScale(){
+	/*void temperatureScale(){
 		temperature.transform.localScale = (ShipStatKeeper.temperature * Vector3.up/10)+(Vector3.right);
 		if (ShipStatKeeper.temperature > 40) {
 			trutemp.GetComponent<SpriteRenderer> ().color = Color.red;
@@ -72,7 +72,7 @@ public class GraphicalOutput : MonoBehaviour {
 			truhum.GetComponent<SpriteRenderer> ().color = Color.green;
 		} else
 			truhum.GetComponent<SpriteRenderer> ().color = Color.red;
-	}
+	}*/
 
 	void CrewDataManager(){
 		cstats0.text = CrewManager.crewList [0].name + "\n" + CrewManager.crewList [0].age+"\n" + CrewManager.crewList [0].health + "\n" + roomNames[CrewManager.crewList [0].currRoom];

@@ -11,7 +11,7 @@ public class textKeeper : MonoBehaviour {
 		"Your job is to travel to asteroids to mine resources and bring them back to earth.",
 		"As the Company Representative Captain, you must keep the ship and its crew at peak productivity.",
 		"While intersystem flight is not dangerous, your ship will be under a lot of strain and must be maintained.",
-		"You can monitor each system's status on your SHIP STAT SCREEN to the far right.",
+		"You can monitor each system's status on your SHIP STAT PANEL to the far LEFT.",
 		"The systems can be adjusted using your control panel.",
 		"In the very likely event that a system malfunctions or deteriorates beyond usability, ask a crew member to repair it.",
 		"You can do so by clicking on their ID in the communications panel and indicating the desired room and action.",

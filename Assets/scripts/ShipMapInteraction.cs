@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 //remove listeners when player doesnt select an option
 public class ShipMapInteraction : MonoBehaviour {
-	public TextMeshProUGUI detail, selection, SB1, SB2, SB3;
+	public TextMeshProUGUI selection, SB1, SB2, SB3;
 	public GameObject holder, bg1, bg2, bg3, crewCommVisual;
 	public Button b1, b2, b3;
 	int SCHold;
@@ -22,7 +22,7 @@ public class ShipMapInteraction : MonoBehaviour {
 		}
 	}
 	private int _selectedCrew;
-	public SpriteRenderer r0, r1, r2, r3, r4, r5, r6, r7, r8;
+	public SpriteRenderer r0, r1, r2, r3, r4, r5, r6, r7;
 	SpriteRenderer[] sprites;
 	string[] options1, options2, options3;
 
@@ -35,6 +35,7 @@ public class ShipMapInteraction : MonoBehaviour {
 
 					//Use later to display crew member stats
 					if (value == 0) {
+
 						selection.enabled = true;
 						selection.text = "Where do you want me to go boss";
 						Debug.Log (selection.text + selection.enabled);
@@ -44,6 +45,8 @@ public class ShipMapInteraction : MonoBehaviour {
 						crewCommVisual.GetComponent<SpriteRenderer> ().sprite = CrewManager.crewList [0].sprite;
 						crewCommVisual.GetComponent<SpriteRenderer> ().color = Color.red;
 					} else if (value == 1) {
+						Debug.Log ("selection screen active");
+
 						selection.enabled = true;
 						selection.text = "Where do you want me to go boss";
 						Debug.Log (selection.text + selection.enabled);
@@ -54,6 +57,8 @@ public class ShipMapInteraction : MonoBehaviour {
 						crewCommVisual.GetComponent<SpriteRenderer> ().color = Color.green;
 
 					} else if (value == 2) {
+						Debug.Log ("selection screen active");
+
 						selection.enabled = true;
 						selection.text = "Where do you want me to go boss";
 						Debug.Log (selection.text + selection.enabled);
@@ -63,6 +68,8 @@ public class ShipMapInteraction : MonoBehaviour {
 						crewCommVisual.GetComponent<SpriteRenderer> ().color = Color.blue;
 
 					}
+					Debug.Log ("TEST " + CrewManager.crewList[value].currRoom);
+
 				} else {
 					selection.text = "Crew dead";
 					SC = -1;
@@ -79,7 +86,10 @@ public class ShipMapInteraction : MonoBehaviour {
 			_selectedRoom = value;
 			if (_selectedCrew > -1 && selectionActive) {
 				if (CrewManager.crewList [_selectedCrew].currRoom != value && !RoomManager.rooms [value].occupied &&!CrewManager.crewList[_selectedCrew].active) {
-					RoomManager.rooms[CrewManager.crewList [_selectedCrew].currRoom].occupied = false;
+					//RoomManager.rooms[CrewManager.crewList [_selectedCrew].currRoom].occupied = false;
+					Debug.Log("TEST" + CrewManager.crewList [0].currRoom);
+					RoomManager.rooms[CrewManager.crewList [0].currRoom].occupied = false;
+
 					sprites [CrewManager.crewList [_selectedCrew].currRoom].enabled = false;
 					RoomManager.rooms [value].occupied = true;
 
@@ -103,7 +113,7 @@ public class ShipMapInteraction : MonoBehaviour {
 	}
 
 	void Start(){
-		sprites = new SpriteRenderer[]{ r0, r1, r2, r3, r4, r5, r6, r7, r8 };
+		sprites = new SpriteRenderer[]{ r0, r1, r2, r3, r4, r5, r6, r7 };
 	}
 
 	void Update () {
