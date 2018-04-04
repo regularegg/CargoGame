@@ -1,10 +1,12 @@
 fileFormatVersion: 2
-guid: 095d4a0c73e5142a297640fef378b421
-timeCreated: 1522799777
+guid: 2214a11110a2e4de58e518df05980a57
+timeCreated: 1522812098
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: screen_0
+    21300000: ac buttons_0
+    21300002: ac buttons_1
+    21300004: ac buttons_2
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -87,15 +89,41 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: screen_0
+      name: ac buttons_0
       rect:
         serializedVersion: 2
-        x: 128
-        y: 151
-        width: 561
-        height: 678
+        x: 320
+        y: 242
+        width: 224
+        height: 167
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ac buttons_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 75
+        width: 224
+        height: 167
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ac buttons_2
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 75
+        width: 224
+        height: 167
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

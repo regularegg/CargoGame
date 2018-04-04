@@ -340,7 +340,7 @@ public class ShipMapInteraction : MonoBehaviour {
 			GetComponent<Inventory> ().fabPrep (SR, 0, 2);
 
 		}else if (SR == 1) {
-			GetComponent<researchBehavior> ().upgradeCheck (6, SCHold);
+			GetComponent<researchBehavior> ().upgradeCheck (3, SCHold);
 
 		} else if (SR == 4) {
 			GetComponent<Inventory> ().fabPrep (SR, 1, 2);

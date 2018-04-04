@@ -1,10 +1,12 @@
 fileFormatVersion: 2
-guid: 095d4a0c73e5142a297640fef378b421
-timeCreated: 1522799777
+guid: 6748cbda44d3140d2b69fcb4aafaf1fd
+timeCreated: 1522812531
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: screen_0
+    21300000: humid buttons_0
+    21300002: humid buttons_1
+    21300004: humid buttons_2
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -87,15 +89,41 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: screen_0
+      name: humid buttons_0
       rect:
         serializedVersion: 2
-        x: 128
-        y: 151
-        width: 561
-        height: 678
+        x: 336
+        y: 242
+        width: 224
+        height: 167
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: humid buttons_1
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 76
+        width: 224
+        height: 167
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: humid buttons_2
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 75
+        width: 224
+        height: 167
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

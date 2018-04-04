@@ -67,7 +67,7 @@ public class researchBehavior : MonoBehaviour {
 
 	public void upgradeCheck(int room, int crew){
 		for (int i = 0; i < CrewManager.crewList.Length; i++) {
-			Debug.Log ("fabPrep loop" + i);
+			Debug.Log ("upgrade prep" + i);
 
 			if (CrewManager.crewList [i].currRoom == 1) {
 				StartCoroutine (research (room,CrewManager.crewList[i]));
@@ -90,10 +90,9 @@ public class researchBehavior : MonoBehaviour {
 		int target = 0;
 		while (target < 10 + RoomManager.rooms [room].level) {
 			target++;
-			Debug.Log ("researching");
-
+			Debug.Log ("researching " + target);
 			yield return wait;
-		}
+			}
 		if (target >= 10 + RoomManager.rooms [room].level) {
 			Debug.Log ("done w level research");
 			if (room == 1)

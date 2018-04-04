@@ -54,23 +54,23 @@ public class MouseManager : MonoBehaviour {
 				}
 			}
 			if (hit.collider.gameObject.tag.Contains ("Selection")) {
-				activityBox.GetComponent<SpriteRenderer> ().enabled = true;
-				activityText.GetComponent<TextMeshProUGUI>().enabled = true;
-				activityText.GetComponent<Transform> ().position = Camera.main.ScreenToWorldPoint (Input.mousePosition) + transHolder;
+			//	activityBox.GetComponent<SpriteRenderer> ().enabled = true;
+			//	activityText.GetComponent<TextMeshProUGUI>().enabled = true;
+			//	activityText.GetComponent<Transform> ().position = Camera.main.ScreenToWorldPoint (Input.mousePosition) + transHolder;
 
 				if (hit.collider.gameObject.name.EndsWith ("0")) {
-					SC = 0;
+					SC = 3;
 				} else if (hit.collider.gameObject.name.EndsWith ("1")) {
-					SC = 1;
+					SC = 4;
 				} else if (hit.collider.gameObject.name.EndsWith ("2")) {
-					SC = 2;
+					SC = 5;
 				}
 			}
 		} else {
 			crewBox.GetComponent<SpriteRenderer> ().enabled = false;
 			crewText.GetComponent<TextMeshProUGUI>().enabled = false;
-			activityBox.GetComponent<SpriteRenderer> ().enabled = false;
-			activityText.GetComponent<TextMeshProUGUI>().enabled = false;
+//			activityBox.GetComponent<SpriteRenderer> ().enabled = false;
+		//	activityText.GetComponent<TextMeshProUGUI>().enabled = false;
 		}
 	}
 }

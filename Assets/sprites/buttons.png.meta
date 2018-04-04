@@ -1,10 +1,12 @@
 fileFormatVersion: 2
-guid: 095d4a0c73e5142a297640fef378b421
-timeCreated: 1522799777
+guid: ae221d45e05ac41e8917df45bdd99bb3
+timeCreated: 1522802378
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: screen_0
+    21300000: buttons_0
+    21300002: buttons_1
+    21300004: buttons_2
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -87,15 +89,41 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: screen_0
+      name: buttons_0
       rect:
         serializedVersion: 2
-        x: 128
-        y: 151
-        width: 561
-        height: 678
+        x: 82
+        y: 218
+        width: 159
+        height: 154
       alignment: 0
       pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buttons_1
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 232
+        width: 159
+        height: 154
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buttons_2
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 27
+        width: 160
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

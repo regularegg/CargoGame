@@ -22,6 +22,8 @@ public class ButtonManager : MonoBehaviour {
 	private float currentHumidityTarget, currentTemperatureTarget;
 
 	void Start () {
+
+
 		SSK = FindObjectOfType<ShipStatKeeper> ();
 			
 		slideA.onValueChanged.AddListener (delegate {
@@ -124,10 +126,13 @@ public class ButtonManager : MonoBehaviour {
 	public void  Button0Click(){ //humidity button
 		if (ShipStatKeeper.engine != 0) {
 			ShipStatKeeper.humidOn = !ShipStatKeeper.humidOn;
+			humButt.GetComponentInParent<Image>().color = Color.green;
 
 			Debug.Log ("0");
 		} else {
 			ShipStatKeeper.humidOn = false;
+			humButt.GetComponentInParent<Image>().color = Color.gray;
+
 		}
 		SpriteRenderer SR = humL.GetComponent<SpriteRenderer> ();
 

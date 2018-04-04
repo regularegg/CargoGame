@@ -8,7 +8,7 @@ public class EventManager : MonoBehaviour {
 	public bool[] introChecklist = new bool[textKeeper.introduction.Length];
 	public string[] introText;
 	public GameObject pic, alert1, alert2;
-	public SpriteRenderer light;
+	public SpriteRenderer commLight;
 	public Sprite fish,offLight, onLight;
 	public TextMeshProUGUI speech, alert;
 
@@ -44,12 +44,12 @@ public class EventManager : MonoBehaviour {
 		set{
 			_introCount = value;
 			if (value == 1) {
-				light.sprite = onLight;
+				commLight.sprite = onLight;
 				/*holder = GameObject.Find ("Communication Screen");
 				holder.GetComponent<slidepanel> ().handle.transform.position = holder.GetComponent<slidepanel> ().openPos;
 				holder.GetComponent<slidepanel> ().active = true;*/
 			} else if (value == 2) {
-				light.sprite = offLight;
+				commLight.sprite = offLight;
 			}else if (value == 7) {
 				alert1.GetComponent<SpriteRenderer> ().enabled = true;
 				holder = GameObject.Find ("Info Panel");
@@ -76,17 +76,30 @@ public class EventManager : MonoBehaviour {
 		get{ return _trigger; }
 		set{
 			_trigger = value;
-			if (value == 5000) {
-				alert.text = "OH NO! A DOG THAT SOMEONE SMUGGLED ONBOARD HAS PEED ON THE AIRFILTERS! FILTER HEALTH CRITICAL!";
+			if (value == 100) {
+				speech.text = "OH NO! A DOG THAT SOMEONE SMUGGLED ONBOARD HAS PEED ON THE AIRFILTERS! FILTER HEALTH CRITICAL!";
+				commLight.sprite = onLight;
 				ShipStatKeeper.airfilter = 10;
 			}
-			if (value == 10000) {
-				alert.text = CrewManager.crewList[1].name+" done messed up. The garden is all goofed!";
+			if (value == 150) {
+				speech.text = CrewManager.crewList[1].name+" done messed up. The garden is all goofed!";
+				commLight.sprite = onLight;
 				ShipStatKeeper.garden = 10;
 			}
 		}
 	}
-	int asteroidCount;
+	int _asteroidCount;
+	int asteroidCount{
+		get{ return _asteroidCount; }
+		set{
+			_asteroidCount = value;
+			if (value == 1) {
+				commLight.sprite = onLight;
+			} else if (value == 2) {
+				commLight.sprite = offLight;
+			}
+		}
+	}
 	void Awake () {
 		state = 0;
 		wait = new WaitForSeconds (0.5f);
@@ -95,6 +108,14 @@ public class EventManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	IEnumerator accidents(){
+		for (int i = 0; i < 200; i++) {
+			trigger++;
+			Debug.Log ("Trigger " + trigger);
+			yield return wait;
+		}
 	}
 	IEnumerator textDisplay(string[] textInput){
 		Debug.Log ("intro started");
@@ -128,7 +149,9 @@ public class EventManager : MonoBehaviour {
 					pic.GetComponent<SpriteRenderer> ().enabled = false;
 					speech.enabled = false;
 					FindObjectOfType<ButtonManager> ().enabled = true;
-
+					if (state == 0) {
+						StartCoroutine (accidents ());
+					}
 				}
 				yield return wait;
 			} 
