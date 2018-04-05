@@ -47,7 +47,7 @@ public class GraphicalOutput : MonoBehaviour {
 		}
 
 		CrewDataManager ();
-		fueltxt.text = "Fuel: " + (100*ShipStatKeeper.fuel/fuelInit)+"% " + ShipStatKeeper.fuel;
+//		fueltxt.text = "Fuel: " + (100*ShipStatKeeper.fuel/fuelInit)+"% " + ShipStatKeeper.fuel;
 		filter.text = "Filter: " + ShipStatKeeper.airfilter;
 	}
 

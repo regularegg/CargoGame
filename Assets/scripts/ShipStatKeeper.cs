@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShipStatKeeper: MonoBehaviour {
+	public SpriteRenderer BG;
+	public Sprite[] sky = new Sprite[4];
 	public static float 
 	temperature = 25, 
 	humidity = 25, 
@@ -21,7 +23,6 @@ public class ShipStatKeeper: MonoBehaviour {
 //	float foodDecay = 1, oxygenDecay = 0, airFilterDecay = 1, hydroponicsDecay = 0.5f, botsDecay = 1;
 	public static float tempToAdd, humToAdd;
 	public static float cryobedCount, crewCount, engineClass;
-	static bool _shipMoving;
 	public static bool  shipMoving, acOn, humidOn, _gravOn, docked, canMine, 
 	engineCanUpgrade,
 	filterCanUpgrade;
@@ -73,6 +74,16 @@ public class ShipStatKeeper: MonoBehaviour {
 		}
 		HumidityIncrease ();
 		TemperatureIncrease ();
+		if (shipMoving) {
+			BG.sprite = sky [0];
+		}
+		else if (!shipMoving) {
+			if (docked) {
+				BG.sprite= sky [2];
+			}else{
+				BG.sprite = sky [1];
+			}
+		}
 	}
 
 	void HumidityIncrease(){

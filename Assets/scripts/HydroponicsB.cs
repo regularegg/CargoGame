@@ -110,7 +110,7 @@ public class HydroponicsB : MonoBehaviour {
 				Debug.Log("food 77"); 	
 
 				foodStore += foodOutput;
-				output.text = "FOOD0 :"+ foodStore;// TEMPORARY PLS CHANGE TO OUTPUT THE FOOD IN INV INSTEAD
+				output.text = "FOOD :"+ foodStore;// TEMPORARY PLS CHANGE TO OUTPUT THE FOOD IN INV INSTEAD
 				Debug.Log("food enum"); 	
 				yield return foodRate;
 			} else {
