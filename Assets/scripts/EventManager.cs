@@ -113,7 +113,7 @@ public class EventManager : MonoBehaviour {
 	IEnumerator accidents(){
 		for (int i = 0; i < 200; i++) {
 			trigger++;
-			Debug.Log ("Trigger " + trigger);
+			//Debug.Log ("Trigger " + trigger);
 			yield return wait;
 		}
 	}
