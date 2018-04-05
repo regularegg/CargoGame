@@ -49,9 +49,9 @@ public class GraphicalOutput : MonoBehaviour {
 		CrewDataManager ();
 		fueltxt.text = "Fuel: " + (100*ShipStatKeeper.fuel/fuelInit)+"% " + ShipStatKeeper.fuel;
 		filter.text = "Filter: " + ShipStatKeeper.airfilter;
-		//inventory.text = "hand tools: " + Inventory.inv [0] + "\nGardening Equipment: " + Inventory.inv [1] + "\nfilters: " + Inventory.inv [2] + "\nDrills: " + Inventory.inv [3] + "\nMaterials: " + Inventory.inv [4] + "\nCoolant" + Inventory.inv [5];
 	}
 
+	//graph display system put on hold
 	/*void temperatureScale(){
 		temperature.transform.localScale = (ShipStatKeeper.temperature * Vector3.up/10)+(Vector3.right);
 		if (ShipStatKeeper.temperature > 40) {
@@ -73,6 +73,8 @@ public class GraphicalOutput : MonoBehaviour {
 		} else
 			truhum.GetComponent<SpriteRenderer> ().color = Color.red;
 	}*/
+
+
 
 	void CrewDataManager(){
 		cstats0.text = CrewManager.crewList [0].name + "\n" + CrewManager.crewList [0].age+"\n" + CrewManager.crewList [0].health + "\n" + roomNames[CrewManager.crewList [0].currRoom];

@@ -7,16 +7,8 @@ using TMPro;
 public class ScreenAManager : MonoBehaviour {
 	public TextMeshProUGUI systemLevel, fuel, energyUse, food;
 	public string opAtext, opBtext,opCtext;
-	/*
-	 * Screen A will contain: 
-	 * minimap with realtime crew location
-	 * room stats (refine later)
-	 * room names
-	 */
 
-	void Start () {
-	}
-	
+
 	void Update () {
 		int energyCount = 0;
 		if (ShipStatKeeper.acOn)
@@ -33,10 +25,10 @@ public class ScreenAManager : MonoBehaviour {
 		}
 		systemLevel.text = "Engine Level: " + RoomManager.rooms[2].level+" \n Tool Fab Level: " + RoomManager.rooms[1].level;
 
-		fuel.text = "fuel: " + ShipStatKeeper.fuel;
+		fuel.text = ""+ShipStatKeeper.fuel;
 		energyUse.text = "Energy usage: "+ energyCount;
 		food.text = "food: " + ShipStatKeeper.food;
-		//opA.text = "Temperature: " + ShipStatKeeper.temperature.ToString("0.#");
+	//	opA.text = "Temperature: " + ShipStatKeeper.temperature.ToString("0.#");
 		//opB.text = "Humidity: " + ShipStatKeeper.humidity.ToString("0.#");
 	}
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-//remove listeners when player doesnt select an option
+
 public class ShipMapInteraction : MonoBehaviour {
 	public TextMeshProUGUI selection, SB1, SB2, SB3;
 	public GameObject holder, bg1, bg2, bg3, crewCommVisual;
@@ -287,9 +287,9 @@ public class ShipMapInteraction : MonoBehaviour {
 		}else if (SR == 4) {
 			GetComponent<Inventory> ().fabPrep (SR, 1, 0);
 		} else if (SR == 3) {
-			GetComponent<EngineeringB> ().upgrade (Inventory.upgradeInv [0], CrewManager.crewList [SCHold]);
+			GetComponent<EngineeringB> ().upgrade (Inventory.upgradeInv [0], CrewManager.crewList [SCHold]);//upgrade engines
 		}else if (SR == 7) {
-			StartCoroutine(GetComponent<airFilterBehavior>().filterUpgrade(CrewManager.crewList[SCHold]));
+			StartCoroutine(GetComponent<airFilterBehavior>().filterUpgrade(CrewManager.crewList[SCHold]));//upgrade filters
 		}else if (SR == 5) {
 			GetComponent<HydroponicsB> ().harvest ();
 		}else if (SR == -1) {
@@ -335,7 +335,6 @@ public class ShipMapInteraction : MonoBehaviour {
 	}
 	void optC(int room){
 		Debug.Log ("Option 3");
-		//holder.SetActive(false);
 		if (SR == 2) {
 			GetComponent<Inventory> ().fabPrep (SR, 0, 2);
 
@@ -360,3 +359,6 @@ public class ShipMapInteraction : MonoBehaviour {
 
 	}
 }
+
+
+//note: make sure listeners are removed if players dont select option

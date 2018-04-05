@@ -70,7 +70,7 @@ public class airFilterBehavior : MonoBehaviour {
 		}
 	}
 	public IEnumerator filterUpgrade(CrewPerson crew){
-		if (ShipStatKeeper.filterCanUpgrade&&Inventory.upgradeInv[2]>3) {
+		if (ShipStatKeeper.filterCanUpgrade && Inventory.upgradeInv [2] > 3) {
 			int count = -10;
 			Inventory.upgradeInv [2] -= 3;
 			while (count < 100) {
@@ -82,6 +82,12 @@ public class airFilterBehavior : MonoBehaviour {
 				researchBehavior.roomLevels [7]++;
 				ShipStatKeeper.filterCanUpgrade = false;
 				yield break;
+			}
+		} else {
+			if (!ShipStatKeeper.filterCanUpgrade) {
+				Debug.Log ("Can't upgrade! insufficient research");
+			}else if (Inventory.upgradeInv [2] <= 3) {
+				Debug.Log ("Can't upgrade! insufficient filters");
 			}
 		}
 	}

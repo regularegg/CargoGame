@@ -43,12 +43,12 @@ public class EventManager : MonoBehaviour {
 		get{ return _introCount; }
 		set{
 			_introCount = value;
-			if (value == 1) {
+			if (value == 2) {
 				commLight.sprite = onLight;
-				/*holder = GameObject.Find ("Communication Screen");
+				holder = GameObject.Find ("Communication Screen");
 				holder.GetComponent<slidepanel> ().handle.transform.position = holder.GetComponent<slidepanel> ().openPos;
-				holder.GetComponent<slidepanel> ().active = true;*/
-			} else if (value == 2) {
+				holder.GetComponent<slidepanel> ().active = true;
+			} else if (value == 3) {
 				commLight.sprite = offLight;
 			}else if (value == 7) {
 				alert1.GetComponent<SpriteRenderer> ().enabled = true;
@@ -95,8 +95,14 @@ public class EventManager : MonoBehaviour {
 			_asteroidCount = value;
 			if (value == 1) {
 				commLight.sprite = onLight;
+				holder.GetComponent<slidepanel> ().handle.transform.position = holder.GetComponent<slidepanel> ().openPos;
+				holder.GetComponent<slidepanel> ().active = true;
+
 			} else if (value == 2) {
 				commLight.sprite = offLight;
+			} else if (value == textKeeper.asteroid.Length) {
+				holder.GetComponent<slidepanel> ().handle.transform.position = holder.GetComponent<slidepanel> ().startPos;
+				holder.GetComponent<slidepanel> ().active = false;
 			}
 		}
 	}

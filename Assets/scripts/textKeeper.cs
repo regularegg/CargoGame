@@ -5,6 +5,7 @@ using UnityEngine;
 public class textKeeper : MonoBehaviour {
 
 	public static string[] introduction = new string[]{
+		" ",
 		"Hello there and welcome to the Space Miners Corp.",
 		"My name is Fish Face and I will be your training guide.",
 		"Due to the longstanding resource shortages on Earth 2, we have been forced to turn to the stars even the most basic elements.",

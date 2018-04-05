@@ -32,10 +32,12 @@ public class slidepanel : MonoBehaviour {
 			} else if (hit.collider.gameObject.tag.Contains ("Panel Handle") && active && Input.GetMouseButtonUp (0)&& hit.collider.gameObject.name.Contains(currentPanel)) {
 				handle.transform.position = startPos;
 				active = false;
+				if (hit.collider.gameObject.name.Contains ("side title")) {
+					GameObject.Find ("Manual Book").transform.position = new Vector3 (100, 100, 0);
+				}
 			}
-		} else if(hit.collider==null && !active || Input.GetMouseButtonUp(0)) {
+		} else if(hit.collider==null && !active) {
 			handle.transform.position = startPos;
-			GameObject.Find("Manual Book").transform.position = new Vector3(100,100,0);
 		}
 	}
 	void Update () {

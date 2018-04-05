@@ -90,7 +90,11 @@ public class EngineeringB : MonoBehaviour {
 			StartCoroutine (_upgrade (crew));
 			Debug.Log ("Started upgrade");
 		} else {
-			Debug.Log (" NOT enough toolboxes");
+			if (!ShipStatKeeper.engineCanUpgrade) {
+				Debug.Log ("Can't upgrade! insufficient research");
+			}else if (toolbox<5) {
+				Debug.Log ("Can't upgrade! insufficient toolboxes");
+			}
 		}
 	}
 		
