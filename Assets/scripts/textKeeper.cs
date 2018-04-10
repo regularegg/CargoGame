@@ -39,13 +39,4 @@ public class textKeeper : MonoBehaviour {
 		"Filters getting clogged",
 		"Fuel use not sustainable!"
 	};
-		
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

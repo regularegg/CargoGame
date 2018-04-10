@@ -28,7 +28,7 @@ public class airFilterBehavior : MonoBehaviour {
 		if ((ShipStatKeeper.garden < 75)&&(ShipStatKeeper.humidity>50)) {
 			health -= 1f;
 		} else {
-			health -= 0.25f;//add randomness later
+			health -= 0.25f;
 		}
 	}
 	void OxygenDecay(){
