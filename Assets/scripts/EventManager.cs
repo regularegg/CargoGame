@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Audio;
 
 public class EventManager : MonoBehaviour {
 	
@@ -11,6 +12,8 @@ public class EventManager : MonoBehaviour {
 	public SpriteRenderer commLight;
 	public Sprite fish,offLight, onLight;
 	public TextMeshProUGUI speech, alert;
+
+	public AudioSource FishTalking;
 
 	GameObject holder;
 
@@ -160,6 +163,7 @@ public class EventManager : MonoBehaviour {
 					}
 				}
 				yield return wait;
+				FishTalking.Play ();
 			} 
 			else {
 				yield return null;

@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class ShipMapInteraction : MonoBehaviour {
+	public AudioSource HeyYa;
+	public AudioSource HeyYa1;
+	public AudioSource HeyYa2;
+
 	public TextMeshProUGUI selection, SB1, SB2, SB3;
 	public GameObject holder, bg1, bg2, bg3, crewCommVisual;
 	public Button b1, b2, b3;
@@ -43,6 +48,8 @@ public class ShipMapInteraction : MonoBehaviour {
 
 						selection.enabled = true;
 						selection.text = "Where do you want me to go boss";
+
+
 
 						bg1.GetComponent<SpriteRenderer> ().enabled = !bg1.GetComponent<SpriteRenderer> ().enabled;
 						crewCommVisual.GetComponent<SpriteRenderer> ().enabled = true;
@@ -139,14 +146,18 @@ public class ShipMapInteraction : MonoBehaviour {
 					selectionActive = true;
 					b1.onClick.RemoveAllListeners();
 					b2.onClick.RemoveAllListeners();
-					b3.onClick.RemoveAllListeners();				}
+					b3.onClick.RemoveAllListeners();
+					HeyYa.Play ();
+				}
 				else if (hit.collider.gameObject.name.EndsWith("1")) {
 					SC = 1;
 					SCHold = SC;
 					selectionActive = true;
 					b1.onClick.RemoveAllListeners();
 					b2.onClick.RemoveAllListeners();
-					b3.onClick.RemoveAllListeners();				}
+					b3.onClick.RemoveAllListeners();
+					HeyYa1.Play ();
+				}
 				else if (hit.collider.gameObject.name.EndsWith("2")) {
 					SC = 2;
 					SCHold = SC;
@@ -154,6 +165,7 @@ public class ShipMapInteraction : MonoBehaviour {
 					b1.onClick.RemoveAllListeners();
 					b2.onClick.RemoveAllListeners();
 					b3.onClick.RemoveAllListeners();
+					HeyYa2.Play ();
 				}
 			}
 
