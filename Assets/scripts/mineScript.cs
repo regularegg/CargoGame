@@ -31,16 +31,16 @@ public class mineScript : MonoBehaviour {
 	}
 	void Start () {
 		airlock.onClick.AddListener(delegate {
-			ActivateAirlock ();
+			//ActivateAirlock ();
 		});
 		callbackCrew.onClick.AddListener (delegate {
-			returnCrew ();
+			//returnCrew ();
 		});
 
 		wait = new WaitForSeconds (2);
 	}
 
-	IEnumerator mining(){
+/*	IEnumerator mining(){
 		float mineable = baseIceOutput + sumSkillMult+(Inventory.mineBonus[1]*Inventory.mineInv[1]/2);
 		float rate = mineable * 0.5f*crewOutside+(Inventory.mineBonus[0]*Inventory.mineInv[0])+(Inventory.mineBonus[2]*Inventory.mineInv[2]);
 		float iceMined = 0;
@@ -89,5 +89,5 @@ public class mineScript : MonoBehaviour {
 		}
 		StopCoroutine ("mining");
 		callbackCrew.onClick.RemoveAllListeners();
-	}
+	}*/
 }

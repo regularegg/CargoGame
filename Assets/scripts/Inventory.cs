@@ -5,8 +5,11 @@ using UnityEngine.UI;
 using TMPro;
 
 public class Inventory : MonoBehaviour {
-	public static int[] mineInv = new int[]{0,0,0};
-	float[] mineFabTime = new float[]{10,15,15};
+	public static int[] Inv = new int[]{0,0,0};
+	public static int[] InvMin = new int[]{2,1,1};
+	public static int[] energyMin = new int[]{2,2,1};
+
+	int[] FabTime = new int[]{10,15,15};
 	public static float[] mineBonus = new float[]{ 0.5f, 1, 1 };
 
 	public static int[] upgradeInv = new int[]{0,0,0};
@@ -26,10 +29,27 @@ public class Inventory : MonoBehaviour {
 
 
 	void Start () {
-		mineItems = new string[]{ "Drills", "Containers", "Transporters" };
+		mineItems = new string[]{ "Mining Kit", "Repair Kit", "Self Care Kit" };
 		upgradeItems = new string[]{ "Toolbox", "Fertilizer", "Air Filter" };
 	
 	}
+
+	public void makeItemCheck(int room, int fabType, int item, int crew){
+		if (ShipStatKeeper.matter > InvMin [fabType] && CrewManager.crewList [crew].energy > energyMin [fabType]) {
+			StartCoroutine (makeItem (fabType));
+		}
+	}
+	IEnumerator makeItem (int fabType){
+		anim.Play ("Working");
+		WaitForSeconds wait = new WaitForSeconds (1);
+		for (int i = 0; i < FabTime[fabType]; i++) {
+			yield return wait;
+		}
+		Inv [fabType]++;
+		anim.Play ("Wait");
+	}
+
+
 
 
 	public void fabPrep(int room, int fabType, int item){
@@ -39,10 +59,10 @@ public class Inventory : MonoBehaviour {
 			if (CrewManager.crewList [i].currRoom == room) {
 				Debug.Log ("fabPrep 2");
 				if (fabType == 1) {
-					StartCoroutine (addMineInv (item,CrewManager.crewList[i].fabSkill, CrewManager.crewList[i], i));
+					//StartCoroutine (addMineInv (item,CrewManager.crewList[i].fabSkill, CrewManager.crewList[i], i));
 					break;
 				} else
-					StartCoroutine (addUpgradeInv (item,CrewManager.crewList[i].fabSkill, CrewManager.crewList[i], i));
+				//	StartCoroutine (addUpgradeInv (item,CrewManager.crewList[i].fabSkill, CrewManager.crewList[i], i));
 				break;
 
 			} else
@@ -50,7 +70,7 @@ public class Inventory : MonoBehaviour {
 		}
 	}
 
-	IEnumerator addMineInv(int itemIndex, float crewSkill, CrewPerson crew, int index){ // 1 progress every 0.25 sec
+/*	IEnumerator addMineInv(int itemIndex, float crewSkill, CrewPerson crew, int index){ // 1 progress every 0.25 sec
 		Debug.Log("addMineInv");
 
 
@@ -82,9 +102,10 @@ public class Inventory : MonoBehaviour {
 		action [index].text = "";
 
 		yield break;
+		*/
 	
 	}
-
+/*
 	IEnumerator addUpgradeInv(int itemIndex, float crewSkill, CrewPerson crew, int index){ // 1 progress every 0.25 sec
 		Debug.Log("addUpgradeInv");
 		anim.enabled = true;
@@ -122,5 +143,5 @@ public class Inventory : MonoBehaviour {
 		anim.Play ("wait");
 			yield break;
 
-	}
-}
+	}*/
+//}

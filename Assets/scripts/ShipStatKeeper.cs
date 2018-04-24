@@ -19,7 +19,8 @@ public class ShipStatKeeper: MonoBehaviour {
 	garden = 100,
 	cargo=0,
 	engine = 100,
-	bots = 3; // slow rate of decay when there are more bots, more bots can be made in fab room
+	bots = 3, // slow rate of decay when there are more bots, more bots can be made in fab room
+	matter = 0;
 //	float foodDecay = 1, oxygenDecay = 0, airFilterDecay = 1, hydroponicsDecay = 0.5f, botsDecay = 1;
 	public static float tempToAdd, humToAdd;
 	public static float cryobedCount, crewCount, engineClass;

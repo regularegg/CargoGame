@@ -222,42 +222,38 @@ public class ShipMapInteraction : MonoBehaviour {
 		b3.onClick.AddListener (delegate {
 			optC (SR);
 		});
-		if (SR == 0) {
-
-		}
-		else if (SR == 1) {
+		if (SR == 0) { // Fabrication room
 			selection.enabled = true;
 			SB1.enabled = true;
-			SB1.text = "Research Engine";
+			SB1.text = "Make Mining Kit (-2 material, -2 energy)";
 			SB2.enabled = true;
-			SB2.text = "Research Tool Fab";
+			SB2.text = "Make Repair Kit (-2 material, -1 energy)";
 			SB3.enabled = true;
-			SB3.text = "Research Air Filter";
+			SB3.text = "Make Self Care kit(-1 material, -1 energy)";
 		}
-		else if (SR == 2) {
+		else if (SR == 1) { // Dormitries 
 			selection.enabled = true;
 			SB1.enabled = true;
-			SB1.text = "make toolbox";
-			SB2.enabled = true;
-			SB2.text = "make fertilizer";
-			SB3.enabled = true;
-			SB3.text = "make airfilters";
+			SB1.text = "Rest (+3 Energy, -1 Self Care Kit)";
 		}
-		else if (SR == 3) {
+		else if (SR == 2) { // Medical Bay
 			selection.enabled = true;
 			SB1.enabled = true;
-			SB1.text = "Upgrade Engines";
-			SB2.enabled = true;
-			SB2.text = "fix engines";
+			SB1.text = "Heal (+3 Health, +1 Energy, -1 Self Care Kit)";
 		}
-		else if (SR == 4) {
+		else if (SR == 3) { // Garden
 			selection.enabled = true;
 			SB1.enabled = true;
-			SB1.text = "make drill";
+			SB1.text = "Tend Garden (+1 happiness, -1 repair kit)";
 			SB2.enabled = true;
-			SB2.text = "make containment unit";
-			SB3.enabled = true;
-			SB3.text = "make transporters";
+			SB2.text = "Relax (+2 Energy, +2 happiness)";
+		}
+		else if (SR == 4) { // Machine Room
+			selection.enabled = true;
+			SB1.enabled = true;
+			SB1.text = "Repair Damages (-1 toolbox, -2 energy)";
+			SB2.enabled = true;
+			SB2.text = "Maintain Ship (-1 toolbox)";
 		}
 		else if (SR == 5) {
 			selection.enabled = true;
@@ -287,7 +283,7 @@ public class ShipMapInteraction : MonoBehaviour {
 	//keeps duplicating actions?!?!?
 	void optA(int room){
 		Debug.Log ("Option 1");
-
+		/*
 		if (SR == 2) {
 			Debug.Log ("Option start fabprep");
 			GetComponent<Inventory> ().fabPrep (SR, 0, 0);
@@ -301,7 +297,24 @@ public class ShipMapInteraction : MonoBehaviour {
 			StartCoroutine(GetComponent<airFilterBehavior>().filterUpgrade(CrewManager.crewList[SCHold]));//upgrade filters
 		}else if (SR == 5) {
 			GetComponent<HydroponicsB> ().harvest ();
-		}else if (SR == -1) {
+		}*/
+		if (SR == 0) {
+			GetComponent<Inventory> ().makeItemCheck (0, 0, 0, SC);
+		} else if (SR == 1) {
+			CrewManager.crewList [SC].energy = 5;
+		}else if (SR == 2) {
+			if (Inventory.Inv [2] >= 1) {
+				CrewManager.crewList [SC].health += 3;
+				if (CrewManager.crewList [SC].energy < 5) {
+					CrewManager.crewList [SC].energy += 1;
+				}
+			}
+		}else if (SR == 3) {
+
+		}else if (SR == 4) {
+
+		}
+		else if (SR == -1) {
 			b1.onClick.RemoveAllListeners();
 		}
 		selection.text = "";
@@ -313,6 +326,7 @@ public class ShipMapInteraction : MonoBehaviour {
 	}
 	void optB(int room){
 		Debug.Log ("Option 2 " + SR);
+		/*
 		if (SR == 2) {
 			GetComponent<Inventory> ().fabPrep (SR, 0, 1);
 		} else if (SR == 1) {
@@ -332,6 +346,20 @@ public class ShipMapInteraction : MonoBehaviour {
 
 		} else if (SR == -1) {
 			b2.onClick.RemoveAllListeners();
+		}*/
+		if (SR == 0) {
+			GetComponent<Inventory> ().makeItemCheck (0, 1, 1, SC);
+		} else if (SR == 1) {
+			//crew rest, no option 2
+		}else if (SR == 2) {
+			//crew garden
+		}else if (SR == 3) {
+
+		}else if (SR == 4) {
+
+		}
+		else if (SR == -1) {
+			b1.onClick.RemoveAllListeners();
 		}
 		selection.text = "";
 		SB1.text = "";
@@ -344,7 +372,7 @@ public class ShipMapInteraction : MonoBehaviour {
 	}
 	void optC(int room){
 		Debug.Log ("Option 3");
-		if (SR == 2) {
+		/*if (SR == 2) {
 			GetComponent<Inventory> ().fabPrep (SR, 0, 2);
 
 		}else if (SR == 1) {
@@ -357,6 +385,20 @@ public class ShipMapInteraction : MonoBehaviour {
 			
 		}else if (SR == -1) {
 			b3.onClick.RemoveAllListeners();
+		}*/
+		if (SR == 0) {
+			GetComponent<Inventory> ().makeItemCheck (0, 2, 2, SR);
+		} else if (SR == 1) {
+
+		}else if (SR == 2) {
+
+		}else if (SR == 3) {
+
+		}else if (SR == 4) {
+
+		}
+		else if (SR == -1) {
+			b1.onClick.RemoveAllListeners();
 		}
 		selection.text = "";
 		SB1.text = "";
