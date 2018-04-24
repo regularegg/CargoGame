@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CrewPerson {
-	public float _health, happiness, engineerSkill, fabSkill, mineSkill, cost, age;
+	public float _health, happiness, hunger, engineerSkill, fabSkill, mineSkill, cost, age;
 	public float health{
 		get{ return _health; }
 		set{
@@ -29,6 +29,7 @@ public class CrewPerson {
 		active = false;
 		sprite = sp;
 		energy = 100;
+		hunger = 80;
 
 		engineerSkill = engSkill;
 		fabSkill = fbSkill;
@@ -38,20 +39,5 @@ public class CrewPerson {
 		index = nindex;
 		cost = (engineerSkill + fbSkill + mineSkill) / 10;
 	}
-
-	void needsDecay(){
-		if (ShipStatKeeper.food < ShipStatKeeper.crewAwake * 10) 
-			health -= 0.05f;
-		if (ShipStatKeeper.temperature < 5 || ShipStatKeeper.temperature > 45) {
-			health -= 0.05f;
-			happiness -= 0.5f;
-		}
-		if (ShipStatKeeper.humidity > 50) {
-			happiness -= 0.5f;
-		}
-
-		if (happiness < 1) {
-			health--;
-		}
-	}
+		
 }

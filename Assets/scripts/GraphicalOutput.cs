@@ -47,32 +47,8 @@ public class GraphicalOutput : MonoBehaviour {
 		}
 
 		CrewDataManager ();
-//		fueltxt.text = "Fuel: " + (100*ShipStatKeeper.fuel/fuelInit)+"% " + ShipStatKeeper.fuel;
-		filter.text = "Filter: " + ShipStatKeeper.airfilter;
 	}
 
-	//graph display system put on hold
-	/*void temperatureScale(){
-		temperature.transform.localScale = (ShipStatKeeper.temperature * Vector3.up/10)+(Vector3.right);
-		if (ShipStatKeeper.temperature > 40) {
-			trutemp.GetComponent<SpriteRenderer> ().color = Color.red;
-		} else
-			trutemp.GetComponent<SpriteRenderer> ().color = Color.green;
-	}
-	void humidityScale(){
-		humidity.transform.localScale = (ShipStatKeeper.humidity * Vector3.up/10)+(Vector3.right);
-		if (ShipStatKeeper.humidity > 40) {
-			truhum.GetComponent<SpriteRenderer> ().color = Color.red;
-		} else
-			truhum.GetComponent<SpriteRenderer> ().color = Color.green;
-	}
-	void oxygenScale(){
-		fuel.transform.localScale = (ShipStatKeeper.oxygen * Vector3.up/10)+(Vector3.right);
-		if (ShipStatKeeper.oxygen > 50) {
-			truhum.GetComponent<SpriteRenderer> ().color = Color.green;
-		} else
-			truhum.GetComponent<SpriteRenderer> ().color = Color.red;
-	}*/
 
 
 

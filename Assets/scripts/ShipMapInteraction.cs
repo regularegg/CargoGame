@@ -49,8 +49,6 @@ public class ShipMapInteraction : MonoBehaviour {
 						selection.enabled = true;
 						selection.text = "Where do you want me to go boss";
 
-
-
 						bg1.GetComponent<SpriteRenderer> ().enabled = !bg1.GetComponent<SpriteRenderer> ().enabled;
 						crewCommVisual.GetComponent<SpriteRenderer> ().enabled = true;
 						crewCommVisual.GetComponent<SpriteRenderer> ().sprite = CrewManager.crewList [0].sprite;
@@ -59,7 +57,6 @@ public class ShipMapInteraction : MonoBehaviour {
 
 						selection.enabled = true;
 						selection.text = "Where do you want me to go boss";
-						Debug.Log (selection.text + selection.enabled);
 
 						bg2.GetComponent<SpriteRenderer> ().enabled = !bg2.GetComponent<SpriteRenderer> ().enabled;
 						crewCommVisual.GetComponent<SpriteRenderer> ().enabled = true;
@@ -70,7 +67,7 @@ public class ShipMapInteraction : MonoBehaviour {
 
 						selection.enabled = true;
 						selection.text = "Where do you want me to go boss";
-						Debug.Log (selection.text + selection.enabled);
+
 						bg3.GetComponent<SpriteRenderer> ().enabled = !bg3.GetComponent<SpriteRenderer> ().enabled;
 						crewCommVisual.GetComponent<SpriteRenderer> ().enabled = true;
 						crewCommVisual.GetComponent<SpriteRenderer> ().sprite = CrewManager.crewList [2].sprite;

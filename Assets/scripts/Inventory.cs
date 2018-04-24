@@ -117,6 +117,7 @@ public class Inventory : MonoBehaviour {
 		Debug.Log("Made inv thing" +upgradeInv[itemIndex]);
 		crew.active = false;
 		action [index].text = "";
+		anim.enabled = false;
 
 		anim.Play ("wait");
 			yield break;

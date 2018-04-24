@@ -54,8 +54,8 @@ public class ShipMvmt : MonoBehaviour {
 
 	IEnumerator shipMovement(){
 		Debug.Log ("GOING");
-		yield return wait;
-			/*if (ShipStatKeeper.shipMoving) {
+	
+			if (ShipStatKeeper.shipMoving) {
 			Debug.Log ("Moving");
 				while(ShipStatKeeper.fuel>0) {
 					distanceCovered += speed;
@@ -63,10 +63,10 @@ public class ShipMvmt : MonoBehaviour {
 					if (distanceCovered % efficiency == 0) {
 						ShipStatKeeper.fuel--;
 						if (distanceCovered < 500) {
-							shipSprite.transform.position += Vector3.right * 0.5f;
+							//shipSprite.transform.position += Vector3.right * 0.5f;
 						} else {
-							shipSprite.GetComponent<SpriteRenderer> ().flipX = true;
-							shipSprite.transform.position -= Vector3.right * 0.5f;
+							//shipSprite.GetComponent<SpriteRenderer> ().flipX = true;
+							//shipSprite.transform.position -= Vector3.right * 0.5f;
 						}
 					if (ShipStatKeeper.distanceTravelled == (speed*(ShipStatKeeper.fuel/2-1))){
 						Debug.Log("AT ASTEROID");
@@ -83,8 +83,8 @@ public class ShipMvmt : MonoBehaviour {
 		if (!ShipStatKeeper.shipMoving) {
 			Debug.Log ("waiting");
 			yield return wait;
-		}*/
-
+		}
+		yield return wait;
 	}
 }
 
