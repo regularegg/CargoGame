@@ -92,15 +92,26 @@ public class ShipMapInteraction : MonoBehaviour {
 			_selectedRoom = value;
 			if (_selectedCrew > -1 && selectionActive) {
 				if (CrewManager.crewList [_selectedCrew].currRoom != value && !RoomManager.rooms [value].occupied &&!CrewManager.crewList[_selectedCrew].active) {
-					RoomManager.rooms[CrewManager.crewList [_selectedCrew].currRoom].occupied = false;
-					//Debug.Log("TEST" + CrewManager.crewList [0].currRoom);
-					//RoomManager.rooms[CrewManager.crewList [0].currRoom].occupied = false;
+					//RoomManager.rooms[CrewManager.crewList [_selectedCrew].currRoom].occupied = false;
+					for (int i = 0; i < 3; i++) {
+						if (!RoomManager.roomGuys[value,i]){
+							Debug.Log (RoomManager.roomGuys [value, i]);
 
+							RoomManager.roomGuys[value,i] = true;
+							GetComponent<RoomManager> ().guys [value * i + i].SetActive(true);
+
+							if(CrewManager.crewList[SC].currAnim != -1){
+								GetComponent<RoomManager> ().guys [CrewManager.crewList [SC].currAnim].SetActive(true);
+							//	GetComponent<RoomManager> ().guys [CrewManager.crewList [SC].currAnim].GetComponent<Animator> ().enabled = false;
+							}
+							CrewManager.crewList [SC].currAnim = value * i + i;
+						}
+					}
 					sprites [CrewManager.crewList [_selectedCrew].currRoom].enabled = false;
-					RoomManager.rooms [value].occupied = true;
+					//RoomManager.rooms [value].occupied = true;
 
 					if(_selectedCrew == 0)
-						sprites [value].color = new Color (0.5f,0,0);
+						sprites [value].color = new Color (1,0,0);
 					else if(_selectedCrew == 1)
 						sprites [value].color = new Color (0, 1, 0);
 					else
@@ -301,7 +312,7 @@ public class ShipMapInteraction : MonoBehaviour {
 		if (SR == 0) {
 			GetComponent<Inventory> ().makeItemCheck (0, 0, 0, SC);
 		} else if (SR == 1) {
-			CrewManager.crewList [SC].energy = 5;
+		//	CrewManager.crewList [SC].energy = 5;
 		}else if (SR == 2) {
 			if (Inventory.Inv [2] >= 1) {
 				CrewManager.crewList [SC].health += 3;

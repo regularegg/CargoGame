@@ -15,7 +15,7 @@ public class CrewPerson {
 	}
 	public string name;
 	public bool awake, alive, outsideShip, active;
-	public int index, currRoom, energy;
+	public int index, currRoom, energy, currAnim;
 	public Sprite sprite;
 	public int currentActivity;
 
@@ -30,6 +30,7 @@ public class CrewPerson {
 		sprite = sp;
 		energy = 100;
 		hunger = 80;
+		currAnim = -1;
 
 		engineerSkill = engSkill;
 		fabSkill = fbSkill;
