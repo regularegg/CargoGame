@@ -6,12 +6,12 @@ using UnityEngine;
 public class RoomManager : MonoBehaviour {
 	public static RoomBehavior[] rooms;
 	public RoomBehavior[] roomDsp;
-	public GameObject[] guys = new GameObject[15];
+	public GameObject[] guys = new GameObject[18];
 	// 5 = rooms, 3 = guys
-	public static bool[,] roomGuys = new bool[5, 3] ;
+	public static bool[,] roomGuys = new bool[6, 3] ;
 
 	void Start () {
-		rooms = new RoomBehavior[5];
+		rooms = new RoomBehavior[6];
 		for (int i = 0; i < rooms.Length; i++) {
 			rooms [i] = new RoomBehavior (i);
 		}

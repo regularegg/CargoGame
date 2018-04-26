@@ -69,6 +69,8 @@ public class ButtonManager : MonoBehaviour {
 		if (slideC.value == 1) {
 			ShipStatKeeper.shipMoving = false;
 			goL1.GetComponent<SpriteRenderer> ().sprite = offL;
+			GameObject.Find("Engine slider temp").GetComponent<Animator> ().Play ("throttle slide down");
+
 		}
 
 		Debug.Log(ShipStatKeeper.shipMoving + " ship going");

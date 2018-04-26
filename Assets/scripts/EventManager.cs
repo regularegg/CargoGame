@@ -8,7 +8,7 @@ public class EventManager : MonoBehaviour {
 	
 	public bool[] introChecklist = new bool[textKeeper.introduction.Length];
 	public string[] introText;
-	public GameObject pic, alert1, alert2;
+	public GameObject pic, alert1, alert2, alert3, throttle;
 	public SpriteRenderer commLight;
 	public Sprite fish,offLight, onLight;
 	public TextMeshProUGUI speech, alert;
@@ -63,14 +63,20 @@ public class EventManager : MonoBehaviour {
 				holder = GameObject.Find ("Info Panel");
 				holder.GetComponent<slidepanel> ().handle.transform.position = holder.GetComponent<slidepanel> ().startPos;
 				holder.GetComponent<slidepanel> ().active = false;
-			} else if (value == 10) {
+			} else if (value == 9) {
 				alert2.GetComponent<SpriteRenderer> ().enabled = true;
-			} else if (value == 11) {
+			} else if (value == 10) {
 				alert2.GetComponent<SpriteRenderer> ().enabled = false;
-			} else if (value == textKeeper.introduction.Length) {
+			} else if (value == 18) {
+				alert3.GetComponent<SpriteRenderer> ().enabled = true;
+			} else if (value == 19) {
+				alert3.GetComponent<SpriteRenderer> ().enabled = false;
+			}else if (value == textKeeper.introduction.Length) {
 				holder = GameObject.Find ("Communication Screen");
 				holder.GetComponent<slidepanel> ().handle.transform.position = holder.GetComponent<slidepanel>().startPos;
  				holder.GetComponent<slidepanel> ().active = false;
+				throttle.GetComponent<Animator> ().Play ("throttle slide up");
+				ShipStatKeeper.matter += 10;
 			}
 		}
 	}

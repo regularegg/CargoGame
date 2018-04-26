@@ -52,7 +52,7 @@ public class HydroponicsB : MonoBehaviour {
 		scale ();
 	}
 
-	public void tend(){
+	public void tend(int crew){
 		if (Inventory.upgradeInv[0] > 0&&ShipStatKeeper.garden<100){
 			Inventory.upgradeInv [0]--;
 			ShipStatKeeper.garden += 25;
@@ -101,14 +101,10 @@ public class HydroponicsB : MonoBehaviour {
 		}
 	}
 
-	IEnumerator _foodGrowth(){
-		Debug.Log("food enum122s"); 	
+	IEnumerator _foodGrowth(){	
 		while (ShipStatKeeper.fuel > 0) {
-			Debug.Log("food enum555"); 	
 
 			if (foodOutput > 0) {
-				Debug.Log("food 77"); 	
-
 				foodStore += foodOutput;
 				output.text = "FOOD :"+ foodStore;// TEMPORARY PLS CHANGE TO OUTPUT THE FOOD IN INV INSTEAD
 				Debug.Log("food enum"); 	

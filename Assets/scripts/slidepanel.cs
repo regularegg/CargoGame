@@ -8,6 +8,9 @@ public class slidepanel : MonoBehaviour {
 	public Vector3 startPos, hoverPos, openPos;
 	public GameObject handle;
 	public string currentPanel;
+	public string openPlay, closePlay;
+
+	public Animator anim;
 
 	void Start () {
 		startPos = handle.transform.position;
@@ -23,6 +26,7 @@ public class slidepanel : MonoBehaviour {
 				
 				if (Input.GetMouseButtonUp (0)) {
 					handle.transform.position = openPos;
+					//anim.Play(openPlay);
 					active = true;
 					if (hit.collider.gameObject.name.Contains("side title")){
 						GameObject.Find("Manual Book").transform.position = Vector3.zero;
@@ -31,6 +35,7 @@ public class slidepanel : MonoBehaviour {
 					handle.transform.position = hoverPos;
 			} else if (hit.collider.gameObject.tag.Contains ("Panel Handle") && active && Input.GetMouseButtonUp (0)&& hit.collider.gameObject.name.Contains(currentPanel)) {
 				handle.transform.position = startPos;
+				//anim.Play(closePlay);
 				active = false;
 				if (hit.collider.gameObject.name.Contains ("side title")) {
 					GameObject.Find ("Manual Book").transform.position = new Vector3 (100, 100, 0);
