@@ -61,7 +61,7 @@ public class Inventory : MonoBehaviour {
 				Debug.Log ("fabPrep 2");
 				StartCoroutine (addMineInv (item, CrewManager.crewList [i].fabSkill, CrewManager.crewList [i], i));
 				break;
-*/
+
 			} else
 				Debug.Log ("next person");
 		}

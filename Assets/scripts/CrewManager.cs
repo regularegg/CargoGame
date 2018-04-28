@@ -39,7 +39,7 @@ public class CrewManager : MonoBehaviour {
 			fab = Random.Range(18, 60), 
 			mine = Random.Range(18, 60);
 			crewList [i] = new CrewPerson (name, age, engineering, fab, mine, i, crewpics[Random.Range(0,crewpics.Length)]);
-			StartCoroutine (aging (crewList [i]));
+
 		}
 
 
@@ -54,45 +54,11 @@ public class CrewManager : MonoBehaviour {
 	}
 
 	void Update(){
-		needsDecay (crewList [0]);
-		needsDecay (crewList [1]);
-		needsDecay (crewList [2]);
 
 		for (int i = 0; i < crewList.Length; i++) {
-			needsDecay (crewList [i]);
+			//needsDecay (crewList [i]);
 			crewStat [i].text = "Comfort:" + crewList [i].happiness + "\nEnergy: " + crewList [i].energy + "\nHunger: " + crewList [i].hunger ;
 		}
 	}
-
-	void needsDecay( CrewPerson crew){
-		if (ShipStatKeeper.food < ShipStatKeeper.crewAwake * 10) 
-			crew.health -= 0.05f;
-		if (ShipStatKeeper.temperature < 5 || ShipStatKeeper.temperature > 45) {
-			crew.health -= 0.05f;
-			crew.happiness -= 0.5f;
-		}
-		if (ShipStatKeeper.humidity > 50) {
-			crew.happiness -= 0.5f;
-		}
-
-		if (crew.happiness < 1) {
-			crew.health--;
-		}
-	}
-
-	IEnumerator aging(CrewPerson crew){
-		if (crew.age < 100 && crew.alive && crew.awake) {
-			crew.age++;
-
-			yield return new WaitForSeconds (30);
-		} else if (!crew.awake) {
-			yield return null;
-		}
-		else if (crew.age > 100 || !crew.alive || crew.health < 1) {
-			yield break;
-		}
-	}
-
-
 
 }

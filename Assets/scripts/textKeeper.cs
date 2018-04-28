@@ -16,7 +16,7 @@ public class textKeeper : MonoBehaviour {
 		"In the very likely event that a system malfunctions or deteriorates beyond usability, it is your job to fix it.",
 		"First, make sure that you have enough repair kits and assign a crew member through the intercom system to the job.",
 		"As a class D ship, your crewmembers are human and therefore have varying skill levels.",
-		"Be aware that these skills can have a big impact on the speed of their work",
+		"Use these icons to call your crewmembers to do the tasks.",
 		"Each member can only perform 1 action at a time and only 1 person can occupy a room at a time.",
 		"Many maintenance actions cannot be performed without the required tools.",
 		"You can hover over an action to see what it needs and have the tools made in the fabrication rooms.",
@@ -24,17 +24,22 @@ public class textKeeper : MonoBehaviour {
 		"There are also tools that can be made in the MINING FABRICATION room for use when mining.",
 		"Mining tools can only be used at the asteroid but will determine the speed and amount of resources you can bring back.",
 		"Now, enough chit chat. Use the throttle to start the ship and get going.",
-		"Good luck, CR Captain."};
+		"Good luck Captain."};
 	public static string[] asteroid = new string[]{
 		"Good job captain, you've just arrived at the asteroid.",
 		"This one looks very promising. I suggest you send some crew down ASAP",
 		"Our fuel is limited and can't stay on this vector of motion for long.",
-		"As soon as I'm finished, the mine timer will start.",
-		"The ship is programmed to leave as soon as it hits 0, so get on it!"
+		"As soon as I'm finished, a crew member will be dispatched to the surface",
+		"use the Left and right arrow keys to guide them and use spacebar to launch their super drill"
 	};
 	public static string[] eventAlerts = new string[]{
 		"Temperature inhabitable!",
 		"Filters getting clogged",
 		"Fuel use not sustainable!"
+	};
+	public static string[] noDrills = new string[] {
+		"uh oh, seems like you forgot to bring a drill to a drilling job!",
+		"Unfortunately, there is no more time to make the drills either.",
+		"Looks like you've failed"
 	};
 }

@@ -12,6 +12,7 @@ public class EventManager : MonoBehaviour {
 	public SpriteRenderer commLight;
 	public Sprite fish,offLight, onLight;
 	public TextMeshProUGUI speech, alert;
+	public GameObject game;
 
 	public AudioSource FishTalking;
 
@@ -63,9 +64,9 @@ public class EventManager : MonoBehaviour {
 				holder = GameObject.Find ("Info Panel");
 				holder.GetComponent<slidepanel> ().handle.transform.position = holder.GetComponent<slidepanel> ().startPos;
 				holder.GetComponent<slidepanel> ().active = false;
-			} else if (value == 9) {
+			} else if (value == 11) {
 				alert2.GetComponent<SpriteRenderer> ().enabled = true;
-			} else if (value == 10) {
+			} else if (value == 12) {
 				alert2.GetComponent<SpriteRenderer> ().enabled = false;
 			} else if (value == 18) {
 				alert3.GetComponent<SpriteRenderer> ().enabled = true;
@@ -84,7 +85,7 @@ public class EventManager : MonoBehaviour {
 	int trigger{
 		get{ return _trigger; }
 		set{
-			_trigger = value;
+			_trigger = value;/*
 			if (value == 100) {
 				speech.text = "OH NO! A DOG THAT SOMEONE SMUGGLED ONBOARD HAS PEED ON THE AIRFILTERS! FILTER HEALTH CRITICAL!";
 				commLight.sprite = onLight;
@@ -94,7 +95,7 @@ public class EventManager : MonoBehaviour {
 				speech.text = CrewManager.crewList[1].name+" done messed up. The garden is all goofed!";
 				commLight.sprite = onLight;
 				ShipStatKeeper.garden = 10;
-			}
+			}*/
 		}
 	}
 	int _asteroidCount;
@@ -112,6 +113,8 @@ public class EventManager : MonoBehaviour {
 			} else if (value == textKeeper.asteroid.Length) {
 				holder.GetComponent<slidepanel> ().handle.transform.position = holder.GetComponent<slidepanel> ().startPos;
 				holder.GetComponent<slidepanel> ().active = false;
+					Instantiate (game);
+
 			}
 		}
 	}
@@ -122,7 +125,9 @@ public class EventManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Input.GetKeyUp (KeyCode.A)) {
+			Instantiate (game);
+		}
 	}
 
 	IEnumerator accidents(){

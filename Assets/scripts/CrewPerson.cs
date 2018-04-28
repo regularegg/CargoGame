@@ -28,7 +28,7 @@ public class CrewPerson {
 		currentActivity = 0;
 		active = false;
 		sprite = sp;
-		energy = 100;
+		energy = 10;
 		hunger = 80;
 		currAnim = -1;
 

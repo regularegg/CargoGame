@@ -45,14 +45,6 @@ public class StateManager : MonoBehaviour {
 	}
 
 
-	void shipSelect(){
-		
-	}
-
-	void cargoSelect(){
-
-	}
-
 	void crewSelect(){
 		GameObject currentScreen = Instantiate (SelectionScreen);
 
@@ -66,9 +58,5 @@ public class StateManager : MonoBehaviour {
 		Destroy (GameObject.Find ("Ship Progression(Clone)"));
 		Destroy (GameObject.Find ("Map Label Holder(Clone)"));
 
-
-		GameObject currMap = Instantiate (Map);
-		GameObject currTrail = Instantiate (ProgressBar);
-		GameObject mapLabel = Instantiate (MapLabels);
 	}
 }

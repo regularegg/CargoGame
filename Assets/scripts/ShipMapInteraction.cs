@@ -263,40 +263,18 @@ public class ShipMapInteraction : MonoBehaviour {
 	//keeps duplicating actions?!?!?
 	void optA(int room){
 		Debug.Log ("Option 1");
-		/*
-		if (SR == 2) {
-			Debug.Log ("Option start fabprep");
-			GetComponent<Inventory> ().fabPrep (SR, 0, 0);
-		} else if (SR == 1) {
-			GetComponent<researchBehavior> ().upgradeCheck (2, SCHold);
-		}else if (SR == 4) {
-			GetComponent<Inventory> ().fabPrep (SR, 1, 0);
-		} else if (SR == 3) {
-			GetComponent<EngineeringB> ().upgrade (Inventory.upgradeInv [0], CrewManager.crewList [SCHold]);//upgrade engines
-		}else if (SR == 7) {
-			StartCoroutine(GetComponent<airFilterBehavior>().filterUpgrade(CrewManager.crewList[SCHold]));//upgrade filters
-		}else if (SR == 5) {
-			GetComponent<HydroponicsB> ().harvest ();
-		}*/
 		if (SR == 0) {
-			//GetComponent<Inventory> ().makeItemCheck (0, 0, 0, scHold)
 			GetComponent<Inventory> ().fabPrep (0, 0, 0);
 		} else if (SR == 1) {
-			
+			GetComponent<RestBehavior> ().RestCheck (scHold);
 		}else if (SR == 2) {
 			Debug.Log (scHold);
 			GetComponent<HealBehavior> ().HealCheck (scHold);
 
-			/*if (Inventory.Inv [2] >= 1) {
-				CrewManager.crewList [SC].health += 3;
-				if (CrewManager.crewList [SC].energy < 5) {
-					CrewManager.crewList [SC].energy += 1;
-				}
-			}*/
 		}else if (SR == 3) {
 			GetComponent<HydroponicsB> ().tend (SC);
 		}else if (SR == 4) {
-
+			GetComponent<EngineeringB> ().fixCheck (Inventory.Inv[0], CrewManager.crewList[scHold]);
 		}
 		else if (SR == -1) {
 			b1.onClick.RemoveAllListeners();
@@ -309,27 +287,6 @@ public class ShipMapInteraction : MonoBehaviour {
 	}
 	void optB(int room){
 		Debug.Log ("Option 2 " + SR);
-		/*
-		if (SR == 2) {
-			GetComponent<Inventory> ().fabPrep (SR, 0, 1);
-		} else if (SR == 1) {
-			GetComponent<researchBehavior> ().upgradeCheck (1, SC);
-
-		} else if (SR == 4) {
-			GetComponent<Inventory> ().fabPrep (SR, 1, 1);
-
-		} else if (SR == 3) {
-			GetComponent<EngineeringB> ().fix (Inventory.upgradeInv [0], CrewManager.crewList [SCHold]);
-
-		} else if (SR == 7) {
-			GetComponent<airFilterBehavior> ().fix (Inventory.upgradeInv [2], CrewManager.crewList [SCHold]);
-
-		} else if (SR == 8) {
-			GetComponent<HydroponicsB> ().tend ();
-
-		} else if (SR == -1) {
-			b2.onClick.RemoveAllListeners();
-		}*/
 		if (SR == 0) {
 			GetComponent<Inventory> ().makeItemCheck (0, 1, 1, scHold);
 		} else if (SR == 1) {
@@ -339,7 +296,7 @@ public class ShipMapInteraction : MonoBehaviour {
 		}else if (SR == 3) {
 
 		}else if (SR == 4) {
-
+			GetComponent<EngineeringB> ().maintainCheck (Inventory.Inv[0], CrewManager.crewList[scHold]);
 		}
 		else if (SR == -1) {
 			b1.onClick.RemoveAllListeners();
@@ -354,20 +311,6 @@ public class ShipMapInteraction : MonoBehaviour {
 	}
 	void optC(int room){
 		Debug.Log ("Option 3");
-		/*if (SR == 2) {
-			GetComponent<Inventory> ().fabPrep (SR, 0, 2);
-
-		}else if (SR == 1) {
-			GetComponent<researchBehavior> ().upgradeCheck (3, SCHold);
-
-		} else if (SR == 4) {
-			GetComponent<Inventory> ().fabPrep (SR, 1, 2);
-
-		}else if (SR == 5) {
-			
-		}else if (SR == -1) {
-			b3.onClick.RemoveAllListeners();
-		}*/
 		if (SR == 0) {
 			GetComponent<Inventory> ().makeItemCheck (0, 2, 2, scHold);
 		} else if (SR == 1) {

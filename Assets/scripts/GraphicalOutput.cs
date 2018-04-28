@@ -8,7 +8,7 @@ public class GraphicalOutput : MonoBehaviour {
 	public GameObject temperature, humidity, fuel, power, trutemp, truhum;
 	public GameObject crw0, crw1, crw2;
 	public float temperatureHold, humhold, oxygenhold, powerhold;
-	public TextMeshProUGUI cstats0, cstats1, cstats2, detail, fueltxt, energy, filter, cargo, inventory;
+	public TextMeshProUGUI cstats0, cstats1, cstats2, detail, fueltxt, energy, filter, inventory, cargo, income;
 	float fuelInit;
 
 
@@ -65,5 +65,7 @@ public class GraphicalOutput : MonoBehaviour {
 			Inventory.mineItems[0] +": "+Inventory.Inv [0] + "\n" +
 			Inventory.mineItems[1] +": "+Inventory.Inv [1] + "\n" +
 			Inventory.mineItems[2] +": " +Inventory.Inv [2];
+		
+		
 	}
 }

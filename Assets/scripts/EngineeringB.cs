@@ -13,7 +13,8 @@ public class EngineeringB : MonoBehaviour {
 	}
 	public int heatOutput = 1;
 	public static int ID = 2;
-	int _engineLevel = 0;
+
+	/*int _engineLevel = 0;
 	public int engineLevel{
 		get{ return _engineLevel; }
 		set{
@@ -29,45 +30,37 @@ public class EngineeringB : MonoBehaviour {
 				ShipMvmt.speed += 2;
 			}
 		}
-	}
+	}*/
 
 	WaitForSeconds wait, upgradeWait;
 
 	// Use this for initialization
 	void Start () {
-		health = 100;
+		health = 10;
 		wait = new WaitForSeconds (4f);
 		upgradeWait = new WaitForSeconds (2f);
 		InvokeRepeating ("Decay", 1f, 4f);
 	}
 
 	void Decay(){
-		if (health > 10) {
+		if (health > 0) {
 			if (Random.Range (0, 100) < 10) {
 				health--;
-				if (!ShipStatKeeper.acOn)
-					ShipStatKeeper.temperature += heatOutput / 2;
 			}
-		} else if (health <= 10 && health > 0) {
-			if (Random.Range (0, 100) < 50) {
-				health--;
-				if (!ShipStatKeeper.acOn)
-					ShipStatKeeper.temperature += heatOutput;
-			}
-		} else if (health == 0) {
+		}if (health == 0) {
 
 		}
 	}
 
-	public void fix(int toolbox, CrewPerson crew){
+	public void fixCheck(int toolbox, CrewPerson crew){
 		if (toolbox >= 1 && health<100 && crew.energy > 2) {
 			Inventory.upgradeInv [0] -= 2;
 			crew.active = true;
 			crew.active = true;
-			StartCoroutine (_fix(crew));
+			StartCoroutine (fix(crew));
 		}
 	}
-	IEnumerator _fix(CrewPerson crew){
+	IEnumerator fix(CrewPerson crew){
 		int count = -10;
 		while (count < 100){
 			count += 10;
@@ -80,25 +73,23 @@ public class EngineeringB : MonoBehaviour {
 		}
 	}
 
-	public void upgrade(int toolbox, CrewPerson crew){
-		Debug.Log ("Upgrade check");
+	public void maintainCheck(int toolbox, CrewPerson crew){
+		Debug.Log ("maintain check");
 
 		if (toolbox>= 1) {
 			crew.active = true;
 			Inventory.Inv [0] -= 1;
 			crew.active = true;
-			StartCoroutine (_upgrade (crew));
+			StartCoroutine (maintain (crew));
 			Debug.Log ("Started upgrade");
 		} else {
 			if (!ShipStatKeeper.engineCanUpgrade) {
-				Debug.Log ("Can't upgrade! insufficient research");
-			}else if (toolbox<5) {
-				Debug.Log ("Can't upgrade! insufficient toolboxes");
+				Debug.Log ("not enough toolkits");
 			}
 		}
 	}
 		
-	IEnumerator _upgrade(CrewPerson crew){
+	IEnumerator maintain(CrewPerson crew){
 		int count = -10;
 		while (count < 100){
 			Debug.Log ("Maintaining");
@@ -107,9 +98,8 @@ public class EngineeringB : MonoBehaviour {
 			yield return upgradeWait;
 		}
 		if (count >= 100) {
-			Debug.Log ("Maintainance");
+			Debug.Log ("Maintainance over");
 			crew.active = false;
-			engineLevel++;
 			yield break;
 		}
 	}

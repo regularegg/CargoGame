@@ -29,7 +29,7 @@ public class ShipMvmt : MonoBehaviour {
 					ShipStatKeeper.fuel--;
 				}
 				if (distanceCovered < (speed*(initfuel/2-1))&&!asteroid) {
-					ship.transform.position += Vector3.right * 0.5f;
+					ship.transform.position += Vector3.right * 0.25f;
 					Debug.Log ("Sprite Moving");
 				} else if(distanceCovered >= (speed*(initfuel/2-1))&&!asteroid){
 					Debug.Log("AT ASTEROID");
@@ -38,7 +38,7 @@ public class ShipMvmt : MonoBehaviour {
 					asteroid = true;
 				}else if (asteroid){
 					ship.GetComponent<SpriteRenderer> ().flipX = true;
-					ship.transform.position -= Vector3.right * 0.5f;
+					ship.transform.position -= Vector3.right * 0.25f;
 				}else if(distanceCovered >= (speed * initfuel)){
 					Debug.Log ("VICTORY!!!");
 				}
@@ -68,7 +68,7 @@ public class ShipMvmt : MonoBehaviour {
 							//shipSprite.GetComponent<SpriteRenderer> ().flipX = true;
 							//shipSprite.transform.position -= Vector3.right * 0.5f;
 						}
-					if (ShipStatKeeper.distanceTravelled == (speed*(ShipStatKeeper.fuel/2-1))){
+					if (ShipStatKeeper.distanceTravelled == (speed*(ShipStatKeeper.fuel/2))){
 						Debug.Log("AT ASTEROID");
 						ShipStatKeeper.shipMoving = false;
 						yield return null;
